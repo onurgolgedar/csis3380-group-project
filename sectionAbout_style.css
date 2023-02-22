@@ -8,7 +8,7 @@
 .sectionAbout--body{
     background: #4c5559;
     min-height: 100vh;
-    padding: 30px 10% 0px;
+    padding: 30px 10% 10px;
 }
 
 .sectionAbout--mainText{
@@ -17,7 +17,9 @@
 }
 .sectionAbout--mainText > h2{
     color: #FECEA8;
-    font-size: 40px;
+    text-align: left;
+    font-size: 5vw;
+    border-bottom: 4px solid white;
 }
 .sectionAbout--mainText h2 span{
     color: #99B898;
@@ -25,7 +27,10 @@
 .sectionAbout--mainText p{
     color: #99B898;
     font-size: 15px;
+    padding-top: 20px;
+    padding-bottom: 15px;
     margin-bottom: 10px;
+    border-bottom: 4px solid white;
 }
 
 .sectionAbout--teamContent{
@@ -64,7 +69,7 @@
     background: #333333;
     font-size: 15px;
     font-weight: 500;
-    color: rgba(255,255,255,0.5);
+    color: #FFF;
     transition: 0.5s;
     text-decoration: none;
 }
