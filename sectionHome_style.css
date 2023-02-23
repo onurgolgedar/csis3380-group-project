@@ -7,9 +7,10 @@
 
 .sectionHome--body{
     background: #4c5559;
-    min-height: 75vh;
-    padding: 80px 10% 10px;
+    min-height: 70vh;
+    padding: 30px 10% 10px;
     width: 100%;
+    border-bottom: 8px solid #FECEA8;
 }
 
 .sectionHome--mainText{
@@ -18,13 +19,14 @@
 }
 
 .sectionHome--mainText > h1{
+    transition: 0.5s;
     color: #FECEA8;
     text-align: left;
     font-size: 9vw;
     border-bottom: 4px solid white;  
 }
 .sectionHome--mainText > h1:hover{
-    opacity: 1; 
+    letter-spacing: .01em;
 }
 .sectionHome--mainText h1 span{
     color: #99B898;
