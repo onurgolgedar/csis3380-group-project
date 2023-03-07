@@ -37,6 +37,14 @@ function Header() {
                 <span className="header--text">Contacts</span>
               </a>
             </li>
+            <li class="header--list">
+            <a href="#">
+              <span className="header--icon">
+                <ion-icon name="person-add-outline"></ion-icon>
+              </span>
+              <span className="header--text">Login</span>
+            </a>
+          </li>
           </ul>
         </header>
       </div>
