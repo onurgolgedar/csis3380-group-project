@@ -6,10 +6,14 @@ import SectionHome from "./components/Home"
 import SectionService from './components/Service'
 import SectionAbout from "./components/About"
 
+
+import { useState } from "react";
+
 function App() {
+
   return (
     <div>
-      <Header />
+      <Header/>
       <SectionHome />
       <SectionService />
       <SectionAbout />

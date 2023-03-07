@@ -70,3 +70,7 @@
     padding: 0 20px;
     margin-top: 20px;
 }
+
+#myModal {
+    z-index: 99999;
+}
