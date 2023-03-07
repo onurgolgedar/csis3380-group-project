@@ -11,12 +11,75 @@
     height: 80px;
     display: flex;
     margin-bottom: 10px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .header--nav{
     padding:0;
     display: flex;
+    width: 85%;
+    min-width: 220px;
+    flex-grow: 1;
+}
+
+.header--navLogin{
+    padding: 0;
+    width: 10%;
+    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    margin-top: 10px;
+}
+
+.header--navLogin .btnLogin{
+    width: 100%;
+    font: 1.5em;
+    margin-top: 10px;
+    height: 40px;
+    background: #333333;
+    color: #FFFF;
+    transition: 0.5s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+.header--navLogin .btnLogin:hover {
+    background: #333333;
+    color: #99B898;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+.btnSave{
+    font: 1.5em;
+    background: #333333;
+    color: #FFFF;
+    transition: 0.5s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+.btnSave:hover {
+    background: #333333;
+    color: #99B898;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+.btnCancel{
+    font: 1.5em;
+    background: #E84A5F;
+    color: #FFFF;
+    transition: 0.5s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+.btnCancel:hover {
+    background: #E84A5F;
+    color: #FECEA8;
+    letter-spacing: 1px;
+    border-radius: 10px;
 }
 
 .header--list{

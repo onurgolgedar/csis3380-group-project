@@ -54,13 +54,13 @@ function Header() {
             </a>
           </li>
         </ul>
-        <button
+        <ul className="header--navLogin">
+          <button
           type="button"
-          className="btn btn-warning btn-log"
-          onClick={showPopModal}
-        >
-          Log In
-        </button>
+          className="btnLogin"
+          onClick={showPopModal}>Login
+          </button>
+        </ul>
       </header>
 
 
@@ -72,15 +72,15 @@ function Header() {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="username" />
+              <Form.Control type="text" placeholder="Enter a username" />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={hidePopModal}>
+          <Button variant="danger" className="btnCancel" onClick={hidePopModal}>
             Cancel
           </Button>
-          <Button variant="info">Save Username</Button>
+          <Button variant="info" className="btnSave">Save Username</Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -88,3 +88,4 @@ function Header() {
 }
 
 export default Header;
+
