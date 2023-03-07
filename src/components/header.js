@@ -2,7 +2,7 @@ import "../css_files/header_style.css";
 
 function Header() {
     return (
-      <div>
+      <div className="header--wrapper">
         <header className="header--body">
           <ul className="header--nav">
             <li className="header--list">
@@ -37,15 +37,8 @@ function Header() {
                 <span className="header--text">Contacts</span>
               </a>
             </li>
-            <li class="header--list">
-            <a href="#">
-              <span className="header--icon">
-                <ion-icon name="person-add-outline"></ion-icon>
-              </span>
-              <span className="header--text">Login</span>
-            </a>
-          </li>
           </ul>
+          <button type="button" class="btn btn-warning btn-log">Log In</button>
         </header>
       </div>
     );
