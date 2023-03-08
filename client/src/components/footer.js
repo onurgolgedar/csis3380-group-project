@@ -1,5 +1,7 @@
 import "../css_files/footer_style.css";
 
+import {NavLink} from 'react-router-dom';
+
 const Footer = () => {
     return (
       <div>
@@ -76,13 +78,13 @@ const Footer = () => {
               </h3>
               <ul>
                 <li>
-                  <a href="#sectionHome">Home</a>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                  <a href="#sectionService">Services</a>
+                  <NavLink to="/service">Services</NavLink>
                 </li>
                 <li>
-                  <a href="#sectionAbout">About</a>
+                  <NavLink to="/about">About</NavLink>
                 </li>
                 <li>
                   <a href="#footer">Contacts</a>

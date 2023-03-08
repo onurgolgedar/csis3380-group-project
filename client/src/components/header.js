@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import { useState } from "react";
+import {NavLink} from 'react-router-dom';
 
 function Header() {
   const [isPopOpen, setIsPopOpen] = useState(false);
@@ -22,28 +23,28 @@ function Header() {
       <header className="header--body">
         <ul className="header--nav">
           <li className="header--list">
-            <a href="#sectionHome">
+            <NavLink to="/">
               <span className="header--icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
               <span className="header--text">Home</span>
-            </a>
+            </NavLink>
           </li>
           <li className="header--list">
-            <a href="#sectionService">
+            <NavLink to="/service">
               <span className="header--icon">
                 <ion-icon name="construct-outline"></ion-icon>
               </span>
               <span className="header--text">Services</span>
-            </a>
+            </NavLink>
           </li>
           <li className="header--list">
-            <a href="#sectionAbout">
+            <NavLink to="/about">
               <span className="header--icon">
                 <ion-icon name="information-circle-outline"></ion-icon>
               </span>
               <span className="header--text">About</span>
-            </a>
+            </NavLink>
           </li>
           <li className="header--list">
             <a href="#footer">
