@@ -1,6 +1,6 @@
 .sectionService--body{
     background: #4c5559;
-    min-height: 100vh;
+    min-height: calc(100vh - 90px);
     padding: 30px 10% 10px;
     border-bottom: 8px solid #FECEA8;
 }
