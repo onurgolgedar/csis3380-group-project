@@ -6,7 +6,7 @@ const SectionHome = () => {
         <section className="sectionHome--body" id="sectionHome">
           <div className="sectionHome--mainText">
             <h1>
-              .react<span>Project</span>
+              Game<span>Ship</span>
             </h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero

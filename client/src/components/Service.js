@@ -6,7 +6,7 @@ const SectionService = () => {
         <section className="sectionService--body" id="sectionService">
           <div className="sectionService--mainText">
             <h2>
-              .our<span>Services</span>
+              Our<span>Games</span>
             </h2>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
