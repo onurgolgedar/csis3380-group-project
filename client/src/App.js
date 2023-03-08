@@ -6,6 +6,7 @@ import Header from "./components/header";
 import SectionHome from "./components/Home";
 import SectionService from "./components/Service";
 import SectionAbout from "./components/About";
+import SectionNotFound from "./components/NotFound";
 
 import { useState } from "react";
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<SectionHome />} />
         <Route path="/service" element={<SectionService />} />
         <Route path="/about" element={<SectionAbout />} />
+        <Route path="*" element={<SectionNotFound/>} />
       </Routes>
       <Footer />
     </div>
