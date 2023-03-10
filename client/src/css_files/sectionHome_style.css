@@ -1,57 +1,69 @@
 .sectionHome--body{
-    background: #4c5559;
+background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(111,142,103,1) 100%);
     min-height: calc(100vh - 90px);
     padding: 30px 10% 10px;
     width: 100%;
     border-bottom: 8px solid #FECEA8;
+    display: flex;
+    align-items: center;
+}
+
+/*  */
+.sectionHomeArcade--body {
+    background: url("../assets/ArcadeBackground.jpg") scroll;
+    background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .sectionHome--mainText{
-    padding-top: 100px;
     text-align: center;
 }
 
-.sectionHome--mainText > h1{
+h1 {
     transition: 0.5s;
     color: #FECEA8;
-    text-align: left;
-    font-size: 9vw;
-    border-bottom: 4px solid white;  
+    font-size: 7vw;
 }
-.sectionHome--mainText > h1:hover{
-    letter-spacing: .01em;
+h1:hover{
+    letter-spacing: .05em;
+    font-size: 7.5vw;
+    color: #99B898;
 }
 .sectionHome--mainText h1 span{
-    color: #99B898;
+    color: white;
 }
 
 .sectionHome--mainText p{
-    color: #99B898;
-    padding-top: 20px;
-    padding-bottom: 15px;
-    font-size: 15px;
+    color: #ffffff;
+    font-size: 35px;
+    font-style: italic;
     line-height: 20px;
 }
 
-.sectionHome--mainButton{
-    text-align: right;
-    border-top: 4px solid white;
+/*  */
+.sectionHomeArcade--Title{
+    border: 0 !important;
+    color: white !important;
+    font-style: bold !important;
 }
 
-.sectionHome--mainButton a{
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 18px 8px;
-    background: #333333;
-    font-size: 15px;
-    font-weight: 500;
-    color: #FFF;
-    transition: 0.5s;
-    text-decoration: none;  
+.sectionHome--mainText {
+    display: flex;
 }
-.sectionHome--mainButton a:hover {
-    background: #333333;
-    color: #99B898;
-    letter-spacing: 4px;
-    border-radius: 10px;
+
+.sectionHome--LogoWrapper {
+    flex: 1;
+}
+
+.sectionHome--ContentWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 90%;
 }

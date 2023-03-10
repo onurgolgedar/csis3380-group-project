@@ -50,7 +50,7 @@ function Header() {
           <li className={openLink === 'arcade' ? 'active--link header--list ' : 'header--list'}>
             <NavLink to="/arcade" onClick={() => handleLink('arcade')}>
               <span className="header--icon">
-                <ion-icon name="construct-outline"></ion-icon>
+                <ion-icon name="game-controller-outline"></ion-icon>
               </span>
               <span className="header--text">Arcade</span>
             </NavLink>

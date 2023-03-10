@@ -1,0 +1,20 @@
+.sectionHome--body{
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(111,142,103,1) 100%);
+      min-height: calc(100vh - 90px);
+      padding: 30px 10% 10px;
+      width: 100%;
+      border-bottom: 8px solid #FECEA8;
+  }
+
+.sectionHomeArcade--body {
+    background: url("../assets/ArcadeBackground.jpg") scroll;
+    background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.sectionHomeArcade--Title{
+    border: 0 !important;
+    color: white !important;
+    font-style: bold !important;
+}
