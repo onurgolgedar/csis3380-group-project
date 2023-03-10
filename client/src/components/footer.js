@@ -81,7 +81,7 @@ const Footer = () => {
                   <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/service">Services</NavLink>
+                  <NavLink to="/arcade">Arcade</NavLink>
                 </li>
                 <li>
                   <NavLink to="/about">About</NavLink>

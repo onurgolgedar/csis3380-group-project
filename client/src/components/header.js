@@ -5,11 +5,28 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import { useState } from "react";
-import {NavLink} from 'react-router-dom';
+import { useState, useEffect } from "react";
+import {NavLink, useLocation} from 'react-router-dom';
 
 function Header() {
   const [isPopOpen, setIsPopOpen] = useState(false);
+  const [openLink, setOpenLink] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/') {
+      setOpenLink('home');
+    } else if (path === '/about') {
+      setOpenLink('about');
+    } else if (path === '/arcade') {
+      setOpenLink('arcade');
+    }
+  }, [location.pathname])
+
+  const handleLink = (name) => {
+    setOpenLink(name);
+  }
 
   const showPopModal = () => {
     setIsPopOpen(true);
@@ -22,24 +39,24 @@ function Header() {
     <div className="header--wrapper">
       <header className="header--body">
         <ul className="header--nav">
-          <li className="header--list">
-            <NavLink to="/">
+          <li className={openLink === 'home' ? 'active--link header--list' : 'header--list'}>
+            <NavLink to="/" onClick={() => handleLink('home')}>
               <span className="header--icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
               <span className="header--text">Home</span>
             </NavLink>
           </li>
-          <li className="header--list">
-            <NavLink to="/service">
+          <li className={openLink === 'arcade' ? 'active--link header--list ' : 'header--list'}>
+            <NavLink to="/arcade" onClick={() => handleLink('arcade')}>
               <span className="header--icon">
                 <ion-icon name="construct-outline"></ion-icon>
               </span>
-              <span className="header--text">Services</span>
+              <span className="header--text">Arcade</span>
             </NavLink>
           </li>
-          <li className="header--list">
-            <NavLink to="/about">
+          <li className={openLink === 'about' ? 'active--link header--list ' : 'header--list'}>
+            <NavLink to="/about"  onClick={() => handleLink('about')}> 
               <span className="header--icon">
                 <ion-icon name="information-circle-outline"></ion-icon>
               </span>

@@ -19,7 +19,7 @@ const SectionHome = () => {
             </p>
           </div>
           <div className="sectionHome--mainButton">
-            <a href="#sectionService">Explore... </a>
+            <a href="#sectionArcade">Explore... </a>
           </div>
         </section>
       </div>

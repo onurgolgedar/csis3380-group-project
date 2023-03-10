@@ -1,10 +1,10 @@
-import "../css_files/sectionService_style.css";
+import "../css_files/sectionArcade_style.css";
 
-const SectionService = () => {
+const SectionArcade = () => {
     return (
       <div>
-        <section className="sectionService--body" id="sectionService">
-          <div className="sectionService--mainText">
+        <section className="sectionArcade--body" id="sectionArcade">
+          <div className="sectionArcade--mainText">
             <h2>
               Our<span>Games</span>
             </h2>
@@ -18,10 +18,10 @@ const SectionService = () => {
               reiciendis, maiores saepe corporis magni?
             </p>
           </div>
-          <div className="sectionService--mainContent"></div>
+          <div className="sectionArcade--mainContent"></div>
         </section>
       </div>
     );
   };
 
-  export default SectionService;
+  export default SectionArcade;
