@@ -2,11 +2,11 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 function ToTop() {
-  const { pathname } = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [location.pathname]);
 
   return null;
 }

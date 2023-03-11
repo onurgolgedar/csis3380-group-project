@@ -1,7 +1,8 @@
 .sectionHome--body{
   background: rgb(2,0,36);
   background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(111,142,103,1) 100%);
-      min-height: calc(100vh - 90px);
+      height: calc(100vh - 90px);
+      min-height: 800px !important;
       padding: 30px 10% 10px;
       width: 100%;
       border-bottom: 8px solid #FECEA8;
@@ -11,6 +12,8 @@
     background: url("../assets/ArcadeBackground.jpg") scroll;
     background-repeat: no-repeat;
   background-size: 100% 100%;
+  
+  min-height: 800px !important;
 }
 
 .sectionHomeArcade--Title{

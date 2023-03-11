@@ -4,8 +4,8 @@
     flex-direction: column;
     width: 100%;
     min-height: 340px;
-    background: #E84A5F;
-    
+    /* background: #E84A5F; */
+    background: #6e93be;
 }
 
 
@@ -113,7 +113,7 @@
     transition: 0.5s;
 }
 .footer--links2 .footer--col:hover h3 > span{
-    color: #E84A5F;
+    color: #6e93be;
 } 
 .footer--links2 .footer--col:hover ul > li > a{
     font-size: 1em;
