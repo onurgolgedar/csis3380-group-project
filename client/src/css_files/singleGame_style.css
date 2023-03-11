@@ -13,3 +13,64 @@
 .play_btn {
     margin-left: 15px;
 }
+
+/* Single Game Description */
+.SingleGameDescription_Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+}
+
+.SingleGameTop_Wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.SingleGamePoster_Container {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.SingleGamePoster_Container img {
+    width: 100%;
+}
+
+.SingleGameDescription_Container {
+    flex: 1.7;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+.SingleGameDescription_TitleContainer p, .SingleGameDescription_DescContainer p {
+    background-color: #FECEA8;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-style: italic;
+    letter-spacing: 5px;
+}
+
+/* Single Game Play */
+
+.SingleGamePlay_GameContainer {
+    background-color: rgb(230, 228, 228);
+    border-radius: 10px;
+    padding: 20px 20px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.SingleGamePlay_GameContainer h3 {
+    flex: 1;
+}
+
+.SingleGamePlay_GameScreen {
+    background-color: gray;
+    width: 100%;
+    flex: 30;
+}

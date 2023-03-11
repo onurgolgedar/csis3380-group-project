@@ -25,26 +25,29 @@ const SectionArcade = () => {
             <NavLink
               to={"/arcade/123/description"}
               type="button"
-              className="btn btn-light"
+              className={linkGame === "description" ? "btn btn-light" : "btn btn-dark"}
               onClick={() => {handleClick("description")}}
             >
-              Description
+              Description/Comments
             </NavLink>
             <NavLink
               to={"/arcade/123/play"}
               type="button"
-              className="btn btn-dark play_btn"
+              className={linkGame === "play" ? "btn btn-light play_btn" : "btn btn-dark play_btn"}
               onClick={() => {handleClick("play")}}
             >
               PLAY
             </NavLink>
           </div>
         </div>
-        {linkGame == "description" ? (
-          <SingleGameDescription />
-        ) : (
-          <SingleGamePlay />
-        )}
+        <div className="Content-Wrapper">
+            {linkGame == "description" ? (
+            <SingleGameDescription />
+          ) : (
+            <SingleGamePlay />
+          )}
+        </div>
+        
       </section>
     </div>
   );
