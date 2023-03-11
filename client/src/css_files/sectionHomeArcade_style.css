@@ -1,23 +1,47 @@
-.sectionHome--body{
-  background: rgb(2,0,36);
-  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(111,142,103,1) 100%);
-      height: calc(100vh - 90px);
-      min-height: 800px !important;
-      padding: 30px 10% 10px;
-      width: 100%;
-      border-bottom: 8px solid #FECEA8;
-  }
-
 .sectionHomeArcade--body {
-    background: url("../assets/ArcadeBackground.jpg") scroll;
-    background-repeat: no-repeat;
-  background-size: 100% 100%;
-  
-  min-height: 800px !important;
+    background: url("../assets/ArcadeBackground.jpg") !important;
+    background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
 }
 
 .sectionHomeArcade--Title{
     border: 0 !important;
     color: white !important;
     font-style: bold !important;
+    font-size: 70px !important;
+}
+
+.SectionHomeArcade_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SectionHomeArcade_content div p{
+  text-align: left;
+  color: #FFFFFF;
+text-shadow: #474747 3px 5px 2px;
+line-height: 30px;
+ }
+
+.SectionHomeArcade_content div {
+  margin-left: 50px;
+}
+
+.ArcadeTitleWrapper {
+  background-color: rgb(238, 238, 238);
+  height: 300px;
+  width: 300px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sectionHomeArcade--Title {
+  color: black !important;
+}
+
+.homeArcadeLink {
+  color: black;
 }

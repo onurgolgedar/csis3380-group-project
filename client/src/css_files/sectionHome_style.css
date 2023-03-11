@@ -1,7 +1,6 @@
 .sectionHome--body{
-/* background: rgb(2,0,36);
-background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(111,142,103,1) 100%); */
-    min-height: calc(100vh - 90px);
+    height: calc(100vh - 90px);
+    min-height: 500px;
     padding: 30px 10% 10px;
     width: 100%;
     border-bottom: 8px solid #FECEA8;
@@ -12,7 +11,7 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(11
 .sectionHome--body{
     background: linear-gradient(-45deg, #3f3f3f,  #6e93be);
     background-size: 400% 400%;
-    animation: gradient-bg 10s ease infinite;
+    animation: gradient-bg 5s ease infinite;
 }
 
 @keyframes gradient-bg {
@@ -28,11 +27,6 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(11
 }
 
 /*  */
-.sectionHomeArcade--body {
-    background: url("../assets/ArcadeBackground.jpg") scroll;
-    background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
 
 .sectionHome--mainText{
     text-align: center;
@@ -41,9 +35,9 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgb(68, 76, 80) 0%, rgba(11
 h1 {
     transition: 0.5s;
     color: #FECEA8;
-    font-size: 7vw;
+    font-size: 6.5vw;
 }
-h1:hover{
+.sectionHome--ContentWrapper h1:hover{
     letter-spacing: .05em;
     font-size: 7.5vw;
     color: #f7ac6f;
@@ -57,13 +51,6 @@ h1:hover{
     font-size: 35px;
     font-style: italic;
     line-height: 20px;
-}
-
-/*  */
-.sectionHomeArcade--Title{
-    border: 0 !important;
-    color: white !important;
-    font-style: bold !important;
 }
 
 .sectionHome--mainText {

@@ -1,6 +1,7 @@
 import "../css_files/sectionArcade_style.css";
 
 const SectionArcade = () => {
+
     return (
       <div>
         <section className="sectionArcade--body" id="sectionArcade">
