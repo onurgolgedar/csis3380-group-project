@@ -1,0 +1,15 @@
+.SingleGame_TopSection {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.SingleGame_TopSection h2 {
+    color:white;
+    font-size: 40px;
+    letter-spacing: 5px;
+}
+
+.play_btn {
+    margin-left: 15px;
+}
