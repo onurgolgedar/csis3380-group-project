@@ -26,12 +26,28 @@ const SingleGameDescription = () => {
         </div>
       </div>
       <div className="SingleGameAddComment_Wrapper">
-        <h3>Add a Comment</h3>
+        <h3 className="SingleGame_SubTitle">Add a Comment</h3>
         <div className="AddComment_Container">
-
+          <textarea
+            id="comment_input"
+            rows="4"
+            placeholder="Share your thoughts..."
+          ></textarea>
+          <div className="AddComment_BottomWrapper">
+            <div className="AddComment_Sent">
+              Sent
+            </div>
+            <div className="AddComment_WordCount">
+              <span>Max Words: 100 - </span>
+              <span> Word Count: </span>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="SingleGameComments_Wrapper"></div>
+      <div className="SingleGameComments_Wrapper">
+        <h3 className="SingleGame_SubTitle">Comments</h3>
+        <div className="CommentsSection_Container"></div>
+      </div>
     </div>
   );
 };

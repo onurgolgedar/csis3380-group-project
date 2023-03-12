@@ -1,7 +1,7 @@
 .sectionArcade--body{
     background: #2A363B;
     min-height: 100vh;
-    padding: 30px 10% 10px;
+    padding: 30px 15% 10px;
     border-bottom: 8px solid #E84A5F;
 }
 
@@ -100,3 +100,4 @@
     background-color: #6e93be;
     border-radius: 10px;
 }
+
