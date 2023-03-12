@@ -1,5 +1,6 @@
 import "../css_files/sectionArcade_style.css";
 import { NavLink, Outlet } from "react-router-dom";
+import Poster from "../test_data/poster.jpg";
 
 const SectionArcade = () => {
   return (
@@ -19,6 +20,32 @@ const SectionArcade = () => {
             reiciendis, maiores saepe corporis magni?
           </p>
         </div>
+        <div className="sectionArcade--mainContent">
+            <div className="items">
+              <h2>Game Name</h2>
+              <div><img src={Poster} alt="Game Poster" /></div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              perferendis a aliquid quia dolorem officiis enim dicta soluta
+              </p>
+              <button>Play</button>
+            </div>
+            <div className="items">
+              <h2>Game Name</h2>
+              <div><img src={Poster} alt="Game Poster" /></div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              perferendis a aliquid quia dolorem officiis enim dicta soluta
+              </p>
+              <button>Play</button>
+            </div>
+            <div className="items">
+              <h2>Game Name</h2>
+              <div><img src={Poster} alt="Game Poster" /></div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              perferendis a aliquid quia dolorem officiis enim dicta soluta
+              </p>
+              <button>Play</button>
+            </div>
+          </div>
 
         {/* Testing NavLink */}
         <NavLink to={"123/description"}>Single Game</NavLink>
