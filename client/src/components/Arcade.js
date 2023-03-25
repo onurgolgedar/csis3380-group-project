@@ -1,8 +1,21 @@
 import "../css_files/sectionArcade_style.css";
 import { NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Poster from "../test_data/poster.jpg";
 
+import ArcadePoster from "./Arcade_GamePoster";
+
 const SectionArcade = () => {
+  const [genreSelected, setGenreSelected] = useState("ALL");
+
+  const handleClick = (path) => {
+    setGenreSelected(path)
+  }
+  const Genre1 = "Genre 1"
+  const Genre2 = "Genre 2"
+  const Genre3 = "Genre 3"
+  const Genre4 = "Genre 4"
+
   return (
     <div>
       <section className="sectionArcade--body" id="sectionArcade">
@@ -10,51 +23,43 @@ const SectionArcade = () => {
           <h2>
             Our<span>Games</span>
           </h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-            perferendis a aliquid quia dolorem officiis enim dicta soluta
-            temporibus ipsam, accusamus laudantium nihil, eum commodi est iusto
-            eaque sed repellendus. Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Est autem rerum enim odit, non sint voluptate
-            temporibus sed, cumque itaque tempore incidunt eum doloribus odio
-            reiciendis, maiores saepe corporis magni?
+          <p style={{ fontSize: "20px" }}>
+            Choose the game genre you want to play:
           </p>
+          <div class="filter_buttons_wrapper">
+            <a href="#" className={genreSelected === "ALL" ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick("ALL")}}>
+              ALL
+            </a>
+            <a href="#" className={genreSelected === "FAVORITES" ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick("FAVORITES")}}>
+              FAVORITES
+            </a>
+            <a href="#" className={genreSelected === Genre1 ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick(Genre1)}}>
+              {Genre1}
+            </a>
+            <a href="#" className={genreSelected === Genre2 ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick(Genre2)}}>
+              {Genre2}
+            </a>
+            <a href="#" className={genreSelected === Genre3 ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick(Genre3)}}>
+              {Genre3}
+            </a>
+            <a href="#" className={genreSelected === Genre4 ? "button_filter button_filter_activate" : "button_filter"}
+              onClick={() => {handleClick(Genre4)}}>
+              {Genre4}
+            </a>
+          </div>
         </div>
         <div className="sectionArcade--mainContent">
-            <div className="items">
-              <h2>Game Name</h2>
-              <div><img src={Poster} alt="Game Poster" /></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-              perferendis a aliquid quia dolorem officiis enim dicta soluta
-              </p>
-              <button>Play</button>
-            </div>
-            <div className="items">
-              <h2>Game Name</h2>
-              <div><img src={Poster} alt="Game Poster" /></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-              perferendis a aliquid quia dolorem officiis enim dicta soluta
-              </p>
-              <button>Play</button>
-            </div>
-            <div className="items">
-              <h2>Game Name</h2>
-              <div><img src={Poster} alt="Game Poster" /></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-              perferendis a aliquid quia dolorem officiis enim dicta soluta
-              </p>
-              <button>Play</button>
-            </div>
-          </div>
-
-        {/* Testing NavLink */}
-        <NavLink to={"123/description"}>Single Game</NavLink>
-        <div className="sectionArcade--mainContent"></div>
-        {/* Dont remove the outlet */}
-      <Outlet />
+          <ArcadePoster />
+          <ArcadePoster />
+          <ArcadePoster />
+          <ArcadePoster />
+        </div>
       </section>
-
-      
     </div>
   );
 };

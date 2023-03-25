@@ -46,7 +46,9 @@ const SingleGameDescription = () => {
       </div>
       <div className="SingleGameComments_Wrapper">
         <h3 className="SingleGame_SubTitle">Comments</h3>
-        <div className="CommentsSection_Container"></div>
+        <div className="CommentsSection_Container">
+          
+        </div>
       </div>
     </div>
   );
