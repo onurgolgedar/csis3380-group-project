@@ -19,7 +19,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 900px;
+    margin-bottom: 50px;
+
 }
 
 .SingleGameTop_Wrapper {
@@ -33,6 +34,7 @@
     flex: 1;
     border-radius: 10px;
     overflow: hidden;
+    max-width:300px;
 }
 
 .SingleGamePoster_Container img {
@@ -78,6 +80,8 @@
 .SingleGame_SubTitle {
     color: white;
 }
+
+/* COMMENT */
 
 #comment_input {
     background-color: white;
@@ -127,4 +131,38 @@
 
 .AddComment_Sent, .AddComment_WordCount {
     padding: 10px 10px;
+}
+
+/* COMMENTS SECTION */
+
+.NoComments_Wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+.NoComments_Wrapper h5{
+    font-weight: bold;
+}
+
+.CommentsSection_Container {
+    min-height: 150px;
+}
+
+.Comment_Wrapper {
+    padding-left: 10px;
+    padding-bottom: 0px;
+    border-bottom: 2px solid rgb(116, 116, 116);
+    margin-bottom: 10px;
+}
+
+.comment_author {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.comment_date{
+    font-style: italic;
+    color:rgb(133, 133, 133);
 }
