@@ -81,6 +81,7 @@ img {
     height: 50px;
     font-size: 20px;
     background: #2A363B;
+    z-index: 0;
 }
 
 .dropdown button, .dropdown li{

@@ -21,6 +21,8 @@ function Header() {
       setOpenLink('about');
     } else if (path === '/arcade') {
       setOpenLink('arcade');
+    } else if (path === '/wiki') {
+      setOpenLink('wiki');
     }
   }, [location.pathname])
 
@@ -53,6 +55,14 @@ function Header() {
                 <ion-icon name="game-controller-outline"></ion-icon>
               </span>
               <span className="header--text">Arcade</span>
+            </NavLink>
+          </li>
+          <li className={openLink === 'wiki' ? 'active--link header--list ' : 'header--list'}>
+            <NavLink to="/wiki" onClick={() => handleLink('wiki')}>
+              <span className="header--icon">
+                <ion-icon name="book-outline"></ion-icon>
+              </span>
+              <span className="header--text">Wiki</span>
             </NavLink>
           </li>
           <li className={openLink === 'about' ? 'active--link header--list ' : 'header--list'}>

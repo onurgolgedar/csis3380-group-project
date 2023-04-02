@@ -3,9 +3,9 @@ import logo from "../../assets/Logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const HomeLanding = () => {
-    const scrollDown = () => {
-        const secondDiv = document.getElementById('sectionHome_Arcade');
-        const y_coord = secondDiv.getBoundingClientRect().top + window.pageYOffset - 90;
+    const scrollDown = (element_id) => {
+        const div = document.getElementById(element_id);
+        const y_coord = div.getBoundingClientRect().top + window.pageYOffset - 90;
         window.scrollTo({ top: y_coord, behavior: 'smooth' });
       };
 
@@ -32,8 +32,11 @@ const HomeLanding = () => {
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" onClick={scrollDown}>
-                    Arcade
+                  <a class="dropdown-item" onClick={() => scrollDown("sectionHome_Arcade")}>
+                    A r c a d e
+                  </a>
+                  <a class="dropdown-item" onClick={() => scrollDown("sectionHome_Wiki")}>
+                    W i k i
                   </a>
                 </li>
               </ul>
