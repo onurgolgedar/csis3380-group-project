@@ -108,3 +108,30 @@
    background: #fecea8 !important;
    color: black !important;
 }
+
+/* Search Bar */
+
+.sectionWiki_searchBar {
+  margin: 15px 0;
+  background-color: #fecea8;
+  padding: 15px 15px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.sectionWiki_searchBar input {
+  flex: 10;
+  width: 100%;
+  padding: 5px 10px;
+  outline: none;
+  border-radius: 10px 0 0 10px;
+  border: none;
+}
+
+.sectionWiki_searchBar button {
+  flex: 1;
+  color: white;
+  background: black;
+  border: none;
+  border-radius: 0 10px 10px 0;
+}
