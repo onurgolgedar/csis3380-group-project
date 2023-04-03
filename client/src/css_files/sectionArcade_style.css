@@ -30,7 +30,7 @@
 .sectionArcade--mainContent {
   width: 100%;
   display: flex;
-  margin-top: 30px;
+  margin-top: 10px;
   padding-bottom: 10%;
   justify-content: space-around;
   align-items: center;
@@ -43,7 +43,7 @@
   margin: 10px;
   border: 4px solid #6e93be81;
   border-radius: 10px;
-  width: 290px;
+  width: 280px;
   transition: all 0.5s ease;
 }
 
@@ -52,14 +52,9 @@
 }
 
 .poster {
-  border-radius: 10px;
   width: 100%;
   height: 300px;
-  background-size: contain;
-  padding: 10px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 5px 5px;
 }
 
 .poster h4 {
@@ -68,6 +63,33 @@
   text-align: center;
   border-radius: 5px;
   text-shadow: 2px 1px 2px #474747;
+}
+
+.poster_imageBackground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster_content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 7px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.poster_wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .buttons_poster_wrapping {
@@ -135,3 +157,4 @@
   border: none;
   border-radius: 0 10px 10px 0;
 }
+

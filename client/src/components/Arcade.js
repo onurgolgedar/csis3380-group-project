@@ -1,7 +1,5 @@
 import "../css_files/sectionArcade_style.css";
-import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Poster from "../test_data/poster.jpg";
 
 import ArcadePoster from "./Arcade_GamePoster";
 
@@ -54,10 +52,8 @@ const SectionArcade = () => {
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          <ArcadePoster />
-          <ArcadePoster />
-          <ArcadePoster />
-          <ArcadePoster />
+          <ArcadePoster image='./poster.jpg' title="random_games"/>
+          <ArcadePoster image='./poster.jpg' title="random_games"/>
         </div>
       </section>
     </div>

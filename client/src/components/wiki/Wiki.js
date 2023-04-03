@@ -1,12 +1,24 @@
 import "../../css_files/sectionArcade_style.css";
-import { NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import ArcadePoster from "../Arcade_GamePoster";
 
+const { RAWG_API_KEY } = require('../../api-key.js');
+
 const SectionWiki = () => {
   const [genreSelected, setGenreSelected] = useState("ALL");
   const [searchState, setSearchState] = useState("");
+  const [gamesAnswer, setGamesAnswer] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.results);
+        setGamesAnswer(data.results);
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   const handleClick = (path) => {
     setGenreSelected(path);
@@ -19,6 +31,23 @@ const SectionWiki = () => {
     }
     console.log(search_aux)
   };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    var search = searchState.split(' ').join('-').toLowerCase();
+    setGamesAnswer([]);
+    fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.results.length === 0) {
+          alert("no games with that name found")
+        } else {
+          setGamesAnswer(data.results);
+        }
+      })
+    .catch(error => console.error(error));
+  }
 
   const Genre1 = "Genre 1";
   const Genre2 = "Genre 2";
@@ -33,22 +62,22 @@ const SectionWiki = () => {
             Wi<span>ki</span>
           </h2>
 
-          <div class="sectionWiki_searchBar">
+          <div className="sectionWiki_searchBar">
             <input
               type="text"
-              class="searchTerm"
+              className="searchTerm"
               placeholder="Search a game's title..."
               value={searchState}
               onChange={handleSearchChange}
             />
-            <button type="submit" class="sectionWiki_searchButton">
+            <button type="submit" class="sectionWiki_searchButton" onClick={onSearch}>
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </div>
 
           <p style={{ fontSize: "20px" }}>Filters:</p>
 
-          <div class="filter_buttons_wrapper">
+          <div className="filter_buttons_wrapper">
             <a
               href="#"
               className={
@@ -130,10 +159,11 @@ const SectionWiki = () => {
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          <ArcadePoster />
-          <ArcadePoster />
-          <ArcadePoster />
-          <ArcadePoster />
+          {
+            gamesAnswer.map((game, index) => {
+              return <ArcadePoster key={index} title={game.name} image={game.background_image}/>
+            })
+          }
         </div>
       </section>
     </div>
