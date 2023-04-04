@@ -31,7 +31,7 @@ const SectionArcade = ({type}) => {
               className={linkGame === "description" ? "btn btn-light" : "btn btn-dark"}
               onClick={() => {handleClick("description")}}
             >
-              Description/Comments
+              LOBBY
             </NavLink>
 
             {

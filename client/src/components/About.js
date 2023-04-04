@@ -30,7 +30,7 @@ const SectionAbout = () => {
                 ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
                 sint totam!
               </p>
-              <a href="#" className="sectionAbout--links">
+              <a href="/#" className="sectionAbout--links">
                 See More
               </a>
             </div>
@@ -45,7 +45,7 @@ const SectionAbout = () => {
                 ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
                 sint totam!
               </p>
-              <a href="#" className="sectionAbout--links">
+              <a href="/#" className="sectionAbout--links">
                 See More
               </a>
             </div>
@@ -60,7 +60,7 @@ const SectionAbout = () => {
                 ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
                 sint totam!
               </p>
-              <a href="#" className="sectionAbout--links">
+              <a href="/#" className="sectionAbout--links">
                 See More
               </a>
             </div>

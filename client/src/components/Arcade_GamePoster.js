@@ -22,10 +22,10 @@ const ArcadePoster = ({ game }) => {
                 state={{game_data: game}}
                 className="button_poster"
               >
-                SELECT
+                GO
               </NavLink>
               <a href="#" className="button_poster">
-                ADD
+                FAV
               </a>
             </div>
           </div>
