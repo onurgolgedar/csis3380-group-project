@@ -36,7 +36,30 @@
     flex: 1;
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
+}
 
+.SingleGameTop_ButtonsWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.btn-SingleGameTop {
+    box-shadow: 5px 5px 5px #464646;
+}
+
+.btn-heart {
+    padding: 0 30px;
+    font-size: 25px;
+}
+
+.btn-heart-active {
+    color: red;
 }
 
 .SingleGamePoster_Container img {
@@ -67,12 +90,24 @@
     border-radius: 10px;
 }
 
+.SingleGameDescription_DescContainer h6, .SingleGameDescription_TitleContainer h4{
+    margin: 0 0 20px 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
 .SingleGameDescription_TitleContainer p, .SingleGameDescription_DescContainer p {
     background-color: #FECEA8;
     border-radius: 5px;
     padding: 5px 10px;
     font-style: italic;
     letter-spacing: 5px;
+}
+
+.gameDescription-Text p {
+    background-color: white !important;
+    font-style: normal;
+    letter-spacing: 1px;
 }
 
 /* Single Game Play */
