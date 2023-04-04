@@ -24,7 +24,7 @@ const SectionArcade = ({type}) => {
         <div className="SingleGame_TopSection">
           <h2>{type === "arcade" ? "Arcade" : "Wiki"}</h2>
           <div className="SingleGame_TopButtons">
-            <NavLink
+            {type === "arcade" ? <NavLink
               to={"/arcade/123/description"}
               state={{game_data: game_data, type: type}}
               type="button"
@@ -32,7 +32,7 @@ const SectionArcade = ({type}) => {
               onClick={() => {handleClick("description")}}
             >
               LOBBY
-            </NavLink>
+            </NavLink> : <button href="/#" className="btn btn-light" >INFO</button>} 
 
             {
               type === "arcade" &&

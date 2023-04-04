@@ -1,7 +1,7 @@
 import "../css_files/sectionArcade_style.css";
 import { NavLink } from "react-router-dom";
 const ArcadePoster = ({ game }) => {
-  console.log(game)
+  // console.log(game);
 
   return (
     <div className="items">
@@ -19,13 +19,13 @@ const ArcadePoster = ({ game }) => {
                 to={{
                   pathname: `${game.id}/description`,
                 }}
-                state={{game_data: game}}
+                state={{ game_data: game }}
                 className="button_poster"
               >
                 GO
               </NavLink>
-              <a href="#" className="button_poster">
-                FAV
+              <a href="#" className="button_poster btn-heart">
+                &hearts;
               </a>
             </div>
           </div>

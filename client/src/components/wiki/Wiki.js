@@ -2,12 +2,13 @@ import "../../css_files/sectionArcade_style.css";
 import { useEffect, useState, useRef } from "react";
 
 import ArcadePoster from "../Arcade_GamePoster";
+import FilterButton from "./FilterButton";
 
 const { RAWG_API_KEY } = require("../../api-key.js");
 
 const SectionWiki = () => {
   const searchBarRef = useRef(null);
-  const [genreSelected, setGenreSelected] = useState("ALL");
+  const [genreSelected, setGenreSelected] = useState("POPULAR");
   const [searchState, setSearchState] = useState("");
   const [gamesAnswer, setGamesAnswer] = useState(null);
 
@@ -20,6 +21,20 @@ const SectionWiki = () => {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    // console.log("New Genre")
+    if (genreSelected !== "POPULAR") {
+      fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setGamesAnswer(data.results);
+        console.log("Genre Specific query", gamesAnswer)
+      })
+      .catch((error) => console.error(error));
+    }
+  }, [genreSelected]);
+
 
   const handleClick = (path) => {
     setGenreSelected(path);
@@ -42,7 +57,6 @@ const SectionWiki = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.results.length === 0) {
           alert("no games with that name found");
         } else {
@@ -58,10 +72,8 @@ const SectionWiki = () => {
     }
   };
 
-  const Genre1 = "Genre 1";
-  const Genre2 = "Genre 2";
-  const Genre3 = "Genre 3";
-  const Genre4 = "Genre 4";
+  const Genres = ["POPULAR", "FAVORITE", "action", "indie", "adventure", "shooter", "casual", "simulation", "strategy", 
+    "arcade", "sports", "family", "fighting", "card", "educational", "racing"]
 
   return (
     <div>
@@ -93,84 +105,13 @@ const SectionWiki = () => {
           <p style={{ fontSize: "20px" }}>Filters:</p>
 
           <div className="filter_buttons_wrapper">
-            <a
-              href="#"
-              className={
-                genreSelected === "ALL"
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick("ALL");
-              }}
-            >
-              ALL
-            </a>
-            <a
-              href="#"
-              className={
-                genreSelected === "FAVORITES"
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick("FAVORITES");
-              }}
-            >
-              FAVORITES
-            </a>
-            <a
-              href="#"
-              className={
-                genreSelected === Genre1
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick(Genre1);
-              }}
-            >
-              {Genre1}
-            </a>
-            <a
-              href="#"
-              className={
-                genreSelected === Genre2
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick(Genre2);
-              }}
-            >
-              {Genre2}
-            </a>
-            <a
-              href="#"
-              className={
-                genreSelected === Genre3
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick(Genre3);
-              }}
-            >
-              {Genre3}
-            </a>
-            <a
-              href="#"
-              className={
-                genreSelected === Genre4
-                  ? "button_filter button_filter_activate"
-                  : "button_filter"
-              }
-              onClick={() => {
-                handleClick(Genre4);
-              }}
-            >
-              {Genre4}
-            </a>
+            
+            {
+              Genres.map((genre, index) => {
+                return <FilterButton key={index} genre={genre} genre_selected={genreSelected} handleClick={handleClick}/>;
+              })
+            }
+            
           </div>
         </div>
         <div className="sectionArcade--mainContent">
