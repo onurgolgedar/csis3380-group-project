@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const gameReviewSchema = new mongoose.Schema({
   gameID: String,
   user: String,

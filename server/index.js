@@ -89,16 +89,22 @@ async function connectMongoose() {
 
   const mongooseConnection = await mongooseConnection_promise;
 
-  const _collection = mongoose.connection.collections['games'];
+  await dropCollection('games');
+  await dropCollection('users');
+  await dropCollection('gamereviews');
+
+  return mongooseConnection;
+}
+
+async function dropCollection(collectionName) {
+  _collection = mongoose.connection.collections[collectionName];
   if (_collection) {
     _collection.drop(function (err) {
       if (err) {
-        console.log('(Error) Mongoose -> Collection could not be dropped.', err);
+        console.log(`(Error) Mongoose -> Collection could not be dropped. (${collectionName})`, err);
       } else {
-        console.log('Mongoose -> Collection Dropped');
+        console.log(`Mongoose -> Collection Dropped (${collectionName})`);
       }
     });
   }
-
-  return mongooseConnection;
 }
