@@ -1,23 +1,24 @@
 import "../../css_files/sectionArcade_style.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import ArcadePoster from "../Arcade_GamePoster";
 
-const { RAWG_API_KEY } = require('../../api-key.js');
+const { RAWG_API_KEY } = require("../../api-key.js");
 
 const SectionWiki = () => {
+  const searchBarRef = useRef(null);
   const [genreSelected, setGenreSelected] = useState("ALL");
   const [searchState, setSearchState] = useState("");
-  const [gamesAnswer, setGamesAnswer] = useState([]);
+  const [gamesAnswer, setGamesAnswer] = useState(null);
 
   useEffect(() => {
+    searchBarRef.current.focus();
     fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data.results);
+      .then((res) => res.json())
+      .then((data) => {
         setGamesAnswer(data.results);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, []);
 
   const handleClick = (path) => {
@@ -26,28 +27,36 @@ const SectionWiki = () => {
 
   const handleSearchChange = (e) => {
     let search_aux = e.target.value;
-    if(search_aux.length <= 255) {
+    if (search_aux.length <= 255) {
       setSearchState(search_aux);
     }
-    console.log(search_aux)
+    console.log(search_aux);
   };
 
   const onSearch = (e) => {
     e.preventDefault();
-    var search = searchState.split(' ').join('-').toLowerCase();
+    var search = searchState.split(" ").join("-").toLowerCase();
     setGamesAnswer([]);
-    fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`)
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
         if (data.results.length === 0) {
-          alert("no games with that name found")
+          alert("no games with that name found");
         } else {
           setGamesAnswer(data.results);
         }
       })
-    .catch(error => console.error(error));
-  }
+      .catch((error) => console.error(error));
+  };
+
+  const onSearchEnter = (e) => {
+    if (e.key === "Enter") {
+      onSearch(e);
+    }
+  };
 
   const Genre1 = "Genre 1";
   const Genre2 = "Genre 2";
@@ -68,9 +77,15 @@ const SectionWiki = () => {
               className="searchTerm"
               placeholder="Search a game's title..."
               value={searchState}
+              ref={searchBarRef}
               onChange={handleSearchChange}
+              onKeyDown={onSearchEnter}
             />
-            <button type="submit" class="sectionWiki_searchButton" onClick={onSearch}>
+            <button
+              type="submit"
+              className="sectionWiki_searchButton"
+              onClick={onSearch}
+            >
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </div>
@@ -159,11 +174,15 @@ const SectionWiki = () => {
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          {
+          {gamesAnswer === null ? (
+            <div style={{width: "100px", height:"100px", marginTop:"60px"}} className="spinner-border text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
             gamesAnswer.map((game, index) => {
-              return <ArcadePoster key={index} title={game.name} image={game.background_image}/>
+              return <ArcadePoster key={index} game={game} />;
             })
-          }
+          )}
         </div>
       </section>
     </div>

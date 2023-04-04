@@ -1,12 +1,11 @@
 import "../../css_files/sectionArcade_style.css";
-import Poster from "../../test_data/poster.jpg";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 import SingleGameComment from "./SingleGameComment";
 
-const SingleGameDescription = () => {
-
+const SingleGameDescription = ({data, type}) => {
   const [newComment, setNewComment] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleCommentChange = (e) => {
     let comment_aux = e.target.value;
@@ -15,17 +14,33 @@ const SingleGameDescription = () => {
     }
   };
 
+  useEffect(() => {
+    async function fetchImagePosterArcade() {
+      const image_aux = await import(`../../test_data/${data.description_image}`);
+      setImageUrl(image_aux.default);
+    }
+    if(type === "arcade") {
+      fetchImagePosterArcade();
+    }
+    
+  }, [data.description_image, type]);
+
   return (
     <div className="SingleGameDescription_Wrapper">
       <div className="SingleGameTop_Wrapper">
         <div className="SingleGamePoster_Container">
-          <img src={Poster} alt="Game Poster" />
+          {
+            type === "arcade" ?
+            <img src={imageUrl} alt="Game Poster" />
+            :
+            <img src={data.background_image} alt="Game Poster" />
+          }
+          
         </div>
         <div className="SingleGameDescription_Container">
           <div className="SingleGameDescription_TitleContainer">
             <p>Title</p>
-            {/* Test Data */}
-            <h4>Pong HTML</h4>
+            <h4>{data.name}</h4>
           </div>
           <div className="SingleGameDescription_DescContainer">
             <p>Description</p>

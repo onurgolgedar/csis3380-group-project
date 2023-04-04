@@ -21,9 +21,10 @@ function App() {
         <Route path="/" element={<SectionHome />} />
         <Route path="/arcade" element={<SectionArcade />} >
         </Route>
-        <Route path="/arcade/:gameId/description" element={<SingleGame/>} />
-        <Route path="/arcade/:gameId/play" element={<SingleGame />} />
+        <Route path="/arcade/:gameId/description" element={<SingleGame type={"arcade"}/>} />
+        <Route path="/arcade/:gameId/play" element={<SingleGame type={"arcade"}/>} />
         <Route path="/wiki" element={<SectionWiki />}/>
+        <Route path="/wiki/:gameId/description" element={<SingleGame type={"wiki"}/>} />
         <Route path="/about" element={<SectionAbout />} />
         <Route path="*" element={<SectionNotFound/>} />
       </Routes>

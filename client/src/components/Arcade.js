@@ -1,5 +1,5 @@
 import "../css_files/sectionArcade_style.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import ArcadePoster from "./Arcade_GamePoster";
 
@@ -24,36 +24,37 @@ const SectionArcade = () => {
           <p style={{ fontSize: "20px" }}>
             Choose the game genre you want to play:
           </p>
-          <div class="filter_buttons_wrapper">
-            <a href="#" className={genreSelected === "ALL" ? "button_filter button_filter_activate" : "button_filter"}
+          <div className="filter_buttons_wrapper">
+            <a href="/#" className={genreSelected === "ALL" ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick("ALL")}}>
               ALL
             </a>
-            <a href="#" className={genreSelected === "FAVORITES" ? "button_filter button_filter_activate" : "button_filter"}
+            <a href="/#" className={genreSelected === "FAVORITES" ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick("FAVORITES")}}>
               FAVORITES
             </a>
-            <a href="#" className={genreSelected === Genre1 ? "button_filter button_filter_activate" : "button_filter"}
+            <a href="/#" className={genreSelected === Genre1 ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick(Genre1)}}>
               {Genre1}
             </a>
-            <a href="#" className={genreSelected === Genre2 ? "button_filter button_filter_activate" : "button_filter"}
+            <a href="/#" className={genreSelected === Genre2 ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick(Genre2)}}>
               {Genre2}
             </a>
-            <a href="#" className={genreSelected === Genre3 ? "button_filter button_filter_activate" : "button_filter"}
+            <a href="/#" className={genreSelected === Genre3 ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick(Genre3)}}>
               {Genre3}
             </a>
-            <a href="#" className={genreSelected === Genre4 ? "button_filter button_filter_activate" : "button_filter"}
+            <a href="/#" className={genreSelected === Genre4 ? "button_filter button_filter_activate" : "button_filter"}
               onClick={() => {handleClick(Genre4)}}>
               {Genre4}
             </a>
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          <ArcadePoster image='./poster.jpg' title="random_games"/>
-          <ArcadePoster image='./poster.jpg' title="random_games"/>
+          <ArcadePoster game={{"background_image":"./assets/poster.jpg", "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
+          <ArcadePoster game={{"background_image":'./assets/poster.jpg', "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
+          <ArcadePoster game={{"background_image":'./assets/poster.jpg', "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
         </div>
       </section>
     </div>

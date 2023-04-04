@@ -21,21 +21,21 @@ const HomeLanding = () => {
               Game<span>Ship</span>
             </h1>
             <p>PLAY and MORE</p>
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-secondary dropdown-toggle"
+                className="btn btn-secondary dropdown-toggle"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Discover
               </button>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" onClick={() => scrollDown("sectionHome_Arcade")}>
+                  <a className="dropdown-item" onClick={() => scrollDown("sectionHome_Arcade")}>
                     A r c a d e
                   </a>
-                  <a class="dropdown-item" onClick={() => scrollDown("sectionHome_Wiki")}>
+                  <a className="dropdown-item" onClick={() => scrollDown("sectionHome_Wiki")}>
                     W i k i
                   </a>
                 </li>
