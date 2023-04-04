@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Game = require('./models/game.js');
 const GameReview = require('./models/gameReview.js');
 const User = require('./models/user.js');
-const Games = require('./data/games.js');
-const GameReviews = require('./data/gameReviews.js');
-const Users = require('./data/users.js');
+const games = require('./data/games.js');
+const gameReviews = require('./data/gameReviews.js');
+const users = require('./data/users.js');
 
 async function connectMongoose(connectionString) {
     var connectionPromise = mongoose.connect(connectionString, {
@@ -39,13 +39,19 @@ async function initializeDB() {
     await dropCollection('users');
     await dropCollection('gamereviews');
 
-    Users.map(item => async function () {
+    users.map(item => async function () {
+        await insertDocument(item);
+    }());
+    games.map(item => async function () {
+        await insertDocument(item);
+    }());
+    gameReviews.map(item => async function () {
         await insertDocument(item);
     }());
 }
 
 async function insertDocument(document, documentName = 'Unnamed Document') {
-    User.create(document).then(function () {
+    document.save().then(function () {
         console.log(`Mongoose -> A New Document Added (${documentName})`);
     }).catch(function (error) {
         console.log(`(Error )Mongoose -> Document could not be added. (${document}) ${error}`);
