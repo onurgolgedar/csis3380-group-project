@@ -1,28 +1,42 @@
+:root{
+  --bg-color: #2B363C;
+  --bg-color-2nd: #000001;
+  --main-color: #FFCEA7;
+  --main-color-2nd: #4F657B;
+  --main-color-3rd: #6e93be;
+  --text-color: #FBFFFA;
+  --large-font: 4rem;
+  --medium-font: 2.5rem;
+  --small-font: 1.2rem;
+}
+
+
+
 .sectionArcade--body {
-  background: #2a363b;
+  background: var(--bg-color);
   min-height: 100vh;
   padding: 30px 15% 10px;
-  border-bottom: 8px solid #fecea8;
+  border-bottom: 8px solid var(--main-color);
 }
 
 .sectionArcade--mainText {
   text-align: center;
 }
 .sectionArcade--mainText > h2 {
-  color: #fecea8;
+  color: var(--main-color);
   transition: 0.5s;
   text-align: left;
   font-size: 5vw;
-  border-bottom: 4px solid white;
+  border-bottom: 4px solid var(--text-color);
 }
 .sectionArcade--mainText > h2:hover {
   letter-spacing: 0.01em;
 }
 .sectionArcade--mainText h2 span {
-  color: white;
+  color: var(--text-color);
 }
 .sectionArcade--mainText p {
-  color: white;
+  color: var(--text-color);
   font-size: 15px;
   text-align: left;
 }
@@ -41,7 +55,7 @@
 .sectionArcade--mainContent > .items {
   padding: 15px;
   margin: 10px;
-  border: 4px solid #6e93be81;
+  border: 4px solid var(--main-color-2nd);
   border-radius: 10px;
   width: 280px;
   transition: all 0.5s ease;
@@ -58,7 +72,7 @@
 }
 
 .poster h4 {
-  color: #ffffff;
+  color: var(--text-color);
   background-color: rgba(128, 128, 128, 0.5);
   text-align: center;
   border-radius: 5px;
@@ -101,7 +115,7 @@
 .button_filter {
   /* box-shadow: 0px 1px 0px 0px #666665; */
   color: rgb(34, 34, 34);
-  background-color: #fecfa8c0;
+  background-color: var(--main-color);
   border-radius: 6px;
   cursor: pointer;
   font-size: 15px;
@@ -111,7 +125,8 @@
 }
 
 .button_poster:hover {
-  background-color: #fecea8;
+  background-color: var(--main-color);
+  color: var(--main-color-3rd);
 }
 
 .filter_buttons_wrapper {
@@ -122,20 +137,28 @@
 }
 
 .button_filter {
-    background: black;
+    background: var(--bg-color-2nd);
     color: rgb(184, 184, 184);
+}
+.button_filter:hover {
+  color: var(--main-color-3rd) !important;
 }
 
 .button_filter_activate {
-   background: #fecea8 !important;
-   color: black !important;
+   background: var(--main-color) !important;
+   color: var(--bg-color-2nd) !important;
 }
+.button_filter_activate:hover {
+  background: var(--main-color) !important;
+  color: var(--bg-color-2nd) !important;
+}
+
 
 /* Search Bar */
 
 .sectionWiki_searchBar {
   margin: 15px 0;
-  background-color: #fecea8;
+  background-color: var(--main-color);
   padding: 15px 15px;
   border-radius: 10px;
   display: flex;
@@ -152,8 +175,8 @@
 
 .sectionWiki_searchBar button {
   flex: 1;
-  color: white;
-  background: black;
+  color: var(--text-color);
+  background: var(--bg-color-2nd);
   border: none;
   border-radius: 0 10px 10px 0;
 }

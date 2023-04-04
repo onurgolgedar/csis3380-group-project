@@ -1,3 +1,16 @@
+:root{
+    --bg-color: #2B363C;
+    --bg-color-2nd: #000001;
+    --main-color: #FFCEA7;
+    --main-color-2nd: #4F657B;
+    --main-color-3rd: #6e93be;
+    --text-color: #FBFFFA;
+    --large-font: 4rem;
+    --medium-font: 2.5rem;
+    --small-font: 1.2rem;
+}
+
+
 
 .footer--body{
     display: flex;
@@ -5,7 +18,7 @@
     width: 100%;
     min-height: 340px;
     /* background: #E84A5F; */
-    background: #6e93be;
+    background: var(--main-color-3rd);
 }
 
 
@@ -17,7 +30,7 @@
     position: relative;
     width: 100%;
     min-height: 100px;
-    background: #2A363B;
+    background: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +48,7 @@
     margin: 4px 4px 4px;
     width: 100%;
     min-height: 80px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid var(--text-color);
     flex-grow: 1;
     margin-bottom: 4px;
 }
@@ -46,7 +59,7 @@
     line-height: 20px;
     font-size: 2em;
     text-align: center;
-    color: #fff;
+    color: var(--text-color);
 }
 .footer--team .footer-teammember{
     width: 100%;
@@ -55,7 +68,7 @@
     display: block;
     line-height: 10px;
     text-align: center;
-    color: #fff;
+    color: var(--text-color);
 }
 .footer--smallicon{
     transition: 0.5s;
@@ -64,13 +77,13 @@
     color: rgba(255,255,255,0.5);
 }
 .footer--team a:hover .footer--smallicon{
-    color: #fff;
+    color: var(--text-color);
 }
 .footer--text{
     transition: 0.5s;
     font-weight: 100;
     font-size: 0.6em;
-    color: #fff;
+    color: var(--text-color);
     text-transform: uppercase;
     letter-spacing: 0.10em;
     opacity: 0.5;
@@ -99,8 +112,8 @@
     align-items: center; 
     flex-wrap: wrap;
     min-height: 100px;
-    background: #2A363B;
-    border-bottom: 2px solid #fff;
+    background: var(--bg-color);
+    border-bottom: 2px solid var(--text-color);
     margin-bottom: 10px;
 }
 .footer--col{
@@ -113,15 +126,15 @@
     transition: 0.5s;
 }
 .footer--links2 .footer--col:hover h3 > span{
-    color: #6e93be;
+    color: var(--main-color-3rd);
 } 
 .footer--links2 .footer--col:hover ul > li > a{
     font-size: 1em;
     letter-spacing: 2px;
-    color: #FFF;
+    color: var(--text-color);
 } 
 .footer--col > h3{
-    color: #FFF;
+    color: var(--text-color);
     font-size: 25px;
 }
 .footer--col > ul{

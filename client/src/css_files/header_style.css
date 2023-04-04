@@ -1,3 +1,17 @@
+:root{
+    --bg-color: #2B363C;
+    --bg-color-2nd: #000001;
+    --main-color: #FFCEA7;
+    --main-color-2nd: #4F657B;
+    --main-color-3rd: #6e93be;
+    --text-color: #FBFFFA;
+    --large-font: 4rem;
+    --medium-font: 2.5rem;
+    --small-font: 1.2rem;
+}
+
+
+
 .header--wrapper {
     position: sticky;
     top: 0;
@@ -7,7 +21,7 @@
 
 .header--body{
     padding: 0 10%;
-    background: #2A363B;
+    background: var(--main-color-2nd);
     height: 80px;
     display: flex;
     margin-bottom: 10px;
@@ -37,47 +51,47 @@
     font: 1.5em;
     margin-top: 10px;
     height: 40px;
-    background: #333333;
-    color: #FFFF;
+    background: var(--bg-color);
+    color: var(--text-color);
     transition: 0.5s;
     text-decoration: none;
     display: inline-block;
     border: none;
 }
 .header--navLogin .btnLogin:hover {
-    background: #333333;
-    color: #99B898;
+    background: var(--bg-color-2nd);
+    color: var(--main-color-3rd);
     letter-spacing: 1px;
     border-radius: 10px;
 }
 
 .btnSave{
     font: 1.5em;
-    background: #333333;
-    color: #FFFF;
+    background: var(--bg-color);
+    color: var(--text-color);
     transition: 0.5s;
     text-decoration: none;
     display: inline-block;
     border: none;
 }
 .btnSave:hover {
-    background: #333333;
-    color: #99B898;
+    background: var(--bg-color);
+    color: var(--main-color-3rd);
     letter-spacing: 1px;
     border-radius: 10px;
 }
 .btnCancel{
     font: 1.5em;
-    background: #E84A5F;
-    color: #FFFF;
+    background: var(--bg-color-2nd);
+    color: var(--text-color);
     transition: 0.5s;
     text-decoration: none;
     display: inline-block;
     border: none;
 }
 .btnCancel:hover {
-    background: #E84A5F;
-    color: #FECEA8;
+    background: var(--bg-color-2nd);
+    color: var(--main-color-3rd);
     letter-spacing: 1px;
     border-radius: 10px;
 }
@@ -108,7 +122,7 @@
     color: rgba(255,255,255,0.5);
 }
 .header--list a:hover .header--icon{
-    color: #fff;
+    color: var(--text-color);
 }
 
 .header--text{
@@ -116,7 +130,7 @@
     position: absolute;
     font-weight: 600;
     font-size: 0.6em;
-    color: #fff;
+    color: var(--text-color);
     text-transform: uppercase;
     transform: translateY(16px);
     letter-spacing: 0.05em;
@@ -128,7 +142,7 @@
 }
 
 .btn-log {
-    color: white;
+    color: var(--text-color);
     height: 40px;
     padding: 0 20px;
     margin-top: 20px;
@@ -139,7 +153,7 @@
 }
 
 .active--link {
-    background-color:#4c5559;
+    background-color: var(--bg-color);
 }
 
 .header--nav {
