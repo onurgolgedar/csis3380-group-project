@@ -1,0 +1,24 @@
+{
+  "name": "csis3380-group-project",
+  "version": "1.0.0",
+  "description": "Gameship.com is a gaming website that will provide users with a platform to access game information and play games online. The website will be developed using React library for the front-end and Node.js for the back-end. The database used will be MongoDB cloud, which will store game and comment information.",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onurgolgedar/csis3380-group-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onurgolgedar/csis3380-group-project/issues"
+  },
+  "homepage": "https://github.com/onurgolgedar/csis3380-group-project#readme",
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
