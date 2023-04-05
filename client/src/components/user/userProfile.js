@@ -1,5 +1,5 @@
-import "../css_files/userProfile_style.css";
-import Avatar from "../assets/avatar.jpg";
+import "../../css_files/userProfile_style.css";
+import Avatar from "../../assets/avatar.jpg";
 
 function UserProfile() {
 
@@ -33,13 +33,13 @@ function UserProfile() {
             <div class="userP--favGamesContainer card">
                 <div class="fav--gamesHeading">Favourite List</div>
                 <div class="fav--gamesScrollContainer">
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
-                    <div class="fav--element"><h4>Game</h4> <img src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example1"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example2"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example3"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example4"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example5"src="./images/avatar.jpg"/></div>
+                    <div class="fav--element"><h4>Game</h4> <img alt="image-example6"src="./images/avatar.jpg"/></div>
                 </div>
             </div>
         </div> 

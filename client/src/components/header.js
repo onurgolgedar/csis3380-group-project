@@ -5,30 +5,33 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import UserButton from "./user/userButton"
+
 import { useState, useEffect } from "react";
-import {NavLink, useLocation} from 'react-router-dom';
+import { NavLink, useLocation } from "react-router-dom";
 
 function Header() {
   const [isPopOpen, setIsPopOpen] = useState(false);
   const [openLink, setOpenLink] = useState("");
+  const [userRegistered, setUserRegistered] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
     const path = window.location.pathname;
-    if (path === '/') {
-      setOpenLink('home');
-    } else if (path === '/about') {
-      setOpenLink('about');
-    } else if (path === '/arcade') {
-      setOpenLink('arcade');
-    } else if (path === '/wiki') {
-      setOpenLink('wiki');
+    if (path === "/") {
+      setOpenLink("home");
+    } else if (path === "/about") {
+      setOpenLink("about");
+    } else if (path === "/arcade") {
+      setOpenLink("arcade");
+    } else if (path === "/wiki") {
+      setOpenLink("wiki");
     }
-  }, [location.pathname])
+  }, [location.pathname]);
 
   const handleLink = (name) => {
     setOpenLink(name);
-  }
+  };
 
   const showPopModal = () => {
     setIsPopOpen(true);
@@ -41,32 +44,54 @@ function Header() {
     <div className="header--wrapper">
       <header className="header--body">
         <ul className="header--nav">
-          <li className={openLink === 'home' ? 'active--link header--list' : 'header--list'}>
-            <NavLink to="/" onClick={() => handleLink('home')}>
+          <li
+            className={
+              openLink === "home" ? "active--link header--list" : "header--list"
+            }
+          >
+            <NavLink to="/" onClick={() => handleLink("home")}>
               <span className="header--icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
               <span className="header--text">Home</span>
             </NavLink>
           </li>
-          <li className={openLink === 'arcade' ? 'active--link header--list ' : 'header--list'}>
-            <NavLink to="/arcade" onClick={() => handleLink('arcade')}>
+          <li
+            className={
+              openLink === "arcade"
+                ? "active--link header--list "
+                : "header--list"
+            }
+          >
+            <NavLink to="/arcade" onClick={() => handleLink("arcade")}>
               <span className="header--icon">
                 <ion-icon name="game-controller-outline"></ion-icon>
               </span>
               <span className="header--text">Arcade</span>
             </NavLink>
           </li>
-          <li className={openLink === 'wiki' ? 'active--link header--list ' : 'header--list'}>
-            <NavLink to="/wiki" onClick={() => handleLink('wiki')}>
+          <li
+            className={
+              openLink === "wiki"
+                ? "active--link header--list "
+                : "header--list"
+            }
+          >
+            <NavLink to="/wiki" onClick={() => handleLink("wiki")}>
               <span className="header--icon">
                 <ion-icon name="book-outline"></ion-icon>
               </span>
               <span className="header--text">Wiki</span>
             </NavLink>
           </li>
-          <li className={openLink === 'about' ? 'active--link header--list ' : 'header--list'}>
-            <NavLink to="/about"  onClick={() => handleLink('about')}> 
+          <li
+            className={
+              openLink === "about"
+                ? "active--link header--list "
+                : "header--list"
+            }
+          >
+            <NavLink to="/about" onClick={() => handleLink("about")}>
               <span className="header--icon">
                 <ion-icon name="information-circle-outline"></ion-icon>
               </span>
@@ -83,16 +108,18 @@ function Header() {
           </li>
         </ul>
         <ul className="header--navLogin">
-          <button
-          type="button"
-          className="btnLogin"
-          onClick={showPopModal}>Login
-          </button>
+          {
+            userRegistered ?  
+            <UserButton/>
+            :
+            <button type="button" className="btnLogin" onClick={showPopModal}>
+              Login
+            </button>
+          }
         </ul>
       </header>
 
-
-      <Modal show={isPopOpen} onHide={hidePopModal}>
+      <Modal id="myModal" show={isPopOpen} onHide={hidePopModal}>
         <Modal.Header>
           <Modal.Title>Login Username</Modal.Title>
         </Modal.Header>
@@ -108,7 +135,9 @@ function Header() {
           <Button variant="danger" className="btnCancel" onClick={hidePopModal}>
             Cancel
           </Button>
-          <Button variant="info" className="btnSave">Save Username</Button>
+          <Button variant="info" className="btnSave">
+            Save Username
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -116,4 +145,3 @@ function Header() {
 }
 
 export default Header;
-

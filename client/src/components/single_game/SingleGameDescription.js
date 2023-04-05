@@ -86,6 +86,14 @@ const SingleGameDescription = ({ data, type }) => {
             <h4>{data.name}</h4>
           </div>
           <div className="SingleGameDescription_DescContainer">
+            <p>P L A T F O R M S</p>
+            <h6>{data.released}</h6>
+          </div>
+          <div className="SingleGameDescription_DescContainer">
+            <p>R A T I N G</p>
+            <h6>{data.released}</h6>
+          </div>
+          <div className="SingleGameDescription_DescContainer">
             <p>R E L E A S E - D A T E</p>
             <h6>{data.released}</h6>
           </div>

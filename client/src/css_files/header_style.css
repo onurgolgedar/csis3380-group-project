@@ -15,7 +15,7 @@
 .header--wrapper {
     position: sticky;
     top: 0;
-    z-index: 999999;
+    z-index: 999;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
 }
 
@@ -149,7 +149,7 @@
 }
 
 #myModal {
-    z-index: 99999;
+    z-index: 9999;
 }
 
 .active--link {
@@ -158,4 +158,20 @@
 
 .header--nav {
     margin: 0;
+}
+
+/* User Button */
+
+.btn-UserProfile {
+    height: 100%;
+    width: 60px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.popover-linkItem {
+    text-decoration: none;
+    color: var(--bg-color-2nd);
+    width: 100%;
 }
