@@ -91,7 +91,7 @@
 .userPInfo-form{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     margin-top: 1em;
 }
 .userPInfo-form form{

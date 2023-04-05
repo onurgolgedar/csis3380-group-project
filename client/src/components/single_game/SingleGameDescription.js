@@ -9,6 +9,9 @@ const SingleGameDescription = ({ data, type }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
 
+  const [heartButtonClicked, setHeartButtonClicked] = useState(false);
+  const [heartBumping, setHeartBumping] = useState(false);
+
   const handleCommentChange = (e) => {
     let comment_aux = e.target.value;
     if (comment_aux.length <= 255) {
@@ -21,6 +24,12 @@ const SingleGameDescription = ({ data, type }) => {
     const doc = parser.parseFromString(text, "text/html");
     const htmlObject = { __html: doc.body.innerHTML };
     return htmlObject;
+  };
+
+  const handleHeartButton = () => {
+    setHeartButtonClicked((value) => !value);
+    setHeartBumping(true);
+    setTimeout(() => setHeartBumping(false), 1500);
   };
 
   console.log("data", data);
@@ -65,9 +74,16 @@ const SingleGameDescription = ({ data, type }) => {
           <div className="SingleGameTop_ButtonsWrapper">
             <button
               href="/#"
-              className="btn btn-SingleGameTop btn-heart btn-heart-active btn-light"
+              className={`btn btn-SingleGameTop btn-heart btn-light ${
+                heartButtonClicked ? "btn-Clicked" : ""
+              }`}
+              onClick={handleHeartButton}
             >
-              &hearts;
+              {heartBumping ? (
+                <span className="heart-Icon heart-Animated">&hearts;</span>
+              ) : (
+                <span className="heart-Icon">&hearts;</span>
+              )}
             </button>
             {type === "arcade" && (
               <button
@@ -82,17 +98,28 @@ const SingleGameDescription = ({ data, type }) => {
         </div>
         <div className="SingleGameDescription_Container">
           <div className="SingleGameDescription_TitleContainer">
-            <p>T I T L E</p>
             <h4>{data.name}</h4>
           </div>
-          <div className="SingleGameDescription_DescContainer">
-            <p>P L A T F O R M S</p>
-            <h6>{data.released}</h6>
-          </div>
-          <div className="SingleGameDescription_DescContainer">
-            <p>R A T I N G</p>
-            <h6>{data.released}</h6>
-          </div>
+          {type === "wiki" && (
+            <div className="SingleGameDescription_DescContainer">
+              <p>P L A T F O R M S</p>
+              <h6>
+                {data.platforms.map((result, index) => {
+                  if (index === data.platforms.length - 1) {
+                    return result.platform.name;
+                  }
+                  return result.platform.name + " - ";
+                })}
+              </h6>
+            </div>
+          )}
+
+          {type === "wiki" && (
+            <div className="SingleGameDescription_DescContainer">
+              <p>R A T I N G</p>
+              <MetacriticPill rating={data.metacritic} />
+            </div>
+          )}
           <div className="SingleGameDescription_DescContainer">
             <p>R E L E A S E - D A T E</p>
             <h6>{data.released}</h6>
@@ -100,12 +127,14 @@ const SingleGameDescription = ({ data, type }) => {
           <div className="SingleGameDescription_DescContainer">
             <p>G E N R E</p>
             <h6>
-              {data.genres.map((genre, index) => {
-                if (index === data.genres.length - 1) {
-                  return genre.name;
-                }
-                return genre.name + " - ";
-              })}
+              {type === "arcade"
+                ? "INSERT VALUE"
+                : data.genres.map((genre, index) => {
+                    if (index === data.genres.length - 1) {
+                      return genre.name;
+                    }
+                    return genre.name + " - ";
+                  })}
             </h6>
           </div>
           <div className="SingleGameDescription_DescContainer">
@@ -173,6 +202,31 @@ const SingleGameDescription = ({ data, type }) => {
       )}
     </div>
   );
+};
+
+const MetacriticPill = ({ rating }) => {
+  if (rating > 75) {
+    return (
+      <h6
+        className="metacritic-pill"
+        style={{ backgroundColor: "rgb(99, 200, 99)" }}
+      >
+        {rating} / 100
+      </h6>
+    );
+  } else if (rating > 50) {
+    return (
+      <h6 className="metacritic-pill" style={{ backgroundColor: "yellow" }}>
+        {rating} / 100
+      </h6>
+    );
+  } else {
+    return (
+      <h6 className="metacritic-pill" style={{ backgroundColor: "red" }}>
+        {rating} / 100
+      </h6>
+    );
+  }
 };
 
 const comments_test = [
