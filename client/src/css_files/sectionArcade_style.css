@@ -106,7 +106,6 @@
   overflow: hidden;
 }
 
-
 .btn-Clicked .heart-Icon {
   color: #f00;
 }
@@ -132,10 +131,6 @@
     transform: scale(1);
   }
 }
-
-
-
-
 
 .buttons_poster_wrapping {
   display: flex;
