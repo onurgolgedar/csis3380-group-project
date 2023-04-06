@@ -1,0 +1,166 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+  :root{
+    --bg-color: #2B363C;
+    --bg-color-2nd: #000001;
+    --main-color: #FFCEA7;
+    --main-color-2nd: #4F657B;
+    --text-color: #FBFFFA;
+    --large-font: 4rem;
+    --medium-font: 2.5rem;
+    --small-font: 1.2rem;
+  }
+  
+  .userFav--body{
+    width: 100%;
+    height: auto;
+    background-color: var(--main-color-2nd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  .card{
+    width: 100%;
+  }
+  
+  /* fav games section*/
+  .userFav--container{
+    margin-top: 1rem;
+    min-height: 350px;
+    background-color: var(--bg-color-2nd);
+    border-bottom: 6px solid var(--main-color-2nd);
+  }
+  .fav--gamesHeading{
+    color: var(--text-color);
+    background: var(--bg-color-2nd);
+    width: 100%;
+    padding: 1rem 1rem 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: var(--large-font);
+    font-weight: 200;
+  }
+  .fav--games2ndHeading{
+    border-bottom: 8px solid var(--text-color);
+    color: var(--text-color);
+    background: var(--main-color-2nd);
+    width: 100%;
+    padding: 1rem 1rem 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: var(--medium-font);
+    font-weight: 200;
+  }
+  span{
+    color: var(--main-color);
+  }
+  .fav--gamesScrollContainer{
+    width: 100%;
+    padding: 0 1rem 1rem;
+    height: auto;
+  
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    grid-auto-columns: 30%;
+  
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+  .fav--element{
+    border-radius: 6px;
+    min-width: 200px;
+    max-width: 300px;
+    min-height: 250px;
+    display: grid;
+    gap: 1em;
+    grid-template-rows: min-content;
+    margin: 1em;
+    padding: 1em;
+    background: var(--bg-color-2nd);
+    border: 6px solid var(--main-color-2nd) ;
+  }
+  .fav--element > h4{
+    width: 100%;
+    font-size: var(--small-font);
+    font-weight: 200;
+    text-transform: uppercase;
+    color: var(--text-color);
+  }
+  .fav--element > img{
+    width: 100%;
+    inline-size: 100%;
+    object-fit: contain;
+  }
+  
+  
+  
+  .empty--favGame{
+    padding: 2.5rem 2.5rem 2.5rem;
+    width: 100%;
+    color: var(--text-color);
+    font-size: var(--medium-font);
+  }
+  .remove--favGame {
+    font-size: var(--small-font);
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    outline: none;
+    visibility: hidden;
+    color: var(--bg-color-2nd);
+    cursor: pointer;
+    transition: ease all 0.35s;
+    padding: .5em .5em .5em;
+    background: var(--main-color);
+  }
+  .fav--element:hover .remove--favGame {
+    visibility: visible;
+  }
+  
+  
+  /* Responsive */
+  @media (max-width:1150px){
+    :root{
+        --small-font: 1rem;
+    }
+  }
+  @media (max-width:950px){
+    :root{
+        --large-font: 3rem;
+        --medium-font: 2rem;
+    }
+  }
+  @media (max-width:850px){
+    :root{
+        --small-font: .8rem;
+    }
+  }
+  @media (max-width:730px){
+    :root{
+        --small-font: .9rem;
+    }
+    .fav--gamesScrollContainer{
+        grid-auto-columns: 40%;
+    }
+  } 
+  @media (max-width:520px){
+    .fav--gamesScrollContainer{
+    grid-auto-columns: 70%;
+    }  
+  }
+  @media (max-width:315px){
+    .fav--gamesScrollContainer{
+    grid-auto-columns: 80%;
+    }
+    
+  }  
+  
