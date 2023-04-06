@@ -42,6 +42,12 @@ async function initializeDB() {
     Users.map(item => async function () {
         await insertDocument(item);
     }());
+    Games.map(item => async function () {
+        await insertDocument(item);
+    }());
+    GameReviews.map(item => async function () {
+        await insertDocument(item);
+    }());
 }
 
 async function insertDocument(document, documentName = 'Unnamed Document') {
