@@ -1,7 +1,17 @@
+import { useState } from "react";
 import "../css_files/sectionArcade_style.css";
 import { NavLink } from "react-router-dom";
+
 const ArcadePoster = ({ game }) => {
   // console.log(game);
+  const [heartButtonClicked, setHeartButtonClicked] = useState(false);
+  const [heartBumping, setHeartBumping] = useState(false);
+
+  const handleHeartButton = () => {
+    setHeartButtonClicked((value) => !value);
+    setHeartBumping(true);
+    setTimeout(() => setHeartBumping(false), 1500);
+  };
 
   return (
     <div className="items">
@@ -24,9 +34,20 @@ const ArcadePoster = ({ game }) => {
               >
                 GO
               </NavLink>
-              <a href="#" className="button_poster btn-heart">
-                &hearts;
-              </a>
+              <button
+                href="/#"
+                className={`button_poster btn-heart ${
+                  heartButtonClicked ? "btn-Clicked" : ""
+                }`}
+                stlyle={{outline:"none"}}
+                onClick={handleHeartButton}
+              >
+                {heartBumping ? (
+                  <span className="heart-Icon heart-Animated">&hearts;</span>
+                ) : (
+                  <span className="heart-Icon">&hearts;</span>
+                )}
+              </button>
             </div>
           </div>
         </div>

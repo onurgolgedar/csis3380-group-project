@@ -105,6 +105,35 @@
   border-radius: 10px;
   overflow: hidden;
 }
+.heart-Icon {
+  color: black;
+}
+
+.btn-Clicked .heart-Icon {
+  color: #f00;
+}
+
+.heart-Icon {
+  display: inline-block;
+  font-size: 24px;
+  transition: all 0.2s;
+}
+
+.heart-Icon.heart-Animated {
+  animation: jumping 0.5s ease-in-out 3;
+}
+
+@keyframes jumping {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .buttons_poster_wrapping {
   display: flex;
@@ -122,6 +151,7 @@
   font-weight: bold;
   padding: 6px 24px;
   text-decoration: none;
+  border: none;
 }
 
 .button_poster:hover {

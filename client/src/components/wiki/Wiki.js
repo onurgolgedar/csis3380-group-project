@@ -8,7 +8,7 @@ const { RAWG_API_KEY } = require("../../api-key.js");
 
 const SectionWiki = () => {
   const searchBarRef = useRef(null);
-  const [genreSelected, setGenreSelected] = useState("POPULAR");
+  const [genreSelected, setGenreSelected] = useState("");
   const [searchState, setSearchState] = useState("");
   const [gamesAnswer, setGamesAnswer] = useState(null);
 
@@ -23,21 +23,38 @@ const SectionWiki = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("New Genre")
-    if (genreSelected !== "POPULAR") {
-      fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}`)
+    var search = searchState.split(" ").join("-").toLowerCase();
+    let query_uri = "";
+    if (genreSelected !== "" && searchState !== "") {
+      var search = searchState.split(" ").join("-").toLowerCase();
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}&search=${search}`
+    } 
+    else if (genreSelected !== "") {
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}`
+    } 
+    else if (searchState !== "") {
+      var search = searchState.split(" ").join("-").toLowerCase();
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`
+    } 
+    else {
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}`
+    }
+    fetch(query_uri)
       .then((res) => res.json())
       .then((data) => {
         setGamesAnswer(data.results);
         console.log("Genre Specific query", gamesAnswer)
       })
       .catch((error) => console.error(error));
-    }
   }, [genreSelected]);
 
 
   const handleClick = (path) => {
-    setGenreSelected(path);
+    if(path === genreSelected) {
+      setGenreSelected("");
+    } else {
+      setGenreSelected(path);
+    }
   };
 
   const handleSearchChange = (e) => {
@@ -51,17 +68,19 @@ const SectionWiki = () => {
   const onSearch = (e) => {
     e.preventDefault();
     var search = searchState.split(" ").join("-").toLowerCase();
+    let query_uri = "";
     setGamesAnswer([]);
-    fetch(
-      `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`
-    )
+    if (genreSelected !== "") {
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}&search=${search}`;
+    } 
+    else {
+      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`;
+    } 
+    fetch(query_uri)
       .then((res) => res.json())
       .then((data) => {
-        if (data.results.length === 0) {
-          alert("no games with that name found");
-        } else {
-          setGamesAnswer(data.results);
-        }
+        setGamesAnswer(data.results);
+        console.log("Genre Specific query", gamesAnswer)
       })
       .catch((error) => console.error(error));
   };
@@ -72,7 +91,7 @@ const SectionWiki = () => {
     }
   };
 
-  const Genres = ["POPULAR", "FAVORITE", "action", "indie", "adventure", "shooter", "casual", "simulation", "strategy", 
+  const Genres = ["FAVORITE", "action", "indie", "adventure", "shooter", "casual", "simulation", "strategy", 
     "arcade", "sports", "family", "fighting", "card", "educational", "racing"]
 
   return (

@@ -8,10 +8,9 @@ import SectionArcade from "./components/Arcade";
 import SectionWiki from "./components/wiki/Wiki"
 import SectionAbout from "./components/About";
 import SectionNotFound from "./components/NotFound";
-
-import SingleGameDescription from "./components/single_game/SingleGameDescription"
-import SingleGamePlay from "./components/single_game/SingleGamePlay"
-import SingleGame from "./components/single_game/SingleGame"
+import SingleGame from "./components/single_game/SingleGame";
+import UserProfile from "./components/user/userProfile";
+import UserFavGames from "./components/user/userFavGames";
 
 function App() {
   return (
@@ -25,7 +24,10 @@ function App() {
         <Route path="/arcade/:gameId/play" element={<SingleGame type={"arcade"}/>} />
         <Route path="/wiki" element={<SectionWiki />}/>
         <Route path="/wiki/:gameId/description" element={<SingleGame type={"wiki"}/>} />
+        <Route path="/user/:userId" element={<UserProfile />}/>
+        <Route path="/user/:userId/favgames" element={<UserFavGames />}/>
         <Route path="/about" element={<SectionAbout />} />
+        
         <Route path="*" element={<SectionNotFound/>} />
       </Routes>
       <Footer />
