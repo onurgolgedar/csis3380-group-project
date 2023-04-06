@@ -13,7 +13,7 @@ const popover = (
            Account
         </NavLink>
         <br></br>
-        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/123">
+        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/123/favgames">
            Favorite
         </NavLink>
     </Popover.Body>

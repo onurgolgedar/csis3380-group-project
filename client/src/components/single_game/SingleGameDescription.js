@@ -1,23 +1,14 @@
 import "../../css_files/sectionArcade_style.css";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SingleGameComment from "./SingleGameComment";
+import SingleGameCommentSection from "./SingleGameCommentSection";
 const { RAWG_API_KEY } = require("../../api-key.js");
 
 const SingleGameDescription = ({ data, type }) => {
-  const [newComment, setNewComment] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
-
   const [heartButtonClicked, setHeartButtonClicked] = useState(false);
   const [heartBumping, setHeartBumping] = useState(false);
-
-  const handleCommentChange = (e) => {
-    let comment_aux = e.target.value;
-    if (comment_aux.length <= 255) {
-      setNewComment(comment_aux);
-    }
-  };
 
   const handleGameDescription = (text) => {
     const parser = new DOMParser();
@@ -32,8 +23,6 @@ const SingleGameDescription = ({ data, type }) => {
     setTimeout(() => setHeartBumping(false), 1500);
   };
 
-  console.log("data", data);
-
   useEffect(() => {
     fetch(`https://rawg.io/api/games/${data.id}?token&key=${RAWG_API_KEY}`)
       .then((res) => res.json())
@@ -42,7 +31,7 @@ const SingleGameDescription = ({ data, type }) => {
         console.log("result", result);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [data.id]);
 
   useEffect(() => {
     async function fetchImagePosterArcade() {
@@ -64,6 +53,7 @@ const SingleGameDescription = ({ data, type }) => {
 
   return (
     <div className="SingleGameDescription_Wrapper">
+      {/* DESCRIPTION SECTION */}
       <div className="SingleGameTop_Wrapper">
         <div className="SingleGamePoster_Container">
           {type === "arcade" ? (
@@ -150,55 +140,10 @@ const SingleGameDescription = ({ data, type }) => {
           </div>
         </div>
       </div>
-
+      
+      {/* COMMENT SECTION */}
       {type === "arcade" && (
-        <>
-          <div id="comment_section" className="SingleGameAddComment_Wrapper">
-            <h3 className="SingleGame_SubTitle">Add a Comment</h3>
-            <div className="AddComment_Container">
-              <textarea
-                id="comment_input"
-                rows="4"
-                placeholder="Share your thoughts..."
-                value={newComment}
-                onChange={handleCommentChange}
-              ></textarea>
-              <div className="AddComment_BottomWrapper">
-                <div className="AddComment_Sent">Sent</div>
-                <div className="AddComment_WordCount">
-                  <span>Max Char: 255 - </span>
-                  <span>
-                    {" "}
-                    Char Count: <strong>{newComment.length}</strong>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="SingleGameComments_Wrapper">
-            <h3 className="SingleGame_SubTitle">
-              Comments: <span>{comments_test.length}</span>
-            </h3>
-            <div className="AddComment_Container CommentsSection_Container">
-              {comments_test.length === 0 ? (
-                <div className="NoComments_Wrapper">
-                  <h5>NO COMMENTS YET</h5>
-                </div>
-              ) : (
-                comments_test.map((comment) => {
-                  return (
-                    <SingleGameComment
-                      key={comment.id}
-                      comment={comment.comment}
-                      author={comment.author}
-                      date={comment.date}
-                    />
-                  );
-                })
-              )}
-            </div>
-          </div>
-        </>
+        <SingleGameCommentSection />
       )}
     </div>
   );
@@ -229,25 +174,6 @@ const MetacriticPill = ({ rating }) => {
   }
 };
 
-const comments_test = [
-  {
-    id: 1,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-  {
-    id: 2,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-  {
-    id: 3,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-];
+
 
 export default SingleGameDescription;

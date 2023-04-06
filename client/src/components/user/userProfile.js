@@ -24,9 +24,9 @@ function UserProfile() {
                             <input type="text" placeholder="Change Password" />
                         </div>
                         <textarea name="" id="" cols="30" rows="10" placeholder="Tell Us About Yourself" required />
-                        <input type="button" name="" value="EDIT" class="btn" />
-                        <input type="button" name="" value="LOGOUT " class="btn" />
-                        <input type="button" name="" value="DELETE ACCOUNT" class="btn" />
+                        <input type="button" name="" value="EDIT" class="btn-userProfile" />
+                        <input type="button" name="" value="LOGOUT " class="btn-userProfile" />
+                        <input type="button" name="" value="DELETE ACCOUNT" class="btn-userProfile" />
                     </form>
                 </div>
             </div>

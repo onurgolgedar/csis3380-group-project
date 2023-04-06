@@ -105,6 +105,9 @@
   border-radius: 10px;
   overflow: hidden;
 }
+.heart-Icon {
+  color: black;
+}
 
 .btn-Clicked .heart-Icon {
   color: #f00;
