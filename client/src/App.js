@@ -1,11 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-<<<<<<< HEAD
-import { Helmet } from "react-helmet"
-=======
 import { useState, useEffect } from 'react';
 import axios from "axios";
->>>>>>> 2b671d4407cdc002e0745d7c5ae9048da8d17955
 
 import Footer from "./components/footer";
 import Header from "./components/header";
@@ -36,17 +32,7 @@ function App() {
 
   return (
     <div>
-<<<<<<< HEAD
-      <Head>
-        <script
-          type="text/javascript"
-          src="./games/game_fhockey/HTML5.js?KQMZB=426724451"/>
-      </Head>
-      
-      <Header />
-=======
       <Header isLoggedIn={isUserLoggedIn} handleLogInStatus={handleLogInStatus}/>
->>>>>>> 0f0e3a4d3e5c5b7b3946ac5484f0e3a2b1a2c084
       <Routes>
         <Route path="/" element={<SectionHome />} />
         <Route path="/arcade" element={<SectionArcade />} >

@@ -75,23 +75,32 @@ function Header({ isLoggedIn, handleLogInStatus }) {
       .catch(error => {
         console.error(error.message);
       });
-      handleLogInStatus();
       hidePopSignUpModal();
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   };
 
   const handleLogInFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", {
-        username,
-        password,
+      await axios.post("http://localhost:7000/api/users/login",  {
+        email,
+        password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error.message);
       });
-      console.log(response.data); // should contain user data
+      handleLogInStatus();
+      hidePopLogInModal(); // should contain user data
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   };
 
