@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 <<<<<<< HEAD
 import { Helmet } from "react-helmet"
 =======
+import { useState, useEffect } from 'react';
+import axios from "axios";
 >>>>>>> 2b671d4407cdc002e0745d7c5ae9048da8d17955
 
 import Footer from "./components/footer";
@@ -17,6 +19,9 @@ import UserProfile from "./components/user/userProfile";
 import UserFavGames from "./components/user/userFavGames";
 
 function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
     async function checkLoginStatus() {
       const response = await fetch('/api/check-login');
       const data = await response.json();
@@ -26,6 +31,7 @@ function App() {
     }
     checkLoginStatus();
   }, []);
+
   return (
     <div>
       <Head>
