@@ -1,14 +1,25 @@
 import "../css_files/sectionArcade_style.css";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import ArcadePoster from "./Arcade_GamePoster";
 
 const SectionArcade = () => {
   const [genreSelected, setGenreSelected] = useState("ALL");
+  const [retrievedGames, setRetrievedGames] = useState([])
 
   const handleClick = (path) => {
     setGenreSelected(path)
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:7000/api/games/")
+      .then((response) => {
+        console.log(response.data)
+        setRetrievedGames(response.data)
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   const Genre1 = "Genre 1"
   const Genre2 = "Genre 2"
   const Genre3 = "Genre 3"
@@ -52,9 +63,10 @@ const SectionArcade = () => {
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          <ArcadePoster game={{"background_image":"./assets/poster.jpg", "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
-          <ArcadePoster game={{"background_image":'./assets/poster.jpg', "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
-          <ArcadePoster game={{"background_image":'./assets/poster.jpg', "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/>
+          {/* <ArcadePoster game={{"background_image":"./assets/poster.jpg", "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/> */}
+          {retrievedGames.map((singleRetrievedGame, index) => {
+            return <ArcadePoster key={index} game={singleRetrievedGame} />
+          })}
         </div>
       </section>
     </div>

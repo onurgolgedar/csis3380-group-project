@@ -2,12 +2,14 @@ import "../../css_files/sectionArcade_style.css";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SingleGameCommentSection from "./SingleGameCommentSection";
+import axios from "axios"
 const { RAWG_API_KEY } = require("../../api-key.js");
+
 
 const SingleGameDescription = ({ data, type }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
-  const [heartButtonClicked, setHeartButtonClicked] = useState(false);
+  const [heartButtonClicked, setHeartButtonClicked] = useState(data.isFavorited);
   const [heartBumping, setHeartBumping] = useState(false);
 
   const handleGameDescription = (text) => {
@@ -17,33 +19,44 @@ const SingleGameDescription = ({ data, type }) => {
     return htmlObject;
   };
 
-  const handleHeartButton = () => {
-    setHeartButtonClicked((value) => !value);
+  const handleHeartButton = (e) => {
     setHeartBumping(true);
     setTimeout(() => setHeartBumping(false), 1500);
+    if(type === "arcade") {
+      handleButtonUpdate(e)
+    } else {
+      setHeartButtonClicked((value) => !value);
+    }
+    
   };
 
   useEffect(() => {
-    fetch(`https://rawg.io/api/games/${data.id}?token&key=${RAWG_API_KEY}`)
+    if(type !== "arcade"){
+      fetch(`https://rawg.io/api/games/${data.id}?token&key=${RAWG_API_KEY}`)
       .then((res) => res.json())
       .then((result) => {
         setGameDescription(handleGameDescription(result.description));
-        console.log("result", result);
+        // console.log("result", result);
       })
       .catch((error) => console.error(error));
+    }
   }, [data.id]);
 
-  useEffect(() => {
-    async function fetchImagePosterArcade() {
-      const image_aux = await import(
-        `../../test_data/${data.description_image}`
+  const handleButtonUpdate = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:7000/api/games/${data._id}`,
+        { isFavorited: !data.isFavorited}
       );
-      setImageUrl(image_aux.default);
+      data.isFavorited = !data.isFavorited;
+      console.log("answer",response.data);
+      setHeartButtonClicked(response.data.isFavorited)
+    } catch (error) {
+      console.error(error);
     }
-    if (type === "arcade") {
-      fetchImagePosterArcade();
-    }
-  }, [data.description_image, type]);
+  };
+
 
   const scrollDown = (element_id) => {
     const div = document.getElementById(element_id);
@@ -56,11 +69,7 @@ const SingleGameDescription = ({ data, type }) => {
       {/* DESCRIPTION SECTION */}
       <div className="SingleGameTop_Wrapper">
         <div className="SingleGamePoster_Container">
-          {type === "arcade" ? (
-            <img src={imageUrl} alt="Game Poster" />
-          ) : (
             <img src={data.background_image} alt="Game Poster" />
-          )}
           <div className="SingleGameTop_ButtonsWrapper">
             <button
               href="/#"
@@ -118,7 +127,7 @@ const SingleGameDescription = ({ data, type }) => {
             <p>G E N R E</p>
             <h6>
               {type === "arcade"
-                ? "INSERT VALUE"
+                ? data.genre
                 : data.genres.map((genre, index) => {
                     if (index === data.genres.length - 1) {
                       return genre.name;
@@ -130,7 +139,7 @@ const SingleGameDescription = ({ data, type }) => {
           <div className="SingleGameDescription_DescContainer">
             <p>D E S C R I P T I O N</p>
             {type === "arcade" ? (
-              <h6> data.description</h6>
+              <h6> {data.description}</h6>
             ) : (
               <div
                 className="gameDescription-Text"

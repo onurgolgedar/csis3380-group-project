@@ -2,8 +2,8 @@ import "../../css_files/sectionArcade_style.css";
 import "../../css_files/singleGame_style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { useLocation, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useLocation, NavLink, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import SingleGameDescription from "./SingleGameDescription";
 import SingleGamePlay from "./SingleGamePlay";
@@ -13,6 +13,7 @@ const SectionArcade = ({type}) => {
   
   const location = useLocation();
   const game_data = location.state.game_data;
+  console.log(game_data)
 
   const handleClick = (path) => {
     setLinkGame(path)
