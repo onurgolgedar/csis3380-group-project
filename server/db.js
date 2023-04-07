@@ -1,10 +1,4 @@
 const mongoose = require('mongoose');
-const game = require('./models/game.js');
-const gameReview = require('./models/gameReview.js');
-const user = require('./models/user.js');
-const games = require('./data/games.js');
-const gameReviews = require('./data/gameReviews.js');
-const users = require('./data/users.js');
 
 async function connectMongoose(connectionString) {
     var connectionPromise = mongoose.connect(connectionString, {
