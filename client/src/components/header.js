@@ -11,7 +11,7 @@ import UserButton from "./user/userButton";
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-function Header({ isLoggedIn, handleLogInStatus }) {
+function Header({ isLoggedIn, handleCheckLogIn }) {
   const [isLogInPopOpen, setIsLogInPopOpen] = useState(false);
   const [isSignUpPopOpen, setIsSignUpPopOpen] = useState(false);
   const [openLink, setOpenLink] = useState("");
@@ -87,17 +87,17 @@ function Header({ isLoggedIn, handleLogInStatus }) {
       await axios.post("http://localhost:7000/api/users/login",  {
         email,
         password
-      }, {
+      },{
         headers: {
           'Content-Type': 'application/json'
         }
       }).then(response => {
-        console.log(response.data);
+        console.log("handle Log In Submit Form", response.data);
       })
       .catch(error => {
         console.error(error.message);
       });
-      handleLogInStatus();
+      // handleCheckLogIn();
       hidePopLogInModal(); // should contain user data
     } catch (error) {
       console.error(error.message);

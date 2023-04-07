@@ -18,21 +18,27 @@ function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:7000/api/users/checklogin')
+    // axios.get('http://localhost:7000/api/users/checklogin')
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     setIsUserLoggedIn(response.data.isLoggedIn)
+    //   })
+    //   .catch((error) => console.error(error));
+    handleCheckLogIn();
+  }, []);
+
+  const handleCheckLogIn = async () => {
+    await axios.get('http://localhost:7000/api/users/checklogin')
       .then((response) => {
-        console.log(response.data)
+        console.log("Handle check login", response.data)
         setIsUserLoggedIn(response.data.isLoggedIn)
       })
       .catch((error) => console.error(error));
-  }, []);
-
-  const handleLogInStatus = () => {
-    setIsUserLoggedIn(true);
   }
 
   return (
     <div>
-      <Header isLoggedIn={isUserLoggedIn} handleLogInStatus={handleLogInStatus}/>
+      <Header isLoggedIn={isUserLoggedIn} handleCheckLogIn={handleCheckLogIn}/>
       <Routes>
         <Route path="/" element={<SectionHome />} />
         <Route path="/arcade" element={<SectionArcade />} >

@@ -13,19 +13,16 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-  
+  console.log("CHECK LOG IN TEST: ", req.session);
+  console.log("CHECK LOG IN TEST: ", req.session.userId);
   if (!req.session.userId) {
     return res.json({ isLoggedIn: false });
   }
-
-  console.log("CHECK LOG IN TEST");
   const user = await User.findById(req.session.userId);
   if (!user) {
-    res.status(404).json({ error : "User not found" });
+    res.status(404).json({ error: "User not found" });
   } else {
-    res
-      .status(200)
-      .json({ message: "Logged in", user, isLoggedIn: true });
+    res.status(200).json({ message: "Logged in", user, isLoggedIn: true });
   }
 });
 
@@ -35,15 +32,14 @@ router.get("/:username", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-    console.log(req.body);
+  console.log(req.body);
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { username, email, password } = req.body;
-    
 
     const user = await User.findOne({ email });
     if (user) {
-      res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ error: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -56,8 +52,8 @@ router.post("/register", async (req, res) => {
     });
     await createdUser.save();
 
-    req.session.userId = createdUser;
-    req.session.save();
+    req.session.userId = createdUser._id;
+    // req.session.save();
     res.send(createdUser);
   } catch (error) {
     console.error(error);
@@ -71,16 +67,17 @@ router.post("/login", async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ error: "Invalid email" });
+      return res.status(400).json({ error: "Invalid email" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      res.status(400).json({ error: "Invalid password" });
+      return res.status(400).json({ error: "Invalid password" });
     }
 
-    req.session.userId = user._id;
-    req.session.save();
+    req.session.userId = user._id.toString();
+    console.log("LOGIN ", req.session.userId.toString());
+    // req.session.save();
     res.send(user);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
