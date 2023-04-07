@@ -22,15 +22,17 @@ function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
-    async function checkLoginStatus() {
-      const response = await fetch('/api/check-login');
-      const data = await response.json();
-      if (data.isLoggedIn) {
-        setIsUserLoggedIn(true);
-      }
-    }
-    checkLoginStatus();
+    axios.get('http://localhost:7000/api/users/checklogin')
+      .then((response) => {
+        console.log(response.data)
+        setIsUserLoggedIn(response.data.isLoggedIn)
+      })
+      .catch((error) => console.error(error));
   }, []);
+
+  const handleLogInStatus = () => {
+    setIsUserLoggedIn(true);
+  }
 
   return (
     <div>
@@ -43,6 +45,7 @@ function App() {
       
       <Header />
 =======
+      <Header isLoggedIn={isUserLoggedIn} handleLogInStatus={handleLogInStatus}/>
 >>>>>>> 0f0e3a4d3e5c5b7b3946ac5484f0e3a2b1a2c084
       <Routes>
         <Route path="/" element={<SectionHome />} />
