@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const {Game} = require('../models/game.js');
+const Game = require("../models/game.js");
 const bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
 
-router.get('/games', async (req, res) => {
-    const games = await Game.find({});
-    res.send(games);
+router.get("/games", async (req, res) => {
+  const games = await Game.find({});
+  res.send(games);
 });
 
-router.get('/games/:id', async (req, res) => {
-    const game = await Game.findOne({_id: req.params.id});
-    res.send(game);
+router.get("/games/:id", async (req, res) => {
+  const game = await Game.findOne({ _id: req.params.id });
+  res.send(game);
 });
 
 // For setting a game as favorite JUST TESTING
@@ -30,6 +30,5 @@ router.get('/games/:id', async (req, res) => {
 //         res.status(500).send({err: err.message});
 //     }
 // })
-
 
 module.exports = router;

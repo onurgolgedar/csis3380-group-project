@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 
 router.get('/gamereviews/:gameID', async (req, res) => {
-    const gamereviews = await GameReview.findOne({gameID: req.params.gameID});
+    const gamereviews = await GameReview.find({gameID: req.params.gameID});
     res.send(gamereviews);
 });
 
