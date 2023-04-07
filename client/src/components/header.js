@@ -93,12 +93,13 @@ function Header({ isLoggedIn, handleLogInStatus }) {
         }
       }).then(response => {
         console.log(response.data);
+
+        handleLogInStatus();
+        hidePopLogInModal(); // ?
       })
       .catch(error => {
         console.error(error.message);
       });
-      handleLogInStatus();
-      hidePopLogInModal(); // should contain user data
     } catch (error) {
       console.error(error.message);
     }

@@ -7,12 +7,12 @@ router.use(bodyParser.json());
 
 router.get("/", async (req, res) => {
   const games = await Game.find({});
-  res.send(games);
+  return res.send(games);
 });
 
 router.get("/:id", async (req, res) => {
   const game = await Game.findOne({ _id: req.params.id });
-  res.send(game);
+  return res.send(game);
 });
 
 // For setting a game as favorite JUST TESTING
@@ -25,9 +25,9 @@ router.get("/:id", async (req, res) => {
 //         if(!game) {
 //             return res.status(404).json({error: "Game Not Found"})
 //         }
-//         res.json(game);
+//         return res.json(game);
 //     } catch (err) {
-//         res.status(500).send({err: err.message});
+//         return res.status(500).send({err: err.message});
 //     }
 // })
 

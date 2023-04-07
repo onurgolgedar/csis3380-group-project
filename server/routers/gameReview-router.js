@@ -7,12 +7,12 @@ router.use(bodyParser.json());
 
 router.get('/:gameID', async (req, res) => {
     const gamereviews = await GameReview.find({gameID: req.params.gameID});
-    res.send(gamereviews);
+    return res.send(gamereviews);
 });
 
 router.get('/', async (req, res) => {
     const gamereviews = await GameReview.find({});
-    res.send(gamereviews);
+    return res.send(gamereviews);
 });
 
 
