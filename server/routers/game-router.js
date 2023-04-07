@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
 
-router.get("/games", async (req, res) => {
+router.get("/", async (req, res) => {
   const games = await Game.find({});
   res.send(games);
 });
 
-router.get("/games/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const game = await Game.findOne({ _id: req.params.id });
   res.send(game);
 });
