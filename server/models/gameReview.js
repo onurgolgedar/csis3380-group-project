@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const gameReviewSchema = new mongoose.Schema({
-  gameID: String,
-  user: String,
-  title: String,
-  text: String
+  gameID: { type: mongoose.Schema.Types.ObjectId, ref: "Game", required: true },
+  userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  title: { type: String, required: true },
+  text: { type: String, required: true },
 });
-const GameReview = mongoose.model('GameReview', gameReviewSchema);
+
+const GameReview = mongoose.model("GameReview", gameReviewSchema);
 
 module.exports = GameReview;

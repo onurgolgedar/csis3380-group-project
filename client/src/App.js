@@ -1,6 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+<<<<<<< HEAD
 import { Helmet } from "react-helmet"
+=======
+>>>>>>> 2b671d4407cdc002e0745d7c5ae9048da8d17955
 
 import Footer from "./components/footer";
 import Header from "./components/header";
@@ -14,6 +17,15 @@ import UserProfile from "./components/user/userProfile";
 import UserFavGames from "./components/user/userFavGames";
 
 function App() {
+    async function checkLoginStatus() {
+      const response = await fetch('/api/check-login');
+      const data = await response.json();
+      if (data.isLoggedIn) {
+        setIsUserLoggedIn(true);
+      }
+    }
+    checkLoginStatus();
+  }, []);
   return (
     <div>
       <Head>
