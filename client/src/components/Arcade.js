@@ -17,7 +17,7 @@ const SectionArcade = () => {
         console.log(response.data)
         setRetrievedGames(response.data)
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error.message));
   }, []);
 
   const Genre1 = "Genre 1"

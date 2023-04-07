@@ -34,6 +34,7 @@ function App() {
 
   return (
     <div>
+<<<<<<< HEAD
       <Head>
         <script
           type="text/javascript"
@@ -41,6 +42,8 @@ function App() {
       </Head>
       
       <Header />
+=======
+>>>>>>> 0f0e3a4d3e5c5b7b3946ac5484f0e3a2b1a2c084
       <Routes>
         <Route path="/" element={<SectionHome />} />
         <Route path="/arcade" element={<SectionArcade />} >
