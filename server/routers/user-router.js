@@ -48,7 +48,7 @@ router.post("/register", async (req, res) => {
     const createdUser = new User({
       username,
       email,
-      favoriteGames: [],
+      favoriteArcadeGames: [],
       password: hashedPassword,
     });
     await createdUser.save();
