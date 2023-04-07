@@ -1,19 +1,23 @@
 import "../css_files/header_style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import UserButton from "./user/userButton"
+import UserButton from "./user/userButton";
 
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-function Header() {
-  const [isPopOpen, setIsPopOpen] = useState(false);
+function Header({ isLoggedIn, handleLogInStatus }) {
+  const [isLogInPopOpen, setIsLogInPopOpen] = useState(false);
+  const [isSignUpPopOpen, setIsSignUpPopOpen] = useState(false);
   const [openLink, setOpenLink] = useState("");
-  const [userRegistered, setUserRegistered] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const location = useLocation();
 
   useEffect(() => {
@@ -33,13 +37,65 @@ function Header() {
     setOpenLink(name);
   };
 
-  const showPopModal = () => {
-    setIsPopOpen(true);
+  const showPopSignUpModal = () => {
+    setIsSignUpPopOpen(true);
   };
 
-  const hidePopModal = () => {
-    setIsPopOpen(false);
+  const hidePopSignUpModal = () => {
+    setIsSignUpPopOpen(false);
+    setUsername("");
+    setPassword("");
+    setEmail("");
   };
+
+  const showPopLogInModal = () => {
+    setIsLogInPopOpen(true);
+  };
+
+  const hidePopLogInModal = () => {
+    setIsLogInPopOpen(false);
+    setPassword("");
+    setEmail("");
+  };
+
+  const handleSignUpFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:7000/api/users/register",  {
+        username,
+        email,
+        password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error.message);
+      });
+      handleLogInStatus();
+      hidePopSignUpModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogInFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/login", {
+        username,
+        password,
+      });
+      console.log(response.data); // should contain user data
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
   return (
     <div className="header--wrapper">
       <header className="header--body">
@@ -108,35 +164,116 @@ function Header() {
           </li>
         </ul>
         <ul className="header--navLogin">
-          {
-            userRegistered ?  
-            <UserButton/>
-            :
-            <button type="button" className="btnLogin" onClick={showPopModal}>
-              Login
-            </button>
-          }
+          {isLoggedIn ? (
+            <UserButton />
+          ) : (
+            <div
+              style={{ display: "flex", gap: "10px" }}
+              className="logButtons-Wrapper"
+            >
+              <button
+                type="button"
+                className="btnLogin"
+                onClick={showPopSignUpModal}
+              >
+                Sign Up
+              </button>
+              <button
+                type="button"
+                className="btnLogin"
+                onClick={showPopLogInModal}
+              >
+                Log In
+              </button>
+            </div>
+          )}
         </ul>
       </header>
 
-      <Modal id="myModal" show={isPopOpen} onHide={hidePopModal}>
+      <Modal id="myLogInModal" show={isLogInPopOpen} onHide={hidePopLogInModal}>
         <Modal.Header>
-          <Modal.Title>Login Username</Modal.Title>
+          <Modal.Title>Log In </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Enter a username" />
+            <Form.Group className="mb-3" controlId="formLogIn">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter an email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" className="btnCancel" onClick={hidePopModal}>
+          <Button
+            variant="danger"
+            className="btnCancel"
+            onClick={hidePopLogInModal}
+          >
             Cancel
           </Button>
-          <Button variant="info" className="btnSave">
-            Save Username
+          <Button onClick={handleLogInFormSubmit} variant="info" className="btnSave">
+            Log In
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        id="mySignUpModal"
+        show={isSignUpPopOpen}
+        onHide={hidePopSignUpModal}
+      >
+        <Modal.Header>
+          <Modal.Title>Sign Up</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group className="mb-3" controlId="formSignUp">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter a username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <br />
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter an email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="danger"
+            className="btnCancel"
+            onClick={hidePopSignUpModal}
+          >
+            Cancel
+          </Button>
+          <Button onClick={handleSignUpFormSubmit} variant="info" className="btnSave">
+            Sign Up
           </Button>
         </Modal.Footer>
       </Modal>
