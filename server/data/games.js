@@ -1,8 +1,9 @@
-const {Game }= require('../models/game.js');
+const Game = require('../models/game.js');
 
 const games = [
     new Game({
         name: 'Pong Pong',
+        gameCode: 1,
         developer_name: 'User 1234',
         description: '"Pong Pong" is a simple arcade-style game that is similar to the classic game of Pong. The game features two paddles and a ball bouncing back and forth between them. The objective of the game is to hit the ball with your paddle and make it pass your opponents paddle to score points.',
         genre: 'Action RPG',

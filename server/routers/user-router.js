@@ -29,7 +29,7 @@ router.get("/checklogin", async (req, res) => {
   }
 });
 
-router.get("/:userId", async (req, res) => {
+router.get("/:username", async (req, res) => {
   const user = await User.findOne({ username: req.params.username });
   res.send(user);
 });
@@ -48,6 +48,7 @@ router.post("/register", async (req, res) => {
     const createdUser = new User({
       username,
       email,
+      favoriteGames: [],
       password: hashedPassword,
     });
     await createdUser.save();

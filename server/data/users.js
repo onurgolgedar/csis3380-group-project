@@ -4,6 +4,7 @@ const users = [
     new User({
         username: 'golgedar',
         favoriteGames: [],
+        email: 'test123123@gmail.com',
         password: 'mysecretpassword'
     })
 ]

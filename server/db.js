@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Game = require('./models/game.js');
-const GameReview = require('./models/gameReview.js');
-const User = require('./models/user.js');
+const game = require('./models/game.js');
+const gameReview = require('./models/gameReview.js');
+const user = require('./models/user.js');
 const games = require('./data/games.js');
 const gameReviews = require('./data/gameReviews.js');
 const users = require('./data/users.js');
@@ -35,26 +35,26 @@ async function dropCollection(collectionName) {
 async function initializeDB() {
     console.log("DB initialization has been started.");
 
-    // await dropCollection('games',);
-    // await dropCollection('users');
-    // await dropCollection('gamereviews');
+     /*await dropCollection('games',);
+     await dropCollection('users');
+     await dropCollection('gamereviews');
 
-    // users.map(item => async function () {
-    //     await insertDocument(item);
-    // }());
-    // games.map(item => async function () {
-    //     await insertDocument(item);
-    // }());
-    // gameReviews.map(item => async function () {
-    //     await insertDocument(item);
-    // }());
+     users.map(item => async function () {
+         await insertDocument(item);
+     }());
+     games.map(item => async function () {
+         await insertDocument(item);
+     }());
+     gameReviews.map(item => async function () {
+         await insertDocument(item);
+     }());*/
 }
 
 async function insertDocument(document, documentName = 'Unnamed Document') {
     document.save().then(function () {
         console.log(`Mongoose -> A New Document Added (${documentName})`);
     }).catch(function (error) {
-        console.log(`(Error )Mongoose -> Document could not be added. (${document}) ${error}`);
+        console.log(`(Error) Mongoose -> Document could not be added. (${document}) ${error}`);
     });
 }
 
