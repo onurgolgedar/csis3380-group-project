@@ -35,19 +35,19 @@ async function dropCollection(collectionName) {
 async function initializeDB() {
     console.log("DB initialization has been started.");
 
-    await dropCollection('games',);
-    await dropCollection('users');
-    await dropCollection('gamereviews');
+    // await dropCollection('games',);
+    // await dropCollection('users');
+    // await dropCollection('gamereviews');
 
-    users.map(item => async function () {
-        await insertDocument(item);
-    }());
-    games.map(item => async function () {
-        await insertDocument(item);
-    }());
-    gameReviews.map(item => async function () {
-        await insertDocument(item);
-    }());
+    // users.map(item => async function () {
+    //     await insertDocument(item);
+    // }());
+    // games.map(item => async function () {
+    //     await insertDocument(item);
+    // }());
+    // gameReviews.map(item => async function () {
+    //     await insertDocument(item);
+    // }());
 }
 
 async function insertDocument(document, documentName = 'Unnamed Document') {

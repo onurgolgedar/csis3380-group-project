@@ -1,5 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 import Footer from "./components/footer";
 import Header from "./components/header";
@@ -13,6 +15,19 @@ import UserProfile from "./components/user/userProfile";
 import UserFavGames from "./components/user/userFavGames";
 
 function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    async function checkLoginStatus() {
+      const response = await fetch('/api/check-login');
+      const data = await response.json();
+      if (data.isLoggedIn) {
+        setIsUserLoggedIn(true);
+      }
+    }
+    checkLoginStatus();
+  }, []);
+
   return (
     <div>
       <Header />

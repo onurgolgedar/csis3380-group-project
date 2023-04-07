@@ -7,9 +7,8 @@ const gameSchema = new mongoose.Schema({
   description: String,
   genre: String,
   background_image: String,
-  isFavorited: { type: Boolean, default: false },
   released: String,
 });
 const Game = mongoose.model("Game", gameSchema);
 
-module.exports = Game;
+module.exports = {Game, gameSchema};
