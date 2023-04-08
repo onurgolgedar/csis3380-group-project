@@ -42,8 +42,7 @@ function App() {
       <Header isLoggedIn={isUserLoggedIn} handleCheckLogIn={handleCheckLogIn}/>
       <Routes>
         <Route path="/" element={<SectionHome />} />
-        <Route path="/arcade" element={<SectionArcade />} >
-        </Route>
+        <Route path="/arcade" element={<SectionArcade />} />
         <Route path="/arcade/:gameId/description" element={<SingleGame type={"arcade"} />} />
         <Route path="/arcade/:gameId/play" element={<SingleGame type={"arcade"} />} />
         <Route path="/wiki" element={<SectionWiki />} />

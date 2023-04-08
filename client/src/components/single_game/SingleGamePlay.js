@@ -14,7 +14,7 @@ const SingleGamePlay = ({ data }) => {
   }, []);
 
   return (
-      <canvas id="canvas">
+      <canvas id="canvas" width="800" height="600">
         <p>Your browser doesn't support HTML5 canvas.</p>
       </canvas>
   );
