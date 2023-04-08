@@ -54,8 +54,9 @@ router.post("/register", async (req, res) => {
     });
     await createdUser.save();
 
-    req.session.userId = createdUser;
-    req.session.save();
+    // req.session.userId = createdUser;
+    // req.session.save();
+
     return res.send(createdUser);
   } catch (error) {
     console.error(error);
@@ -77,9 +78,10 @@ router.post("/login", async (req, res) => {
     if (!isMatch) return res.status(400).json({ error: "Invalid password" });
 
     req.session.userId = user._id;
-    req.session.save();
+    // req.session.save();
 
-    return res.status(200).send(user);
+    // return res.status(200).send(user);
+    res.send(req.session);
   } catch (error) {
     return res.status(500).json({ error: "Server error" });
   }
