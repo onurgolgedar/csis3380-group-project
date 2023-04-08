@@ -1,7 +1,6 @@
 import "../../css_files/sectionArcade_style.css";
 
 const SingleGamePlay = ({data}) => {
-
     return (
       <div className="SingleGamePlay_Wrapper">
         <div className="SingleGamePlay_GameContainer">
