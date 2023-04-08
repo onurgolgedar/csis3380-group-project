@@ -13,15 +13,17 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-  console.log("CHECK LOG IN TEST: ", req.session);
-  console.log("CHECK LOG IN TEST: ", req.session.userId);
   if (!req.session.userId) {
+    console.log("Error -> User is not logged in (Session userID: " + req.session.userId+")");
     return res.json({ isLoggedIn: false });
   }
+
   const user = await User.findById(req.session.userId);
   if (!user) {
-    return res.status(404).json({ error: "User not found" });
+    console.log("Error -> User could not be found.");
+    return res.status(404).json({ error: "User could not be found." });
   } else {
+    console.log("Success -> Session UserID: " + req.session.userId);
     return res
       .status(200)
       .json({ message: "Logged in", user, isLoggedIn: true });
@@ -34,15 +36,11 @@ router.get("/:username", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  console.log(req.body);
   try {
-    console.log(req.body);
     const { username, email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ error: "User already exists" });
-    }
+    if (user) return res.status(400).json({ error: "User already exists." });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -54,47 +52,49 @@ router.post("/register", async (req, res) => {
     });
     await createdUser.save();
 
-    // req.session.userId = createdUser;
-    // req.session.save();
+    req.session.userId = createdUser;
 
     return res.send(createdUser);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Server error" });
+  } catch (err) {
+    console.log("Error -> " + err);
+    return res.status(500).json({ error: "Internal Error" });
   }
 });
 
 router.post("/login", async (req, res) => {
-  console.log(req.body);
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ error: "Invalid email" });
-
-    console.log(user);
+    if (!user) {
+      console.log("Error -> Invalid Email Address");
+      return res.status(400).json({ error: "Invalid Email Address" });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: "Invalid password" });
+    if (!isMatch) {
+      console.log("Error -> Invalid Password");
+      return res.status(400).json({ error: "Invalid Password" });
+    }
 
     req.session.userId = user._id;
-    // req.session.save();
+    console.log("Success -> Session UserID: " + req.session.userId);
 
-    // return res.status(200).send(user);
-    res.send(req.session);
-  } catch (error) {
-    return res.status(500).json({ error: "Server error" });
+    return res.status(200).send(user);
+  } catch (err) {
+    console.log("Error -> " + err);
+    return res.status(500).json({ error: "Internal Error" });
   }
 });
 
 router.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
-      if (err) return res.status(500).json({ error: "Error logging out" });
+      if (err) return res.status(500).json({ error: "Internal Error" });
       else {
         res.clearCookie("connect.sid");
         // res.redirect("/");
-        return res.status(200).json({ message: "Logged Out" });
+        return res.status(200).json({ message: "Logged out succesfully." });
       }
     });
   } else return res.end();
@@ -102,21 +102,27 @@ router.post("/logout", (req, res) => {
 
 router.delete("/deleteaccount", async (req, res) => {
   try {
-    console.log("req.session.userId ", req.session.userId);
     const deletedUser = await User.findByIdAndDelete(req.session.userId);
-    if (!deletedUser)
-      return res.status(404).json({ message: "User not found" });
-    else {
+
+    if (!deletedUser) {
+      console.log("Error -> User could not be found.");
+      return res.status(404).json({ error: "User could not be found." });
+    } else {
       req.session.destroy((err) => {
         if (err) {
-          console.log("Error destroying session:", err);
+          console.log("Error -> Session could not be destroyed: " + err);
+          return res.status(500).json({ error: "Internal Error" });
         }
       });
+
       res.clearCookie("connect.sid");
-      return res.json({ message: "Account deleted" });
+
+      console.log("Success -> Account has been deleted");
+      return res.json({ message: "Account has been deleted." });
     }
   } catch (err) {
-    return res.status(500).json({ message: "Error deleting user" });
+    console.log("Error -> " + err);
+    return res.status(500).json({ error: "Internal Error" });
   }
 });
 

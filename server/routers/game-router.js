@@ -19,7 +19,6 @@ router.get("/:id", async (req, res) => {
 // router.put('/:id', async (req, res) => {
 //     const gameId = req.params.id;
 //     const updates = req.body;
-//     console.log(req.body, gameId)
 //     try {
 //         const game = await Game.findByIdAndUpdate(gameId, updates, {new: true});
 //         if(!game) {
