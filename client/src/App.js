@@ -13,6 +13,7 @@ import SectionNotFound from "./components/NotFound";
 import SingleGame from "./components/single_game/SingleGame";
 import UserProfile from "./components/user/userProfile";
 import UserFavGames from "./components/user/userFavGames";
+import SingleGamePlay from "./components/single_game/SingleGamePlay";
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);

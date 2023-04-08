@@ -1,18 +1,23 @@
+import { Route } from "react-router-dom";
 import "../../css_files/sectionArcade_style.css";
+import { useEffect } from "react";
 
-const SingleGamePlay = ({data}) => {
-    return (
-      <div className="SingleGamePlay_Wrapper">
-        <div className="SingleGamePlay_GameContainer">
-          <h3>
-            {data.name}
-          </h3>
-          <div className="SingleGamePlay_GameScreen">
-            Game goes here
-          </div>
-        </div>
-      </div>
-    );
-  };
+const SingleGamePlay = ({ data }) => {
+  useEffect(() => {
+    console.log("Component mounted for the first time");
 
-  export default SingleGamePlay;
+    GameMaker_Init();
+
+    return () => {
+      console.log("Component unmounted");
+    };
+  }, []);
+
+  return (
+      <canvas id="canvas">
+        <p>Your browser doesn't support HTML5 canvas.</p>
+      </canvas>
+  );
+};
+
+export default SingleGamePlay;
