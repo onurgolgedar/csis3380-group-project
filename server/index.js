@@ -23,7 +23,8 @@ app.use((req, res, next) => {
   console.log();
   console.log(`[REQUEST] ${req.method} `);
   console.log(`Path: ${req.path}`);
-  console.log(`Body: ${JSON.stringify(req.body)}`);
+  if (req.method != "GET")
+    console.log(`Body: ${JSON.stringify(req.body)}`);
   next();
 });
 app.use("/api/users/", userRouter);

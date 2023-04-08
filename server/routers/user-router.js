@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 
 router.get("/checklogin", async (req, res) => {
   if (!req.session.userId) {
-    console.log("Error -> Session userID: " + req.session.userId);
+    console.log("Error -> User is not logged in (Session userID: " + req.session.userId+")");
     return res.json({ isLoggedIn: false });
   }
 
