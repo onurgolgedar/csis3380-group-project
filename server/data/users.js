@@ -2,10 +2,10 @@ const User = require('../models/user.js');
 
 const users = [
     new User({
-        username: 'golgedar',
+        username: 'u',
         favoriteArcadeGames: [],
-        email: 'test123123@gmail.com',
-        password: 'mysecretpassword'
+        email: 'e',
+        password: '$2a$10$O2vh1xjxImurP6hO7NISVunp4oOjQzKDSX41caiGiI4dsr7pXvtjq' // 123456
     })
 ]
 
