@@ -92,13 +92,13 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
           'Content-Type': 'application/json'
         }
       }).then(response => {
-        console.log("handle Log In Submit Form", response.data);
+        console.log(response.data);
+        handleCheckLogIn();
+        hidePopLogInModal();
       })
       .catch(error => {
         console.error(error.message);
       });
-      // handleCheckLogIn();
-      hidePopLogInModal(); // should contain user data
     } catch (error) {
       console.error(error.message);
     }
