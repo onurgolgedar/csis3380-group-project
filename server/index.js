@@ -19,6 +19,13 @@ app.use(session({
 }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log();
+  console.log(`[REQUEST] ${req.method} `);
+  console.log(`Path: ${req.path}`);
+  console.log(`Body: ${JSON.stringify(req.body)}`);
+  next();
+});
 app.use("/api/users/", userRouter);
 app.use("/api/games/", gameRouter);
 app.use("/api/gamereviews/", gameReviewRouter);

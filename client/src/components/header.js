@@ -104,7 +104,6 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
     }
   };
 
-
   return (
     <div className="header--wrapper">
       <header className="header--body">
