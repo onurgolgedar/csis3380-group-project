@@ -1,23 +1,32 @@
 require("dotenv").config({ path: "./config.env" });
 const databaseOperations = require("./db.js");
 const express = require("express");
+const app = express();
 const cors = require("cors");
 const session = require("express-session");
+const passport = require('passport');
+const flash = require('express-flash');
+const bcrypt = require("bcryptjs");
 
 const userRouter = require("./routers/user-router.js");
 const gameRouter = require("./routers/game-router.js");
 const gameReviewRouter = require("./routers/gameReview-router.js");
 
-const app = express();
+const initializePassport = require('./config')
+initializePassport(
+  passport
+)
 
 app.use(cors());
+app.use(express.json());
+app.use(flash());
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false },
+  saveUninitialized: true
 }));
-app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
   console.log();

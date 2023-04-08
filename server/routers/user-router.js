@@ -5,6 +5,8 @@ const router = express.Router();
 const User = require("../models/user.js");
 const bodyParser = require("body-parser");
 
+const passport = require('passport');
+
 router.use(bodyParser.json());
 
 router.get("/", async (req, res) => {
@@ -13,17 +15,18 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-  if (!req.session.userId) {
+    console.log("CHECK LOG IN",req.user);
+  if (!req.user) {
     console.log("Error -> User is not logged in (Session userID: " + req.session.userId+")");
     return res.json({ isLoggedIn: false });
   }
 
-  const user = await User.findById(req.session.userId);
+  const user = await User.findById(req.user._id);
   if (!user) {
     console.log("Error -> User could not be found.");
     return res.status(404).json({ error: "User could not be found." });
   } else {
-    console.log("Success -> Session UserID: " + req.session.userId);
+    console.log("Success -> Session UserID: " + req.user._id);
     return res
       .status(200)
       .json({ message: "Logged in", user, isLoggedIn: true });
@@ -61,31 +64,36 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
+router.post("/login", passport.authenticate('local'), async (req, res) => {
+    console.log("login", req.user)
+    res.send(req.user);
+  });
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      console.log("Error -> Invalid Email Address");
-      return res.status(400).json({ error: "Invalid Email Address" });
-    }
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      console.log("Error -> Invalid Password");
-      return res.status(400).json({ error: "Invalid Password" });
-    }
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       console.log("Error -> Invalid Email Address");
+//       return res.status(400).json({ error: "Invalid Email Address" });
+//     }
 
-    req.session.userId = user._id;
-    console.log("Success -> Session UserID: " + req.session.userId);
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       console.log("Error -> Invalid Password");
+//       return res.status(400).json({ error: "Invalid Password" });
+//     }
 
-    return res.status(200).send(user);
-  } catch (err) {
-    console.log("Error -> " + err);
-    return res.status(500).json({ error: "Internal Error" });
-  }
-});
+//     req.session.userId = user._id;
+//     console.log("Success -> Session UserID: " + req.session.userId);
+
+//     return res.status(200).send(user);
+//   } catch (err) {
+//     console.log("Error -> " + err);
+//     return res.status(500).json({ error: "Internal Error" });
+//   }
+// });
 
 router.post("/logout", (req, res) => {
   if (req.session) {
