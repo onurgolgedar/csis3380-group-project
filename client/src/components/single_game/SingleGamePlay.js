@@ -1,22 +1,10 @@
-import { Route } from "react-router-dom";
 import "../../css_files/sectionArcade_style.css";
-import { useEffect } from "react";
 
 const SingleGamePlay = ({ data }) => {
-  useEffect(() => {
-    console.log("Component mounted for the first time");
-
-    GameMaker_Init();
-
-    return () => {
-      console.log("Component unmounted");
-    };
-  }, []);
+  var gameUrl = `http://127.0.0.1:7000/public/game${data.gameCode}/index.html`;
 
   return (
-      <canvas id="canvas" width="800" height="600">
-        <p>Your browser doesn't support HTML5 canvas.</p>
-      </canvas>
+    <iframe src={gameUrl} allowFullScreen width={800} height={600}></iframe>
   );
 };
 

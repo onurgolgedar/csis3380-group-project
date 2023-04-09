@@ -11,11 +11,14 @@ const bcrypt = require("bcryptjs");
 const userRouter = require("./routers/user-router.js");
 const gameRouter = require("./routers/game-router.js");
 const gameReviewRouter = require("./routers/gameReview-router.js");
+const path = require("path");
 
 const initializePassport = require('./config')
 initializePassport(
   passport
 )
+
+console.log(path.join(__dirname, 'public'));
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +30,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   console.log();
