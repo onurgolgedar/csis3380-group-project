@@ -8,6 +8,7 @@ const gameSchema = new mongoose.Schema({
   genre: { type: String, required: true },
   background_image: { type: String, required: true },
   released: { type: String, required: true },
+  game_reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'GameReview' }]
 });
 
 const Game = mongoose.model("Game", gameSchema);

@@ -57,7 +57,7 @@ router.post("/register", async (req, res) => {
     });
     await createdUser.save();
 
-    req.session.userId = createdUser;
+    // req.session.userId = createdUser;
 
     return res.send(createdUser);
   } catch (err) {
@@ -103,7 +103,6 @@ router.post("/logout", (req, res) => {
       if (err) return res.status(500).json({ error: "Internal Error" });
       else {
         res.clearCookie("connect.sid");
-        // res.redirect("/");
         return res.status(200).json({ message: "Logged out succesfully." });
       }
     });
