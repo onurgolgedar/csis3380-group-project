@@ -2,15 +2,18 @@ import "../../css_files/sectionArcade_style.css";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SingleGameCommentSection from "./SingleGameCommentSection";
-import axios from "axios"
+import axios from "axios";
 const { RAWG_API_KEY } = require("../../api-key.js");
-
+axios.defaults.withCredentials = true;
 
 const SingleGameDescription = ({ data, type }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
-  const [heartButtonClicked, setHeartButtonClicked] = useState(data.isFavorited);
+  const [heartButtonClicked, setHeartButtonClicked] = useState(
+    data.isFavorited
+  );
   const [heartBumping, setHeartBumping] = useState(false);
+  const [retrievedComments, setRetrievedComments] = useState([]);
 
   const handleGameDescription = (text) => {
     const parser = new DOMParser();
@@ -22,41 +25,59 @@ const SingleGameDescription = ({ data, type }) => {
   const handleHeartButton = (e) => {
     setHeartBumping(true);
     setTimeout(() => setHeartBumping(false), 1500);
-    if(type === "arcade") {
-      handleButtonUpdate(e)
+    if (type === "arcade") {
+      handleButtonUpdate(e);
     } else {
       setHeartButtonClicked((value) => !value);
     }
-    
   };
 
   useEffect(() => {
-    if(type !== "arcade"){
+    if (type !== "arcade") {
       fetch(`https://rawg.io/api/games/${data.id}?token&key=${RAWG_API_KEY}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setGameDescription(handleGameDescription(result.description));
-        // console.log("result", result);
-      })
-      .catch((error) => console.error(error));
+        .then((res) => res.json())
+        .then((result) => {
+          setGameDescription(handleGameDescription(result.description));
+          // console.log("result", result);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      handleRetrieveComments();
     }
   }, [data.id]);
+
+  const handleRetrieveComments = async() => {
+    try {
+      await axios
+        .get(
+          `http://localhost:7000/api/gamereviews/${data._id}`
+        )
+        .then((response) => {
+          console.log("TESTING COMMENTS", response.data);
+          setRetrievedComments(response.data);
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const handleButtonUpdate = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.put(
         `http://localhost:7000/api/games/${data._id}`,
-        { isFavorited: !data.isFavorited}
+        { isFavorited: !data.isFavorited }
       );
       data.isFavorited = !data.isFavorited;
-      console.log("answer",response.data);
-      setHeartButtonClicked(response.data.isFavorited)
+      console.log("answer", response.data);
+      setHeartButtonClicked(response.data.isFavorited);
     } catch (error) {
       console.error(error);
     }
   };
-
 
   const scrollDown = (element_id) => {
     const div = document.getElementById(element_id);
@@ -69,7 +90,7 @@ const SingleGameDescription = ({ data, type }) => {
       {/* DESCRIPTION SECTION */}
       <div className="SingleGameTop_Wrapper">
         <div className="SingleGamePoster_Container">
-            <img src={data.background_image} alt="Game Poster" />
+          <img src={data.background_image} alt="Game Poster" />
           <div className="SingleGameTop_ButtonsWrapper">
             <button
               href="/#"
@@ -149,10 +170,14 @@ const SingleGameDescription = ({ data, type }) => {
           </div>
         </div>
       </div>
-      
+
       {/* COMMENT SECTION */}
       {type === "arcade" && (
-        <SingleGameCommentSection />
+        <SingleGameCommentSection
+          comments={retrievedComments}
+          handleRetrieveComments={handleRetrieveComments}
+          gameId={data._id}
+        />
       )}
     </div>
   );
@@ -182,7 +207,5 @@ const MetacriticPill = ({ rating }) => {
     );
   }
 };
-
-
 
 export default SingleGameDescription;

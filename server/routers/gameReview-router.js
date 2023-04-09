@@ -7,8 +7,17 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
 
+const checkUserLoggedIn = (req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+        console.log("User not logged")
+      return res.send({ error: "Unauthorized" });
+    }
+  };
+
 // POST a comment
-router.post("/:gameId", async (req, res) => {
+router.post("/:gameId", checkUserLoggedIn,  async (req, res) => {
   try {
     const { comment_text } = req.body;
     const user = await User.findById(req.user);
@@ -35,7 +44,8 @@ router.post("/:gameId", async (req, res) => {
     await gameReview.save();
     
     game.game_reviews.push(gameReview._id);
-    game.save();
+    
+    await game.save();
 
     res.send(gameReview);
   } catch (err) {
@@ -57,6 +67,10 @@ router.get("/:gameId", async (req, res) => {
           console.log("Error -> Game not Found");
           return res.status(404).json({ error: "Game not Found" });
         }
+
+        game.game_reviews.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+          });    
     
         res.send(game.game_reviews);
       } catch (err) {
@@ -64,7 +78,9 @@ router.get("/:gameId", async (req, res) => {
       }
   });
 
-// DELETE a comment
+// DELETE a comment....
+
+
 
 // router.get("/:gameId", async (req, res) => {
 //   const gamereviews = await GameReview.find({ gameID: req.params.gameID });

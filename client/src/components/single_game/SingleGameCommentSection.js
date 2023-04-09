@@ -2,9 +2,13 @@ import SingleGameComment from "./SingleGameComment";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
 
-const SingleGameCommentSection = () => {
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
+const SingleGameCommentSection = ({ comments, handleRetrieveComments, gameId }) => {
   const [newComment, setNewComment] = useState("");
   const [showCommentAlert, setShowCommentAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleCommentChange = (e) => {
     let comment_aux = e.target.value;
@@ -15,10 +19,50 @@ const SingleGameCommentSection = () => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    if(newComment.length === 0) {
-        setShowCommentAlert(true)
+    if (newComment.length === 0) {
+      setAlertMessage("Please make sure you write something on your comment");
+      setShowCommentAlert(true);
     } else {
-        setShowCommentAlert(false)
+      handlePostComment();
+    }
+  };
+
+  const scrollDown = (element_id) => {
+    const div = document.getElementById(element_id);
+    const y_coord = div.getBoundingClientRect().top + window.pageYOffset - 90;
+    window.scrollTo({ top: y_coord, behavior: "smooth" });
+  };
+
+  const handlePostComment = async () => {
+    try {
+      await axios
+        .post(
+          `http://localhost:7000/api/gamereviews/${gameId}`,
+          {
+            comment_text: newComment
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          if(response.data.error) {
+            setAlertMessage("Please Log In to Comment");
+            setShowCommentAlert(true);
+          } else {
+            scrollDown("comment_SectionId");
+            setShowCommentAlert(false);
+            setNewComment("");
+            handleRetrieveComments();
+          }
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -33,10 +77,8 @@ const SingleGameCommentSection = () => {
               onClose={() => setShowCommentAlert(false)}
               dismissible
             >
-              <Alert.Heading>Comment Error</Alert.Heading>
-              <p>
-                Please make sure you write something on your comment
-              </p>
+              <Alert.Heading>Error</Alert.Heading>
+              <p>{alertMessage}</p>
             </Alert>
           )}
           <textarea
@@ -67,23 +109,27 @@ const SingleGameCommentSection = () => {
           </div>
         </div>
       </div>
-      <div className="SingleGameComments_Wrapper">
+      <div id="comment_SectionId" className="SingleGameComments_Wrapper">
         <h3 className="SingleGame_SubTitle">
-          Comments: <span>{comments_test.length}</span>
+          Comments: <span>{comments.length}</span>
         </h3>
+
+        
+
         <div className="AddComment_Container CommentsSection_Container">
-          {comments_test.length === 0 ? (
+          {comments.length === 0 ? (
             <div className="NoComments_Wrapper">
               <h5>NO COMMENTS YET</h5>
             </div>
           ) : (
-            comments_test.map((comment) => {
+            comments.map((comment, index) => {
               return (
                 <SingleGameComment
-                  key={comment.id}
-                  comment={comment.comment}
-                  author={comment.author}
+                  key={comment._id}
+                  // index={index}
+                  author={comment.author_username}
                   date={comment.date}
+                  content={comment.text}
                 />
               );
             })
@@ -94,25 +140,25 @@ const SingleGameCommentSection = () => {
   );
 };
 
-const comments_test = [
-  {
-    id: 1,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-  {
-    id: 2,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-  {
-    id: 3,
-    comment: "lorem ipsum",
-    author: "John Doe",
-    date: new Date(2022, 3, 1),
-  },
-];
+// const comments_test = [
+//   {
+//     id: 1,
+//     comment: "lorem ipsum",
+//     author: "John Doe",
+//     date: new Date(2022, 3, 1),
+//   },
+//   {
+//     id: 2,
+//     comment: "lorem ipsum",
+//     author: "John Doe",
+//     date: new Date(2022, 3, 1),
+//   },
+//   {
+//     id: 3,
+//     comment: "lorem ipsum",
+//     author: "John Doe",
+//     date: new Date(2022, 3, 1),
+//   },
+// ];
 
 export default SingleGameCommentSection;

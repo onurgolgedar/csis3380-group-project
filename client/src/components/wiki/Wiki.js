@@ -26,14 +26,12 @@ const SectionWiki = () => {
     var search = searchState.split(" ").join("-").toLowerCase();
     let query_uri = "";
     if (genreSelected !== "" && searchState !== "") {
-      var search = searchState.split(" ").join("-").toLowerCase();
       query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}&search=${search}`
     } 
     else if (genreSelected !== "") {
       query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}`
     } 
     else if (searchState !== "") {
-      var search = searchState.split(" ").join("-").toLowerCase();
       query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`
     } 
     else {
