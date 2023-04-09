@@ -6,7 +6,7 @@ const SingleGamePlay = ({ data }) => {
   useEffect(() => {
     console.log("Component mounted for the first time");
 
-    GameMaker_Init();
+    // GameMaker_Init();
 
     return () => {
       console.log("Component unmounted");

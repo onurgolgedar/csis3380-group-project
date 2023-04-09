@@ -8,7 +8,6 @@ function initialize(passport) {
     if (user == null) {
       return done(null, false, { message: 'Wrong Email' })
     }
-
     try {
     const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
@@ -20,10 +19,10 @@ function initialize(passport) {
       return done(e)
     }
   }
-
   passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
   passport.serializeUser((user, done) => done(null, user._id))
   passport.deserializeUser((id, done) => {
+    // console.log("DESEREALIZE FUNCTION");
     return done(null, id)
   })
 }
