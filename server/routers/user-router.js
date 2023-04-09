@@ -21,12 +21,14 @@ router.get("/checklogin", async (req, res) => {
     return res.json({ isLoggedIn: false });
   }
 
-  const user = await User.findById(req.user._id);
+  console.log("CHECK CHECK CHECK, ", req.user)
+
+  const user = await User.findById(req.user);
   if (!user) {
     console.log("Error -> User could not be found.");
     return res.status(404).json({ error: "User could not be found." });
   } else {
-    console.log("Success -> Session UserID: " + req.user._id);
+    console.log("Success -> Session UserID: " + req.user);
     return res
       .status(200)
       .json({ message: "Logged in", user, isLoggedIn: true });
@@ -110,7 +112,8 @@ router.post("/logout", (req, res) => {
 
 router.delete("/deleteaccount", async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.session.userId);
+    console.log("Delete Account", req.user)
+    const deletedUser = await User.findByIdAndDelete(req.user);
 
     if (!deletedUser) {
       console.log("Error -> User could not be found.");

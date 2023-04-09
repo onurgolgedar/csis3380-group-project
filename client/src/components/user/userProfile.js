@@ -1,39 +1,90 @@
 import "../../css_files/userProfile_style.css";
 import Avatar from "../../assets/avatar.jpg";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
 function UserProfile() {
+  const [profile, setProfile] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    handleCheckLogIn();
+  }, []);
+
+  const handleCheckLogIn = async () => {
+    await axios
+      .get("http://localhost:7000/api/users/checklogin")
+      .then((response) => {
+        console.log(response.data);
+        if (!response.data.isLoggedIn) {
+          navigate("/");
+        } else {
+          setProfile(response.data.user);
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:7000/api/users/logout")
+      .then((response) => {
+        navigate("/");
+        window.location.reload(false);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault();
+    await axios
+      .delete("http://localhost:7000/api/users/deleteaccount")
+      .then((response) => {
+          navigate("/");
+          window.location.reload(false);
+      })
+      .catch((error) => console.error(error));
+    // navigate("/");
+  };
 
   return (
-    <div class="userP--body">
-        <div class="userP--container">
-            <div class="userP--avatarContainer card">
-                <div class="imgContainer">
-                    <img src={Avatar} />
-                </div>
+    <div className="userP--body">
+      <div className="userP--container">
+        <div className="userP--avatarContainer card">
+          <div className="imgContainer">
+            <img src={Avatar} />
+          </div>
+        </div>
+        <div className="userP--infoContainer card">
+          <div className="userP--Heading">
+            <h3>Profile</h3>
+          </div>
+          <div className="userPInfo-form">
+            <ul style={{ color: "white" }}>
+              <li style={{ marginBottom: "10px" }}>
+                <h3>Username:</h3> <span>{profile.username}</span>
+              </li>
+              <li>
+                <h3>Email:</h3> <span>{profile.email}</span>
+              </li>
+            </ul>
+            <br></br>
+            <div>
+              <button className="btn-userProfile" onClick={handleLogOut}>
+                LOG OUT
+              </button>
+              <button className="btn-userProfile" onClick={handleDeleteAccount}>
+                DELETE ACCOUNT
+              </button>
             </div>
-            <div class="userP--infoContainer card">
-                <div class="userP--Heading">
-                    <h3>Profile</h3>
-                </div>
-                <div class="userPInfo-form">
-                    <form action="">
-                        <div class="inputsContainer">
-                            <input type="text" placeholder="Your User Name" required />
-                            <input type="email" name="" id="" placeholder="Your Email" required />
-                            <input type="text" placeholder="Your Name" required />
-                            <input type="text" placeholder="Change Password" />
-                        </div>
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Tell Us About Yourself" required />
-                        <input type="button" name="" value="EDIT" class="btn-userProfile" />
-                        <input type="button" name="" value="LOGOUT " class="btn-userProfile" />
-                        <input type="button" name="" value="DELETE ACCOUNT" class="btn-userProfile" />
-                    </form>
-                </div>
-            </div>
-        </div> 
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default UserProfile;
-

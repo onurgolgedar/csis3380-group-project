@@ -6,27 +6,36 @@ const cors = require("cors");
 const session = require("express-session");
 const passport = require('passport');
 const flash = require('express-flash');
-const bcrypt = require("bcryptjs");
+const bodyParser = require('body-parser');
 
 const userRouter = require("./routers/user-router.js");
 const gameRouter = require("./routers/game-router.js");
 const gameReviewRouter = require("./routers/gameReview-router.js");
 const path = require("path");
 
+const cookieParser = require('cookie-parser');
+
 const initializePassport = require('./config')
 initializePassport(
   passport
 )
 
-console.log(path.join(__dirname, 'public'));
-
-app.use(cors());
+app.use(cors(
+  {
+    origin: 'http://localhost:3000',
+    credentials: true
+  }
+));
 app.use(express.json());
 app.use(flash());
+
+app.use(cookieParser());
 app.use(session({
-  secret: 'your-secret-key',
+  secret: 'r8q,+&1LM)CD*{NdsaQhc;#',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
+  ,
+  cookie: { maxAge: 60 * 60 * 1000 } 
 }));
 app.use(passport.initialize());
 app.use(passport.session());

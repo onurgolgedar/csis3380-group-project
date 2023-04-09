@@ -10,8 +10,10 @@ import UserButton from "./user/userButton";
 
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
-function Header({ isLoggedIn, handleCheckLogIn }) {
+
+function Header({ isLoggedIn, handleCheckLogIn, user }) {
   const [isLogInPopOpen, setIsLogInPopOpen] = useState(false);
   const [isSignUpPopOpen, setIsSignUpPopOpen] = useState(false);
   const [openLink, setOpenLink] = useState("");
@@ -61,20 +63,26 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
   const handleSignUpFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:7000/api/users/register",  {
-        username,
-        email,
-        password
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(error.message);
-      });
+      await axios
+        .post(
+          "http://localhost:7000/api/users/register",
+          {
+            username,
+            email,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
       hidePopSignUpModal();
     } catch (error) {
       console.error(error.message);
@@ -84,21 +92,27 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
   const handleLogInFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:7000/api/users/login",  {
-        email,
-        password
-      },{
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(response => {
-        console.log(response.data);
-        handleCheckLogIn();
-        hidePopLogInModal();
-      })
-      .catch(error => {
-        console.error(error.message);
-      });
+      await axios
+        .post(
+          "http://localhost:7000/api/users/login",
+          {
+            email,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          
+          handleCheckLogIn();
+          hidePopLogInModal();
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
     } catch (error) {
       console.error(error.message);
     }
@@ -173,7 +187,7 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
         </ul>
         <ul className="header--navLogin">
           {isLoggedIn ? (
-            <UserButton />
+            <UserButton user={user}/>
           ) : (
             <div
               style={{ display: "flex", gap: "10px" }}
@@ -231,7 +245,11 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
           >
             Cancel
           </Button>
-          <Button onClick={handleLogInFormSubmit} variant="info" className="btnSave">
+          <Button
+            onClick={handleLogInFormSubmit}
+            variant="info"
+            className="btnSave"
+          >
             Log In
           </Button>
         </Modal.Footer>
@@ -280,7 +298,11 @@ function Header({ isLoggedIn, handleCheckLogIn }) {
           >
             Cancel
           </Button>
-          <Button onClick={handleSignUpFormSubmit} variant="info" className="btnSave">
+          <Button
+            onClick={handleSignUpFormSubmit}
+            variant="info"
+            className="btnSave"
+          >
             Sign Up
           </Button>
         </Modal.Footer>

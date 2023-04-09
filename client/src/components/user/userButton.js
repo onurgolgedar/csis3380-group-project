@@ -9,11 +9,11 @@ const popover = (
   <Popover id="popover-basic"style={{width:"150px"}}>
     <Popover.Header as="h3" style={{backgroundColor:"#FFCEA7", textAlign:"center"}}>Options</Popover.Header>
     <Popover.Body style={{textAlign:"center"}}>
-        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/123">
+        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/profile">
            Account
         </NavLink>
         <br></br>
-        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/123/favgames">
+        <NavLink style={{display: "block"}} className="popover-linkItem" to="/user/profile/favgames">
            Favorite
         </NavLink>
     </Popover.Body>
