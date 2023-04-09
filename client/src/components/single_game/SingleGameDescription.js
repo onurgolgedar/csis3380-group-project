@@ -26,7 +26,8 @@ const SingleGameDescription = ({ data, type }) => {
     setHeartBumping(true);
     setTimeout(() => setHeartBumping(false), 1500);
     if (type === "arcade") {
-      handleButtonUpdate(e);
+      // handleButtonUpdate(e);
+      setHeartButtonClicked((value) => !value);
     } else {
       setHeartButtonClicked((value) => !value);
     }
@@ -38,11 +39,11 @@ const SingleGameDescription = ({ data, type }) => {
         .then((res) => res.json())
         .then((result) => {
           setGameDescription(handleGameDescription(result.description));
-          // console.log("result", result);
         })
         .catch((error) => console.error(error));
     } else {
       handleRetrieveComments();
+      handleIfGameIsFavorited();
     }
   }, [data.id]);
 
@@ -64,20 +65,38 @@ const SingleGameDescription = ({ data, type }) => {
     }
   };
 
-  const handleButtonUpdate = async (event) => {
-    event.preventDefault();
+  const handleIfGameIsFavorited = async() => {
     try {
-      const response = await axios.put(
-        `http://localhost:7000/api/games/${data._id}`,
-        { isFavorited: !data.isFavorited }
-      );
-      data.isFavorited = !data.isFavorited;
-      console.log("answer", response.data);
-      setHeartButtonClicked(response.data.isFavorited);
+      await axios
+        .get(
+          `http://localhost:7000/api/games/${data._id}`
+        )
+        .then((response) => {
+          console.log("TESTING GAME IS FAVORITE: ", response.data);
+          
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
-  };
+  }
+
+  // const handleButtonUpdate = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await axios.put(
+  //       `http://localhost:7000/api/games/${data._id}`,
+  //       { isFavorited: !data.isFavorited }
+  //     );
+  //     data.isFavorited = !data.isFavorited;
+  //     console.log("answer", response.data);
+  //     setHeartButtonClicked(response.data.isFavorited);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const scrollDown = (element_id) => {
     const div = document.getElementById(element_id);

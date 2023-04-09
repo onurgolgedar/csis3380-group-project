@@ -33,7 +33,7 @@ const Footer = () => {
               </span>
             </li>
           </ul>
-          <div className="footer--links2">
+          <div style={{padding:"30px 0"}}className="footer--links2">
             <div className="footer--col">
               <h3>
                 .our<span>Portfolio</span>
@@ -91,7 +91,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="footer--col">
+            {/* <div className="footer--col">
               <h3>
                 .follow<span>Us</span>
               </h3>
@@ -117,7 +117,7 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </footer>
       </div>
