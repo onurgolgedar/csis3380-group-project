@@ -1,7 +1,6 @@
 const FilterButton = ({genre, handleClick, genre_selected}) => {
   return (
-    <a
-      href="/#"
+    <button
       className={
         genre_selected === genre
           ? "button_filter button_filter_activate"
@@ -12,7 +11,7 @@ const FilterButton = ({genre, handleClick, genre_selected}) => {
       }}
     >
       {genre}
-    </a>
+    </button>
   );
 };
 

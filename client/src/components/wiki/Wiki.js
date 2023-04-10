@@ -88,7 +88,7 @@ const SectionWiki = () => {
     }
   };
 
-  const Genres = ["FAVORITE", "action", "indie", "adventure", "shooter", "casual", "simulation", "strategy", 
+  const Genres = ["action", "indie", "adventure", "shooter", "casual", "simulation", "strategy", 
     "arcade", "sports", "family", "fighting", "card", "educational", "racing"]
 
   return (
