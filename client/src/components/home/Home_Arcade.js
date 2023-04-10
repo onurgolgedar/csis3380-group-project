@@ -14,7 +14,7 @@ const HomeArcade = () => {
                 Press to start
               </NavLink>
             </div>
-            <div>
+            <div className="homeArcadeP">
               <p>Start a journey</p>
               <p>Enjoy the catalogue of games</p>
               <p>Get the higher scores</p>
