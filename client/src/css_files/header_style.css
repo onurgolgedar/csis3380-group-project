@@ -39,7 +39,7 @@
 .header--navLogin{
     padding: 0;
     width: 10%;
-    min-width: 50px;
+    min-width: 250px;
     display: flex;
     justify-content: center;
     height: 50px;
@@ -175,4 +175,14 @@
     text-decoration: none;
     color: var(--bg-color-2nd);
     width: 100%;
+}
+
+@media (max-width:500px){
+    .header--body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+    }
 }
