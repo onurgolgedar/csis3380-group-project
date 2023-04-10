@@ -51,7 +51,9 @@ const SectionAbout = () => {
               <ion-icon name="ribbon"></ion-icon>
             </div>
             <h3> Lovepreet Singh </h3>
-            <p></p>
+            <p>I'm a student at Douglas College, and I am new to coding. During my courses, I found out I am more interested in the frontend: HTML, CSS, and JavaScript. I am creative and love drawing in my free time. By the way, I also enjoy playing games.
+            Some of my favorites are: God Of War, Horizon Zero Dawn, GTA.
+            </p>
           </div>
         </div>
       </section>
