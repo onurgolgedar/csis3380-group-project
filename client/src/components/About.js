@@ -27,14 +27,8 @@ const SectionAbout = () => {
             </div>
             <h3> Onur Gölgedar </h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              debitis iusto facilis dolores nisi culpa reiciendis minus sapiente
-              ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
-              sint totam!
+              I have over ten years of software development expertise and am both a gamer and game creator. I'm really passionate about video games and the gaming community. Video games, in my opinion, are an outstanding type of entertainment that provide players with fresh inspiration, challenges, and enjoyment.
             </p>
-            <a href="/#" className="sectionAbout--links">
-              See More
-            </a>
           </div>
           <div className="sectionAbout--boxContent">
             <div className="sectionAbout--iconContent">
@@ -42,14 +36,8 @@ const SectionAbout = () => {
             </div>
             <h3> Jerry Pena Alfaro </h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              debitis iusto facilis dolores nisi culpa reiciendis minus sapiente
-              ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
-              sint totam!
+              
             </p>
-            <a href="/#" className="sectionAbout--links">
-              See More
-            </a>
           </div>
           <div className="sectionAbout--boxContent">
             <div className="sectionAbout--iconContent">
@@ -57,14 +45,9 @@ const SectionAbout = () => {
             </div>
             <h3> Lovepreet Singh </h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              debitis iusto facilis dolores nisi culpa reiciendis minus sapiente
-              ad delectus, distinctio quas quod, totam suscipit? Porro id maxime
-              sint totam!
+              
+              
             </p>
-            <a href="/#" className="sectionAbout--links">
-              See More
-            </a>
           </div>
         </div>
       </section>

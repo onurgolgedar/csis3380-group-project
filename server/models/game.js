@@ -35,6 +35,10 @@ const gameSchema = new mongoose.Schema({
       ref: "GameReview",
     },
   ],
+  custom_url: {
+    type: String,
+    required: false,
+  },
 });
 
 const Game = mongoose.model("Game", gameSchema);
