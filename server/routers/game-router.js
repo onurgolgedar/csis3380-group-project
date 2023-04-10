@@ -7,16 +7,39 @@ const { findById } = require("../models/gameReview.js");
 
 router.use(bodyParser.json());
 
-router.get("/", async (req, res) => {
-  const games = await Game.find({});
-  return res.send(games);
-});
-
 router.post("/", async (req, res) => {
   try {
     const game = new Game(req.body);
     await game.save();
     return res.send(game);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// Get all arcade games
+router.get("/", async (req, res) => {
+  try {
+    const games = await Game.find({});
+
+    return res.send(games);
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
+// Get all the arcade game favorite of a Single User
+router.get("/arcadefavorite", async (req, res) => {
+  try {
+    const user = await User.findById(req.user)
+    .populate("favoriteArcadeGames")
+    .exec();
+    if (!user) {
+      console.log("Error -> User not logged in.");
+      return res.status(404).json({ error: "User not logged in" });
+    }
+
+    return res.send(user.favoriteArcadeGames);
   } catch (err) {
     console.error(err.message);
   }

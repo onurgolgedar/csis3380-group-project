@@ -9,9 +9,8 @@ axios.defaults.withCredentials = true;
 const SingleGameDescription = ({ data, type }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
-  const [heartButtonClicked, setHeartButtonClicked] = useState(
-    data.isFavorited
-  );
+  const [heartButtonClicked, setHeartButtonClicked] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [heartBumping, setHeartBumping] = useState(false);
   const [retrievedComments, setRetrievedComments] = useState([]);
 
@@ -26,9 +25,7 @@ const SingleGameDescription = ({ data, type }) => {
     setHeartBumping(true);
     setTimeout(() => setHeartBumping(false), 1500);
     if (type === "arcade") {
-      // handleButtonUpdate(e);
-      setHeartButtonClicked((value) => !value);
-    } else {
+      handleGameLikeDisliked();
       setHeartButtonClicked((value) => !value);
     }
   };
@@ -43,16 +40,27 @@ const SingleGameDescription = ({ data, type }) => {
         .catch((error) => console.error(error));
     } else {
       handleRetrieveComments();
-      handleIfGameIsFavorited();
+      handleCheckLogIn();
+      if (isUserLoggedIn) {
+        handleIfGameIsFavorited();
+      }
     }
   }, [data.id]);
 
-  const handleRetrieveComments = async() => {
+  const handleCheckLogIn = async () => {
+    await axios
+      .get("http://localhost:7000/api/users/checklogin")
+      .then((response) => {
+        console.log("Handle check login Game Description", response.data);
+        setIsUserLoggedIn(response.data.isLoggedIn);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleRetrieveComments = async () => {
     try {
       await axios
-        .get(
-          `http://localhost:7000/api/gamereviews/${data._id}`
-        )
+        .get(`http://localhost:7000/api/gamereviews/${data._id}`)
         .then((response) => {
           console.log("TESTING COMMENTS", response.data);
           setRetrievedComments(response.data);
@@ -65,15 +73,13 @@ const SingleGameDescription = ({ data, type }) => {
     }
   };
 
-  const handleIfGameIsFavorited = async() => {
+  const handleIfGameIsFavorited = async () => {
     try {
       await axios
-        .get(
-          `http://localhost:7000/api/games/${data._id}`
-        )
+        .get(`http://localhost:7000/api/games/${data._id}/checklike`)
         .then((response) => {
           console.log("TESTING GAME IS FAVORITE: ", response.data);
-          
+          setHeartButtonClicked(response.data.isFavorite);
         })
         .catch((error) => {
           console.error(error.message);
@@ -81,22 +87,22 @@ const SingleGameDescription = ({ data, type }) => {
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
 
-  // const handleButtonUpdate = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.put(
-  //       `http://localhost:7000/api/games/${data._id}`,
-  //       { isFavorited: !data.isFavorited }
-  //     );
-  //     data.isFavorited = !data.isFavorited;
-  //     console.log("answer", response.data);
-  //     setHeartButtonClicked(response.data.isFavorited);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const handleGameLikeDisliked = async () => {
+    try {
+      await axios
+        .put(`http://localhost:7000/api/games/${data._id}`)
+        .then((response) => {
+          handleIfGameIsFavorited();
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const scrollDown = (element_id) => {
     const div = document.getElementById(element_id);
@@ -111,19 +117,22 @@ const SingleGameDescription = ({ data, type }) => {
         <div className="SingleGamePoster_Container">
           <img src={data.background_image} alt="Game Poster" />
           <div className="SingleGameTop_ButtonsWrapper">
-            <button
-              href="/#"
-              className={`btn btn-SingleGameTop btn-heart btn-light ${
-                heartButtonClicked ? "btn-Clicked" : ""
-              }`}
-              onClick={handleHeartButton}
-            >
-              {heartBumping ? (
-                <span className="heart-Icon heart-Animated">&hearts;</span>
-              ) : (
-                <span className="heart-Icon">&hearts;</span>
-              )}
-            </button>
+            {type === "arcade" && (
+              <button
+                href="/#"
+                className={`btn btn-SingleGameTop btn-heart btn-light ${
+                  heartButtonClicked ? "btn-Clicked" : ""
+                }`}
+                onClick={handleHeartButton}
+                disabled={!isUserLoggedIn}
+              >
+                {heartBumping ? (
+                  <span className="heart-Icon heart-Animated">&hearts;</span>
+                ) : (
+                  <span className="heart-Icon">&hearts;</span>
+                )}
+              </button>
+            )}
             {type === "arcade" && (
               <button
                 href="/#"

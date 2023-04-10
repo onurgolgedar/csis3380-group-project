@@ -15,6 +15,7 @@ import UserProfile from "./components/user/userProfile";
 import UserFavGames from "./components/user/userFavGames";
 import SingleGamePlay from "./components/single_game/SingleGamePlay";
 axios.defaults.withCredentials = true;
+
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -32,7 +33,6 @@ function App() {
         setUser(response.data.user)
       })
       .catch((error) => console.error(error));
-
   };
 
   return (
