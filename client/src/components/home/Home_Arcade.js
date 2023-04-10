@@ -16,7 +16,7 @@ const HomeArcade = () => {
             </div>
             <div>
               <p>Start a journey</p>
-              <p>Enjoy our catalogue of games</p>
+              <p>Enjoy the catalogue of games</p>
               <p>Get the higher scores</p>
               <p>Share your thoughts</p>
             </div>

@@ -7,7 +7,6 @@ const { RAWG_API_KEY } = require("../../api-key.js");
 axios.defaults.withCredentials = true;
 
 const SingleGameDescription = ({ data, type }) => {
-  const [imageUrl, setImageUrl] = useState("");
   const [gameDescription, setGameDescription] = useState(null);
   const [heartButtonClicked, setHeartButtonClicked] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);

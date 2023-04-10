@@ -56,7 +56,7 @@ const SectionArcade = () => {
       <section className="sectionArcade--body" id="sectionArcade">
         <div className="sectionArcade--mainText">
           <h2>
-            Our<span>Games</span>
+            Ar<span>cade</span>
           </h2>
           <p style={{ fontSize: "20px" }}>
             Choose or Search for the game you want to play:

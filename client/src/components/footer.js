@@ -12,19 +12,19 @@ const Footer = () => {
                 <ion-icon name="people-outline"></ion-icon>
               </span>
               <span className="footer-teammember">
-                <a href="#">
+                <a href="/#">
                   <span className="footer--smallicon">
                     <ion-icon name="person-outline"></ion-icon>
                   </span>
                   <span className="footer--text"> Onur Gölgedar </span>
                 </a>
-                <a href="#">
+                <a href="/#">
                   <span className="footer--smallicon">
                     <ion-icon name="person-outline"></ion-icon>
                   </span>
                   <span className="footer--text"> Jerry Pena Alfaro </span>
                 </a>
-                <a href="#">
+                <a href="/#">
                   <span className="footer--smallicon">
                     <ion-icon name="person-outline"></ion-icon>
                   </span>
@@ -40,16 +40,13 @@ const Footer = () => {
               </h3>
               <ul>
                 <li>
-                  <a href="#">Links</a>
+                  <a href="/#">Onur Gölgedar</a>
                 </li>
                 <li>
-                  <a href="#">Onur Gölgedar</a>
+                  <a href="/#">Jerry Pena Alfaro</a>
                 </li>
                 <li>
-                  <a href="#">Jerry Pena Alfaro</a>
-                </li>
-                <li>
-                  <a href="#">Lovepreet Singh</a>
+                  <a href="/#">Lovepreet Singh</a>
                 </li>
               </ul>
             </div>
@@ -59,16 +56,13 @@ const Footer = () => {
               </h3>
               <ul>
                 <li>
-                  <a href="#">Links</a>
+                  <a href="/#">Onur Gölgedar</a>
                 </li>
                 <li>
-                  <a href="#">Onur Gölgedar</a>
+                  <a href="/#">Jerry Pena Alfaro </a>
                 </li>
                 <li>
-                  <a href="#">Jerry Pena Alfaro </a>
-                </li>
-                <li>
-                  <a href="#">Lovepreet Singh</a>
+                  <a href="/#">Lovepreet Singh</a>
                 </li>
               </ul>
             </div>
@@ -86,38 +80,8 @@ const Footer = () => {
                 <li>
                   <NavLink to="/about">About</NavLink>
                 </li>
-                <li>
-                  <a href="#footer">Contacts</a>
-                </li>
               </ul>
             </div>
-            {/* <div className="footer--col">
-              <h3>
-                .follow<span>Us</span>
-              </h3>
-              <ul>
-                <li>
-                  <a href="#">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                  </a>
-                </li>
-              </ul>
-            </div> */}
           </div>
         </footer>
       </div>

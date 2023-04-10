@@ -9,13 +9,15 @@ const SectionAbout = () => {
             About<span>Us</span>
           </h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-            perferendis a aliquid quia dolorem officiis enim dicta soluta
-            temporibus ipsam, accusamus laudantium nihil, eum commodi est iusto
-            eaque sed repellendus. Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Est autem rerum enim odit, non sint voluptate
-            temporibus sed, cumque itaque tempore incidunt eum doloribus odio
-            reiciendis, maiores saepe corporis magni?
+            Hey there! Welcome to our awesome MERN stack website that we built
+            for our college group project. The website is all about videogames,
+            so if you're a gamer, you're going to love it. We used MongoDB,
+            Express.js, React.js, and Node.js to create a super cool website
+            with a sleek, modern design and tons of features that gamers will
+            appreciate. We put a lot of effort into making it user-friendly, so
+            it's easy to navigate and find what you're looking for. Overall,
+            we're really proud of our website and we hope you enjoy using it as
+            much as we enjoyed building it!
           </p>
         </div>
         <div className="sectionAbout--teamContent">
