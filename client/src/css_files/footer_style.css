@@ -76,9 +76,9 @@
     font-size: 1.5em;
     color: rgba(255,255,255,0.5);
 }
-.footer--team a:hover .footer--smallicon{
+/* .footer--team :hover .footer--smallicon{
     color: var(--text-color);
-}
+} */
 .footer--text{
     transition: 0.5s;
     font-weight: 100;
@@ -89,15 +89,15 @@
     opacity: 0.5;
     letter-spacing: 0.05em;
 }
-.footer--team a:hover .footer--text{
+/* .footer--team :hover .footer--text{
     opacity: 1;
     font-size: .7em;
     letter-spacing: 1px;
-}
-.footer--team a {
+} */
+.footer--team  {
     margin: 6px 6px 6px;
 }
-.footer--team a{
+.footer--team {
     text-decoration: none;
     display: inline-block;
 }

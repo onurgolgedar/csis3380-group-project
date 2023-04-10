@@ -176,14 +176,14 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
               <span className="header--text">About</span>
             </NavLink>
           </li>
-          <li className="header--list">
+          {/* <li className="header--list">
             <a href="#footer">
               <span className="header--icon">
                 <ion-icon name="call-outline"></ion-icon>
               </span>
               <span className="header--text">Contacts</span>
             </a>
-          </li>
+          </li> */}
         </ul>
         <ul className="header--navLogin">
           {isLoggedIn ? (

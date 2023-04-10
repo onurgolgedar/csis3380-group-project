@@ -54,6 +54,7 @@
     background: var(--main-color-2nd);
     padding: 35px 45px;
     transition: 0.5s;
+    min-height: 400px;
 }
 .sectionAbout--boxContent:hover{
     background: var(--main-color-3rd);
