@@ -1,7 +1,14 @@
 import "../../css_files/userFavGames_style.css";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function UserFavGames() {
+  const [profile, setProfile] = useState("");
+  const [favoriteArcadeGames, setFavoriteArcadeGames] = useState([]);
+  const navigate = useNavigate();
   const gamesListWiki = [
     {
       id: 0,
@@ -36,12 +43,53 @@ function UserFavGames() {
   ];
   const gamesListArcade = [];
 
+  useEffect(() => {
+    handleCheckLogIn();
+    handleGetFavoriteArcadeGames();
+  }, []);
+
+  const handleCheckLogIn = async () => {
+    await axios
+      .get("http://localhost:7000/api/users/checklogin")
+      .then((response) => {
+        if (!response.data.isLoggedIn) {
+          navigate("/");
+        } else {
+          setProfile(response.data.user);
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleGetFavoriteArcadeGames = async () => {
+    await axios
+      .get("http://localhost:7000/api/games/arcadefavorite")
+      .then((response) => {
+        console.log("Favorite Arcade Games", response.data);
+        setFavoriteArcadeGames(response.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleRemoveFromList = async (gameId) => {
+    await axios
+      .put(`http://localhost:7000/api/games/${gameId}`)
+      .then((response) => {
+        console.log("Delete from List", response.data);
+        handleGetFavoriteArcadeGames();
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="userFav--body">
       <div className="userFav--container card">
-        <div className="fav--gamesHeading">Favourite List</div>
+        <div className="fav--gamesHeading">
+          <span>{profile.username + " "}</span>
+          Favourite List
+        </div>
         <div className="favlists-container">
-          <div className="singleFavList-container">
+          {/* <div className="singleFavList-container">
             <h1 class="fav--games2ndHeading">
               Favourite <span>Wiki</span> Games
             </h1>
@@ -68,20 +116,21 @@ function UserFavGames() {
                 )
               </h1>
             )}
-          </div>
+          </div> */}
 
           <div className="singleFavList-container">
             <h1 className="fav--games2ndHeading">
               Favourite <span>Arcade</span> Games
             </h1>
-            {gamesListArcade.length > 0 ? (
+            {favoriteArcadeGames.length > 0 ? (
               <div className="fav--gamesScrollContainer">
-                {gamesListArcade.map((gameArcade) => (
+                {favoriteArcadeGames.map((gameArcade) => (
                   <div className="fav--element">
-                    <h4>{gameArcade.title}</h4> <img src="{gameArcade.src}" />{" "}
+                    <h4 style={{fontWeight: 'bold'}}>{gameArcade.name}</h4>
+                    <img src={gameArcade.background_image} />{" "}
                     <button
                       className="remove--favGame"
-                      onClick="{deleteFav(gameArcade.id)}"
+                      onClick={() => {handleRemoveFromList(gameArcade._id)}}
                     >
                       Remove{" "}
                     </button>
@@ -89,13 +138,13 @@ function UserFavGames() {
                 ))}
               </div>
             ) : (
-              <h1 className="empty--favGame">
+              <h5 className="empty--favGame">
                 You do not have any Favorites yet... Don't worry add some! (
                 <span>
                   <NavLink to="/arcade">Go To Arcade</NavLink>
                 </span>
                 )
-              </h1>
+              </h5>
             )}
           </div>
         </div>

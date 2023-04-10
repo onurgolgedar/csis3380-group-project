@@ -24,39 +24,41 @@
     align-items: center;
   }
   
-  
-  
   .card{
     width: 100%;
   }
   
   /* fav games section*/
   .userFav--container{
-    margin-top: 1rem;
+    margin: 30px 0px;
     min-height: 350px;
-    background-color: var(--bg-color-2nd);
+    width: 80%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--bg-color-2nd);
+    background-color: var(--main-color-2nd);
     border-bottom: 6px solid var(--main-color-2nd);
   }
   .fav--gamesHeading{
     color: var(--text-color);
-    background: var(--bg-color-2nd);
+    /* background: var(--bg-color-2nd); */
     width: 100%;
-    padding: 1rem 1rem 2rem;
+    padding: 1rem 0rem;
     text-align: center;
     text-transform: uppercase;
-    font-size: var(--large-font);
-    font-weight: 200;
+    font-size: 3em;
+    font-weight: bold;
   }
   .fav--games2ndHeading{
     border-bottom: 8px solid var(--text-color);
     color: var(--text-color);
     background: var(--main-color-2nd);
     width: 100%;
-    padding: 1rem 1rem 2rem;
+    padding: 1rem 0rem;
     text-align: center;
     text-transform: uppercase;
     font-size: var(--medium-font);
-    font-weight: 200;
+    font-weight: bold;
   }
   span{
     color: var(--main-color);
@@ -97,7 +99,7 @@
   .fav--element > img{
     width: 100%;
     inline-size: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
   
   
@@ -106,7 +108,8 @@
     padding: 2.5rem 2.5rem 2.5rem;
     width: 100%;
     color: var(--text-color);
-    font-size: var(--medium-font);
+    font-size: 1.5em;
+    text-align: center;
   }
   .remove--favGame {
     font-size: var(--small-font);

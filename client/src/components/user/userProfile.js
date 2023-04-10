@@ -2,7 +2,7 @@ import "../../css_files/userProfile_style.css";
 import Avatar from "../../assets/avatar.jpg";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 function UserProfile() {
