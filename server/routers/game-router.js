@@ -26,14 +26,14 @@ router.get("/", async (req, res) => {
   } catch (err) {
     console.error(err.message);
   }
-})
+});
 
 // Get all the arcade game favorite of a Single User
 router.get("/arcadefavorite", async (req, res) => {
   try {
     const user = await User.findById(req.user)
-    .populate("favoriteArcadeGames")
-    .exec();
+      .populate("favoriteArcadeGames")
+      .exec();
     if (!user) {
       console.log("Error -> User not logged in.");
       return res.status(404).json({ error: "User not logged in" });
@@ -49,6 +49,19 @@ router.get("/:id", async (req, res) => {
   try {
     const game = await Game.findById(req.params.id);
     return res.send(game);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//Search for an arcade game
+router.get("/search-arcade/:name", async (req, res) => {
+  try {
+    const decodedName = decodeURIComponent(req.params.name);
+    const regex = new RegExp(decodedName, "i");
+    const examples = await Game.find({ name: regex });
+
+    res.send(examples);
   } catch (err) {
     console.error(err.message);
   }

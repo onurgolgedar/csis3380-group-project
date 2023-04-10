@@ -1,29 +1,55 @@
 import "../css_files/sectionArcade_style.css";
-import { useState, useEffect } from "react";
-import axios from 'axios';
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import ArcadePoster from "./Arcade_GamePoster";
+axios.defaults.withCredentials = true;
 
 const SectionArcade = () => {
-  const [genreSelected, setGenreSelected] = useState("ALL");
-  const [retrievedGames, setRetrievedGames] = useState([])
-
-  const handleClick = (path) => {
-    setGenreSelected(path)
-  }
+  const searchBarRef = useRef(null);
+  const [searchState, setSearchState] = useState("");
+  const [retrievedGames, setRetrievedGames] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:7000/api/games/")
-      .then((response) => {
-        console.log(response.data)
-        setRetrievedGames(response.data)
-      })
-      .catch((error) => console.error(error.message));
+    searchBarRef.current.focus();
+    handleRetrieveAllGames();
   }, []);
 
-  const Genre1 = "Genre 1"
-  const Genre2 = "Genre 2"
-  const Genre3 = "Genre 3"
-  const Genre4 = "Genre 4"
+  const handleSearchChange = (e) => {
+    let search_aux = e.target.value;
+    if (search_aux.length <= 100) {
+      setSearchState(search_aux);
+    }
+  };
+
+  const handleRetrieveAllGames = () => {
+    axios
+      .get("http://localhost:7000/api/games/")
+      .then((response) => {
+        setRetrievedGames(response.data);
+      })
+      .catch((error) => console.error(error.message));
+  };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (searchState !== "") {
+      const encodedSearch = encodeURIComponent(searchState);
+      axios
+        .get(`http://localhost:7000/api/games/search-arcade/${encodedSearch}`)
+        .then((response) => {
+          setRetrievedGames(response.data);
+        })
+        .catch((error) => console.error(error.message));
+    } else {
+      handleRetrieveAllGames();
+    }
+  };
+
+  const onSearchEnter = (e) => {
+    if (e.key === "Enter") {
+      onSearch(e);
+    }
+  };
 
   return (
     <div>
@@ -33,40 +59,35 @@ const SectionArcade = () => {
             Our<span>Games</span>
           </h2>
           <p style={{ fontSize: "20px" }}>
-            Choose the game genre you want to play:
+            Choose or Search for the game you want to play:
           </p>
-          <div className="filter_buttons_wrapper">
-            <a href="/#" className={genreSelected === "ALL" ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick("ALL")}}>
-              ALL
-            </a>
-            <a href="/#" className={genreSelected === "FAVORITES" ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick("FAVORITES")}}>
-              FAVORITES
-            </a>
-            <a href="/#" className={genreSelected === Genre1 ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick(Genre1)}}>
-              {Genre1}
-            </a>
-            <a href="/#" className={genreSelected === Genre2 ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick(Genre2)}}>
-              {Genre2}
-            </a>
-            <a href="/#" className={genreSelected === Genre3 ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick(Genre3)}}>
-              {Genre3}
-            </a>
-            <a href="/#" className={genreSelected === Genre4 ? "button_filter button_filter_activate" : "button_filter"}
-              onClick={() => {handleClick(Genre4)}}>
-              {Genre4}
-            </a>
+          <div className="sectionWiki_searchBar">
+            <input
+              type="text"
+              className="searchTerm"
+              placeholder="Search a game's title..."
+              value={searchState}
+              ref={searchBarRef}
+              onChange={handleSearchChange}
+              onKeyDown={onSearchEnter}
+            />
+            <button
+              type="submit"
+              className="sectionWiki_searchButton"
+              onClick={onSearch}
+            >
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
           </div>
         </div>
         <div className="sectionArcade--mainContent">
-          {/* <ArcadePoster game={{"background_image":"./assets/poster.jpg", "description_image":"poster.jpg", "id": "1234", "name":"random_games"}}/> */}
-          {retrievedGames.map((singleRetrievedGame, index) => {
-            return <ArcadePoster key={index} game={singleRetrievedGame} />
-          })}
+          {retrievedGames.length === 0 ? (
+            <h2 style={{color: "white"}}>No Game Found</h2>
+          ) : (
+            retrievedGames.map((singleRetrievedGame, index) => {
+              return <ArcadePoster key={index} game={singleRetrievedGame} />;
+            })
+          )}
         </div>
       </section>
     </div>

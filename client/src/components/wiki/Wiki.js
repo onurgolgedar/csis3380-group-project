@@ -57,10 +57,9 @@ const SectionWiki = () => {
 
   const handleSearchChange = (e) => {
     let search_aux = e.target.value;
-    if (search_aux.length <= 255) {
+    if (search_aux.length <= 100) {
       setSearchState(search_aux);
     }
-    console.log(search_aux);
   };
 
   const onSearch = (e) => {
@@ -99,7 +98,9 @@ const SectionWiki = () => {
           <h2>
             Wi<span>ki</span>
           </h2>
-
+          <p style={{ fontSize: "20px" }}>
+            Learn more about the videogames you know about
+          </p>
           <div className="sectionWiki_searchBar">
             <input
               type="text"
