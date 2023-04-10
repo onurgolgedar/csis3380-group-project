@@ -6,14 +6,14 @@ function initialize(passport) {
   const authenticateUser = async (email, password, done) => {
     const user = await User.findOne({ email });
     if (user == null) {
-      return done(null, false, { message: 'Wrong Email' })
+      return done(null, false, { error: 'Wrong Email' })
     }
     try {
     const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         return done(null, user)
       } else {
-        return done(null, false, { message: 'Wrong Password' })
+        return done(null, false, { error: 'Wrong Password' })
       }
     } catch (e) {
       return done(e)
