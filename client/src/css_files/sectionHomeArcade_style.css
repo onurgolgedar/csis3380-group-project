@@ -27,10 +27,11 @@ body{
   color: #FFFFFF;
 text-shadow: #474747 3px 5px 2px;
 line-height: 30px;
+padding-left: 20px;
  }
 
 .SectionHomeArcade_content div {
-  margin-left: 50px;
+  margin: auto;
 }
 
 .ArcadeTitleWrapper {
@@ -83,31 +84,28 @@ line-height: 30px;
 }
 
 @media (max-width:900px){
-  .SectionHomeArcade_content, .sectionHomeWiki_content{
+  /* .SectionHomeArcade_content, .sectionHomeWiki_content{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
+  } */
+  .homeArcadeP  p{
+    font-size: 20px !important;
   }
-  .homeArcadeP > p{
-    font-size: 20px;
+  .homeWikiP  p{
+    font-size: 20px !important;
   }
-  .homeWikP > p{
-    font-size: 20px;
+  .sectionHomeArcade--body{
+    padding: auto !important;
   }
 }
 
-@media (max-width:600px){
+@media (max-width:690px){
   .SectionHomeArcade_content, .sectionHomeWiki_content{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
-  .homeArcadeP > p{
-    font-size: 20px;
-  }
-  .homeWikP > p{
-    font-size: 20px;
   }
 }

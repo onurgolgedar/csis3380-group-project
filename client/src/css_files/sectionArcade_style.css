@@ -212,7 +212,7 @@
 }
 
 
-@media (max-width:900px){
+/* @media (max-width:900px){
   .SectionHomeArcade_content, .sectionHomeWiki_content{
     display: flex;
     justify-content: center;
@@ -234,10 +234,10 @@
     align-items: center;
     flex-direction: column;
   }
-  .homeArcadeP > p{
+  .homeArcadeP  p{
     font-size: 20px;
   }
-  .homeWikP > p{
+  .homeWikiP  p{
     font-size: 20px;
   }
-}
+} */
