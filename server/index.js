@@ -31,7 +31,7 @@ app.use(flash());
 
 app.use(cookieParser());
 app.use(session({
-  secret: 'r8q,+&1LM)CD*{NdsaQhc;#',
+  secret: process.env.COOKIE_SECRET_KEY,
   resave: false,
   saveUninitialized: false
   ,

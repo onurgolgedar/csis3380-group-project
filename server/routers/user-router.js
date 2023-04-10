@@ -4,8 +4,9 @@ const session = require("express-session");
 const router = express.Router();
 const User = require("../models/user.js");
 const bodyParser = require("body-parser");
+const { check, validationResult } = require("express-validator");
 
-const passport = require('passport');
+const passport = require("passport");
 
 router.use(bodyParser.json());
 
@@ -15,13 +16,17 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-    console.log("CHECK LOG IN",req.user);
+  console.log("CHECK LOG IN", req.user);
   if (!req.user) {
-    console.log("Error -> User is not logged in (Session userID: " + req.session.userId+")");
+    console.log(
+      "Error -> User is not logged in (Session userID: " +
+        req.session.userId +
+        ")"
+    );
     return res.json({ isLoggedIn: false });
   }
 
-  console.log("CHECK CHECK CHECK, ", req.user)
+  console.log("CHECK CHECK CHECK, ", req.user);
 
   const user = await User.findById(req.user);
   if (!user) {
@@ -40,36 +45,54 @@ router.get("/:username", async (req, res) => {
   return res.send(user);
 });
 
-router.post("/register", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
+router.post(
+  "/register",
+  [
+    check("username").notEmpty().withMessage("Username is required"),
+    check("email")
+      .isEmail()
+      .withMessage("Invalid email address, check the format"),
+    check("password")
+      .isLength({ min: 7 })
+      .withMessage("Password should be at least 7 characters long"),
+  ],
+  async (req, res) => {
+    try {
+      const all_errors = validationResult(req);
+      if (!all_errors.isEmpty()) {
+        console.log("ERRORS ARRAY: ", all_errors.array());
+        return res.send({ error: all_errors.array() });
+      }
 
-    const user = await User.findOne({ email });
-    if (user) return res.status(400).json({ error: "User already exists." });
+      const { username, email, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+      const user = await User.findOne({ email });
+      if (user) return res.send({ error: [{ msg: "User already exists." }] });
 
-    const createdUser = new User({
-      username,
-      email,
-      favoriteArcadeGames: [],
-      password: hashedPassword,
-    });
-    await createdUser.save();
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    // req.session.userId = createdUser;
+      const createdUser = new User({
+        username,
+        email,
+        favoriteArcadeGames: [],
+        password: hashedPassword,
+      });
+      await createdUser.save();
 
-    return res.send(createdUser);
-  } catch (err) {
-    console.log("Error -> " + err);
-    return res.status(500).json({ error: "Internal Error" });
+      // req.session.userId = createdUser;
+
+      return res.send(createdUser);
+    } catch (err) {
+      console.log("Error -> " + err);
+      return res.status(500).json({ error: [{msg: "Internal Error"} ]});
+    }
   }
-});
+);
 
-router.post("/login", passport.authenticate('local'), async (req, res) => {
-    console.log("login", req.user)
-    res.send(req.user);
-  });
+router.post("/login", passport.authenticate("local"), async (req, res) => {
+  console.log("login", req.user);
+  res.send(req.user);
+});
 
 // router.post("/login", async (req, res) => {
 //   try {
@@ -111,7 +134,7 @@ router.post("/logout", (req, res) => {
 
 router.delete("/deleteaccount", async (req, res) => {
   try {
-    console.log("Delete Account", req.user)
+    console.log("Delete Account", req.user);
     const deletedUser = await User.findByIdAndDelete(req.user);
 
     if (!deletedUser) {

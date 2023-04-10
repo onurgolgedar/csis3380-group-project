@@ -8,6 +8,7 @@ const SectionArcade = () => {
   const searchBarRef = useRef(null);
   const [searchState, setSearchState] = useState("");
   const [retrievedGames, setRetrievedGames] = useState([]);
+  const [loadingMessage, setLoadingMessage] = useState("Loading...");
 
   useEffect(() => {
     searchBarRef.current.focus();
@@ -26,6 +27,7 @@ const SectionArcade = () => {
       .get("http://localhost:7000/api/games/")
       .then((response) => {
         setRetrievedGames(response.data);
+        if(response.data.length === 0) setLoadingMessage("Game(s) not found")
       })
       .catch((error) => console.error(error.message));
   };
@@ -38,6 +40,7 @@ const SectionArcade = () => {
         .get(`http://localhost:7000/api/games/search-arcade/${encodedSearch}`)
         .then((response) => {
           setRetrievedGames(response.data);
+          if(response.data.length === 0) setLoadingMessage("Game(s) not found")
         })
         .catch((error) => console.error(error.message));
     } else {
@@ -82,7 +85,7 @@ const SectionArcade = () => {
         </div>
         <div className="sectionArcade--mainContent">
           {retrievedGames.length === 0 ? (
-            <h2 style={{color: "white"}}>No Game Found</h2>
+            <h2 style={{color: "white"}}>{loadingMessage}</h2>
           ) : (
             retrievedGames.map((singleRetrievedGame, index) => {
               return <ArcadePoster key={index} game={singleRetrievedGame} />;

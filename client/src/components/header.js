@@ -1,6 +1,7 @@
 import "../css_files/header_style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -12,10 +13,11 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
-
 function Header({ isLoggedIn, handleCheckLogIn, user }) {
   const [isLogInPopOpen, setIsLogInPopOpen] = useState(false);
   const [isSignUpPopOpen, setIsSignUpPopOpen] = useState(false);
+  const [showSignUpAlert, setShowSignUpAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [openLink, setOpenLink] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -78,12 +80,20 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
           }
         )
         .then((response) => {
-          console.log(response.data);
+          if(response.data.error) {
+            setShowSignUpAlert(true);
+            setAlertMessage(response.data.error[0].msg)
+          } else {
+            setShowSignUpAlert(false);
+            setAlertMessage("");
+            hidePopSignUpModal();
+          }
+          
         })
         .catch((error) => {
           console.error(error.message);
         });
-      hidePopSignUpModal();
+      
     } catch (error) {
       console.error(error.message);
     }
@@ -106,7 +116,7 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
           }
         )
         .then((response) => {
-          
+          console.log("LOG IN: ", response.data)
           handleCheckLogIn();
           hidePopLogInModal();
         })
@@ -187,7 +197,7 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
         </ul>
         <ul className="header--navLogin">
           {isLoggedIn ? (
-            <UserButton user={user}/>
+            <UserButton user={user} />
           ) : (
             <div
               style={{ display: "flex", gap: "10px" }}
@@ -264,6 +274,16 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {showSignUpAlert && (
+            <Alert
+              variant="danger"
+              onClose={() => setShowSignUpAlert(false)}
+              dismissible
+            >
+              <Alert.Heading>Error</Alert.Heading>
+              <p>{alertMessage}</p>
+            </Alert>
+          )}
           <Form.Group className="mb-3" controlId="formSignUp">
             <Form.Label>Username</Form.Label>
             <Form.Control
