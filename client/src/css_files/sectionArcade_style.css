@@ -211,6 +211,7 @@
   border-radius: 0 10px 10px 0;
 }
 
+
 @media (max-width:900px){
   .SectionHomeArcade_content, .sectionHomeWiki_content{
     display: flex;
