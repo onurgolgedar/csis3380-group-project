@@ -2,6 +2,7 @@ import "../../css_files/userFavGames_style.css";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import UserFavGamePoster from "./userFavGamePoster";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -9,39 +10,6 @@ function UserFavGames() {
   const [profile, setProfile] = useState("");
   const [favoriteArcadeGames, setFavoriteArcadeGames] = useState([]);
   const navigate = useNavigate();
-  const gamesListWiki = [
-    {
-      id: 0,
-      src: "image src",
-      title: "Game1",
-    },
-    {
-      id: 1,
-      src: "image src",
-      title: "Game2",
-    },
-    {
-      id: 2,
-      src: "image src",
-      title: "Game3",
-    },
-    {
-      id: 3,
-      src: "image src",
-      title: "Game4",
-    },
-    {
-      id: 4,
-      src: "image src",
-      title: "Game5",
-    },
-    {
-      id: 5,
-      src: "image src",
-      title: "Game6",
-    },
-  ];
-  const gamesListArcade = [];
 
   useEffect(() => {
     handleCheckLogIn();
@@ -120,21 +88,16 @@ function UserFavGames() {
 
           <div className="singleFavList-container">
             <h1 className="fav--games2ndHeading">
-              Favourite <span>Arcade</span> Games
+              <span>Arcade</span> Games
             </h1>
             {favoriteArcadeGames.length > 0 ? (
               <div className="fav--gamesScrollContainer">
                 {favoriteArcadeGames.map((gameArcade) => (
-                  <div className="fav--element">
-                    <h4 style={{fontWeight: 'bold'}}>{gameArcade.name}</h4>
-                    <img src={gameArcade.background_image} />{" "}
-                    <button
-                      className="remove--favGame"
-                      onClick={() => {handleRemoveFromList(gameArcade._id)}}
-                    >
-                      Remove{" "}
-                    </button>
-                  </div>
+                  <UserFavGamePoster
+                    key={gameArcade._id}
+                    handleRemoveFromList={handleRemoveFromList}
+                    gameArcade={gameArcade}
+                  />
                 ))}
               </div>
             ) : (
