@@ -15,7 +15,7 @@ function UserProfile() {
 
   const handleCheckLogIn = async () => {
     await axios
-      .get("http://localhost:7000/api/users/checklogin")
+      .get("https://gameship.onrender.com/api/users/checklogin")
       .then((response) => {
         console.log(response.data);
         if (!response.data.isLoggedIn) {
@@ -30,7 +30,7 @@ function UserProfile() {
   const handleLogOut = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:7000/api/users/logout")
+      .post("https://gameship.onrender.com/api/users/logout")
       .then((response) => {
         navigate("/");
         window.location.reload(false);
@@ -41,7 +41,7 @@ function UserProfile() {
   const handleDeleteAccount = async (e) => {
     e.preventDefault();
     await axios
-      .delete("http://localhost:7000/api/users/deleteaccount")
+      .delete("https://gameship.onrender.com/api/users/deleteaccount")
       .then((response) => {
           navigate("/");
           window.location.reload(false);

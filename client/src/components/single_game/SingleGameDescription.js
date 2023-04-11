@@ -48,7 +48,7 @@ const SingleGameDescription = ({ data, type }) => {
 
   const handleCheckLogIn = async () => {
     await axios
-      .get("http://localhost:7000/api/users/checklogin")
+      .get("https://gameship.onrender.com/api/users/checklogin")
       .then((response) => {
         console.log("Handle check login Game Description", response.data);
         setIsUserLoggedIn(response.data.isLoggedIn);
@@ -59,7 +59,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleRetrieveComments = async () => {
     try {
       await axios
-        .get(`http://localhost:7000/api/gamereviews/${data._id}`)
+        .get(`https://gameship.onrender.com/api/gamereviews/${data._id}`)
         .then((response) => {
           console.log("TESTING COMMENTS", response.data);
           setRetrievedComments(response.data);
@@ -75,7 +75,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleIfGameIsFavorited = async () => {
     try {
       await axios
-        .get(`http://localhost:7000/api/games/${data._id}/checklike`)
+        .get(`https://gameship.onrender.com/api/games/${data._id}/checklike`)
         .then((response) => {
           console.log("TESTING GAME IS FAVORITE: ", response.data);
           setHeartButtonClicked(response.data.isFavorite);
@@ -91,7 +91,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleGameLikeDisliked = async () => {
     try {
       await axios
-        .put(`http://localhost:7000/api/games/${data._id}`)
+        .put(`https://gameship.onrender.com/api/games/${data._id}`)
         .then((response) => {
           handleIfGameIsFavorited();
         })

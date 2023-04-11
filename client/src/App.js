@@ -26,7 +26,7 @@ function App() {
 
   const handleCheckLogIn = async () => {
     await axios
-      .get("http://localhost:7000/api/users/checklogin")
+      .get("https://gameship.onrender.com/api/users/checklogin")
       .then((response) => {
         console.log("Handle check login", response.data);
         setIsUserLoggedIn(response.data.isLoggedIn);

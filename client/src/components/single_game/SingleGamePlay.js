@@ -3,7 +3,7 @@ import "../../css_files/sectionArcade_style.css";
 const SingleGamePlay = ({ data }) => {
   var gameUrl =
     data.custom_url == null
-      ? `http://127.0.0.1:7000/public/game${data.gameCode}/index.html`
+      ? `https://gameship.onrender.com/public/game${data.gameCode}/index.html`
       : data.custom_url;
 
   return (
