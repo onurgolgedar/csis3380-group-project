@@ -20,14 +20,12 @@ initializePassport(
   passport
 )
 
-app.set('trust proxy', 1);
 app.use(cors(
   {
     origin: process.env.CLIENT_URL,
     credentials: true
   }
 ));
-
 app.use(express.json());
 app.use(flash());
 
@@ -35,9 +33,10 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.COOKIE_SECRET_KEY,
   resave: false,
-  saveUninitialized: false
-  ,
-  cookie: { maxAge: 60 * 60 * 1000 } 
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60 * 60 * 1000
+  } 
 }));
 app.use(passport.initialize());
 app.use(passport.session());
