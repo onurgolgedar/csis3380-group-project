@@ -18,7 +18,7 @@ function UserFavGames() {
 
   const handleCheckLogIn = async () => {
     await axios
-      .get("https://gameship.onrender.com/api/users/checklogin")
+      .get(`${process.env.REACT_APP_API_URL}/users/checklogin`)
       .then((response) => {
         if (!response.data.isLoggedIn) {
           navigate("/");
@@ -31,7 +31,7 @@ function UserFavGames() {
 
   const handleGetFavoriteArcadeGames = async () => {
     await axios
-      .get("https://gameship.onrender.com/api/games/arcadefavorite")
+      .get(`${process.env.REACT_APP_API_URL}/games/arcadefavorite`)
       .then((response) => {
         console.log("Favorite Arcade Games", response.data);
         setFavoriteArcadeGames(response.data);
@@ -41,7 +41,7 @@ function UserFavGames() {
 
   const handleRemoveFromList = async (gameId) => {
     await axios
-      .put(`https://gameship.onrender.com/api/games/${gameId}`)
+      .put(`${process.env.REACT_APP_API_URL}/games/${gameId}`)
       .then((response) => {
         console.log("Delete from List", response.data);
         handleGetFavoriteArcadeGames();

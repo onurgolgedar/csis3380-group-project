@@ -4,8 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import ArcadePoster from "../Arcade_GamePoster";
 import FilterButton from "./FilterButton";
 
-const { RAWG_API_KEY } = require("../../api-key.js");
-
 const SectionWiki = () => {
   const searchBarRef = useRef(null);
   const [genreSelected, setGenreSelected] = useState("");
@@ -14,7 +12,7 @@ const SectionWiki = () => {
 
   useEffect(() => {
     searchBarRef.current.focus();
-    fetch(`https://rawg.io/api/games?token&key=${RAWG_API_KEY}`)
+    fetch(`https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}`)
       .then((res) => res.json())
       .then((data) => {
         setGamesAnswer(data.results);
@@ -26,16 +24,16 @@ const SectionWiki = () => {
     var search = searchState.split(" ").join("-").toLowerCase();
     let query_uri = "";
     if (genreSelected !== "" && searchState !== "") {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}&search=${search}`
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}&genres=${genreSelected}&search=${search}`
     } 
     else if (genreSelected !== "") {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}`
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}&genres=${genreSelected}`
     } 
     else if (searchState !== "") {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}&search=${search}`
     } 
     else {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}`
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}`
     }
     fetch(query_uri)
       .then((res) => res.json())
@@ -68,10 +66,10 @@ const SectionWiki = () => {
     let query_uri = "";
     setGamesAnswer([]);
     if (genreSelected !== "") {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&genres=${genreSelected}&search=${search}`;
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}&genres=${genreSelected}&search=${search}`;
     } 
     else {
-      query_uri = `https://rawg.io/api/games?token&key=${RAWG_API_KEY}&search=${search}`;
+      query_uri = `https://rawg.io/api/games?token&key=${process.env.REACT_APP_RAWG_API_KEY}&search=${search}`;
     } 
     fetch(query_uri)
       .then((res) => res.json())

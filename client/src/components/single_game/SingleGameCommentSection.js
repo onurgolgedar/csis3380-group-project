@@ -37,7 +37,7 @@ const SingleGameCommentSection = ({ comments, handleRetrieveComments, gameId }) 
     try {
       await axios
         .post(
-          `https://gameship.onrender.com/api/gamereviews/${gameId}`,
+          `${process.env.REACT_APP_API_URL}/gamereviews/${gameId}`,
           {
             comment_text: newComment
           },

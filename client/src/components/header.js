@@ -67,7 +67,7 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
     try {
       await axios
         .post(
-          "https://gameship.onrender.com/api/users/register",
+          `${process.env.REACT_APP_API_URL}/users/register`,
           {
             username,
             email,
@@ -104,7 +104,7 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
     try {
       await axios
         .post(
-          "https://gameship.onrender.com/api/users/login",
+          `${process.env.REACT_APP_API_URL}/users/login`,
           {
             email,
             password,

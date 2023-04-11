@@ -18,7 +18,7 @@ const ArcadePoster = ({ game }) => {
   //   event.preventDefault();
   //   try {
   //     const response = await axios.put(
-  //       `https://gameship.onrender.com/api/games/${game._id}`,
+  //       `${process.env.REACT_APP_API_URL}/games/${game._id}`,
   //       { isFavorited: !game.isFavorited}
   //     );
   //     game.isFavorited = !game.isFavorited;

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SingleGameCommentSection from "./SingleGameCommentSection";
 import axios from "axios";
-const { RAWG_API_KEY } = require("../../api-key.js");
 axios.defaults.withCredentials = true;
 
 const SingleGameDescription = ({ data, type }) => {
@@ -31,7 +30,7 @@ const SingleGameDescription = ({ data, type }) => {
 
   useEffect(() => {
     if (type !== "arcade") {
-      fetch(`https://rawg.io/api/games/${data.id}?token&key=${RAWG_API_KEY}`)
+      fetch(`https://rawg.io/api/games/${data.id}?token&key=${process.env.REACT_APP_API_URL}`)
         .then((res) => res.json())
         .then((result) => {
           setGameDescription(handleGameDescription(result.description));
@@ -48,7 +47,7 @@ const SingleGameDescription = ({ data, type }) => {
 
   const handleCheckLogIn = async () => {
     await axios
-      .get("https://gameship.onrender.com/api/users/checklogin")
+      .get(`${process.env.REACT_APP_API_URL}/users/checklogin`)
       .then((response) => {
         console.log("Handle check login Game Description", response.data);
         setIsUserLoggedIn(response.data.isLoggedIn);
@@ -59,7 +58,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleRetrieveComments = async () => {
     try {
       await axios
-        .get(`https://gameship.onrender.com/api/gamereviews/${data._id}`)
+        .get(`${process.env.REACT_APP_API_URL}/gamereviews/${data._id}`)
         .then((response) => {
           console.log("TESTING COMMENTS", response.data);
           setRetrievedComments(response.data);
@@ -75,7 +74,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleIfGameIsFavorited = async () => {
     try {
       await axios
-        .get(`https://gameship.onrender.com/api/games/${data._id}/checklike`)
+        .get(`${process.env.REACT_APP_API_URL}/games/${data._id}/checklike`)
         .then((response) => {
           console.log("TESTING GAME IS FAVORITE: ", response.data);
           setHeartButtonClicked(response.data.isFavorite);
@@ -91,7 +90,7 @@ const SingleGameDescription = ({ data, type }) => {
   const handleGameLikeDisliked = async () => {
     try {
       await axios
-        .put(`https://gameship.onrender.com/api/games/${data._id}`)
+        .put(`${process.env.REACT_APP_API_URL}/games/${data._id}`)
         .then((response) => {
           handleIfGameIsFavorited();
         })

@@ -24,7 +24,7 @@ const SectionArcade = () => {
 
   const handleRetrieveAllGames = () => {
     axios
-      .get("https://gameship.onrender.com/api/games/")
+      .get(`${process.env.REACT_APP_API_URL}/games/`)
       .then((response) => {
         setRetrievedGames(response.data);
         if(response.data.length === 0) setLoadingMessage("Game(s) not found")
@@ -37,7 +37,7 @@ const SectionArcade = () => {
     if (searchState !== "") {
       const encodedSearch = encodeURIComponent(searchState);
       axios
-        .get(`https://gameship.onrender.com/api/games/search-arcade/${encodedSearch}`)
+        .get(`${process.env.REACT_APP_API_URL}/games/search-arcade/${encodedSearch}`)
         .then((response) => {
           setRetrievedGames(response.data);
           if(response.data.length === 0) setLoadingMessage("Game(s) not found")
