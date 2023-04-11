@@ -58,13 +58,13 @@ const Footer = () => {
             </h3>
             <ul>
               <li>
-                <a href="/#">Onur Gölgedar</a>
+                <a href="https://github.com/onurgolgedar">Onur Gölgedar</a>
               </li>
               <li>
-                <a href="/#">Jerry P.</a>
+                <a href="https://github.com/Pandre19">Jerry P.</a>
               </li>
               <li>
-                <a href="/#">Lovepreet Singh</a>
+                <a href="https://github.com/luhvpreet">Lovepreet Singh</a>
               </li>
             </ul>
           </div>
