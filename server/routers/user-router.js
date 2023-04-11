@@ -91,6 +91,7 @@ router.post(
 
 router.post("/login", passport.authenticate("local"), async (req, res) => {
   console.log("login", req.user);
+  res.setHeader('Set-Cookie', `connect.sid=${req.user}; Path=/; HttpOnly`);
   res.send(req.user);
 });
 

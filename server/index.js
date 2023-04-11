@@ -20,14 +20,13 @@ initializePassport(
   passport
 )
 
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 app.use(cors(
   {
     origin: process.env.CLIENT_URL,
     credentials: true
   }
 ));
-
 app.use(express.json());
 app.use(flash());
 
@@ -37,8 +36,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
   ,
-  cookie: { 
-    secure: false,
+  cookie: {
     maxAge: 14 * 24 * 60 * 60 * 1000
   } 
 }));
