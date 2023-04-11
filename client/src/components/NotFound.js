@@ -3,10 +3,10 @@ import "../css_files/sectionHome_style.css";
 const SectionNotFound = () => {
     return (
       <div>
-        <section className="sectionHome--body" id="sectionHome">
-          <div className="sectionHome--mainText">
+        <section className="sectionHome--body Error--body" id="sectionHome">
+          <div className="sectionError--mainText">
             <h1>
-              Error:<span> Not Found</span>
+              Error: <span>locating the <br /><span className="errorGameShip">GameShip</span></span>
             </h1>
           </div>
         </section>

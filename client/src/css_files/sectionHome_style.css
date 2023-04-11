@@ -1,11 +1,12 @@
 .sectionHome--body{
     height: calc(100vh - 90px);
     min-height: 500px;
-    padding: 30px 10% 10px;
+    padding: 10px 7% 10px;
     width: 100%;
     border-bottom: 8px solid #FECEA8;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .sectionHome--body{
@@ -87,4 +88,18 @@ img {
 .dropdown button, .dropdown li{
     width: 400px;
 
+}
+.Error--body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Error--body h1{
+    font-size: 5.5vw;
+}
+.Error--body  span{
+    color: white;
+}
+.errorGameShip{
+    font-size: 7.5vw;
 }

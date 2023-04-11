@@ -35,23 +35,7 @@ const Footer = () => {
             </span>
           </li>
         </ul>
-        <div style={{ padding: "30px 0" }} className="footer--links2">
-          <div className="footer--col">
-            <h3>
-              .our<span>Portfolio</span>
-            </h3>
-            <ul>
-              <li>
-                <a href="/#">Onur Gölgedar</a>
-              </li>
-              <li>
-                <a href="/#">Jerry P.</a>
-              </li>
-              <li>
-                <a href="/#">Lovepreet Singh</a>
-              </li>
-            </ul>
-          </div>
+        <div className="footer--links2">
           <div className="footer--col">
             <h3>
               .our<span>Github</span>

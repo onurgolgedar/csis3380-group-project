@@ -11,9 +11,9 @@ const HomeWiki = () => {
                 Wiki 
                 
                 </h1>
-                <span><ion-icon name="search-outline"></ion-icon></span>
+                <span style={{color:"black"}}><ion-icon name="search-outline"></ion-icon></span>
             </div>
-            <div>
+            <div className="homeWikiP">
               <p>Get information about your favorite games</p>
               <p>Powered by RAWG API</p>
               <NavLink to="/wiki" className="homeWikiLink">
