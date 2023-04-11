@@ -31,7 +31,7 @@ const SingleGameDescription = ({ data, type }) => {
   useEffect(() => {
     if (type !== "arcade") {
       fetch(
-        `https://rawg.io/api/games/${data.id}?token&key=${process.env.REACT_APP_API_URL}`
+        `https://rawg.io/api/games/${data.id}?token&key=${process.env.REACT_APP_RAWG_API_KEY}`
       )
         .then((res) => res.json())
         .then((result) => {
