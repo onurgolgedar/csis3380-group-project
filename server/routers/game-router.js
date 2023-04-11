@@ -70,10 +70,11 @@ router.get("/search-arcade/:name", async (req, res) => {
 // check if the user like the game
 router.get("/:id/checklike", async (req, res) => {
   try {
+    console.log("CHECKING LIKE CHECKING LIKE")
     const user = await User.findById(req.user);
     if (!user) {
       console.log("Error -> User not logged in.");
-      return res.status(404).json({ error: "User not logged in" });
+      return res.send({ error: "User not logged in" });
     }
 
     const game = await Game.findById(req.params.id);

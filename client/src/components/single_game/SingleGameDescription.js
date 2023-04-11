@@ -30,7 +30,9 @@ const SingleGameDescription = ({ data, type }) => {
 
   useEffect(() => {
     if (type !== "arcade") {
-      fetch(`https://rawg.io/api/games/${data.id}?token&key=${process.env.REACT_APP_API_URL}`)
+      fetch(
+        `https://rawg.io/api/games/${data.id}?token&key=${process.env.REACT_APP_API_URL}`
+      )
         .then((res) => res.json())
         .then((result) => {
           setGameDescription(handleGameDescription(result.description));
@@ -39,9 +41,7 @@ const SingleGameDescription = ({ data, type }) => {
     } else {
       handleRetrieveComments();
       handleCheckLogIn();
-      if (isUserLoggedIn) {
-        handleIfGameIsFavorited();
-      }
+      handleIfGameIsFavorited();
     }
   }, [data.id]);
 
@@ -60,7 +60,6 @@ const SingleGameDescription = ({ data, type }) => {
       await axios
         .get(`${process.env.REACT_APP_API_URL}/gamereviews/${data._id}`)
         .then((response) => {
-          console.log("TESTING COMMENTS", response.data);
           setRetrievedComments(response.data);
         })
         .catch((error) => {
