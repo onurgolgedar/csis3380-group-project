@@ -32,8 +32,8 @@ app.use(flash());
 app.use(cookieParser());
 app.use(session({
   secret: process.env.COOKIE_SECRET_KEY,
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000
   } 
