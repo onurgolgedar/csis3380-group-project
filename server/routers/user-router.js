@@ -97,11 +97,11 @@ router.post("/login", passport.authenticate("local"), async (req, res) => {
   //     sameSite: 'none'
   //   }).send('Login successful');
   // });
-  res.cookie('connect.sid', req.user, {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none'
-  });
+  // res.cookie('connect.sid', req.user, {
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: 'none'
+  // });
   console.log("LOGIN LOGIN: ", req.user);
   res.send(req.user);
 });
