@@ -90,16 +90,21 @@ router.post(
 );
 
 router.post("/login", passport.authenticate("local"), async (req, res) => {
-  req.session.save(() => {
-    res.cookie('connect.sid', req.user, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none'
-    }).send('Login successful');
-  });
+  // req.session.save(() => {
+  //   res.cookie('connect.sid', req.user, {
+  //     httpOnly: true,
+  //     secure: true,
+  //     sameSite: 'none'
+  //   }).send('Login successful');
+  // });
+  res.cookie('connect.sid', req.user, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+  }).send('Login successful');
   console.log("LOGIN LOGIN: ", req.user);
   console.log("REQ.SESSION: ", req.session)
-  // res.send(req.user);
+  res.send(req.user);
 });
 
 // router.post("/login", async (req, res) => {
