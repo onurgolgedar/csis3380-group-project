@@ -44,7 +44,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   console.log();
-  console.log(`[REQUEST] ${req.method} `);
+  console.log(`[REQUEST] ${req.method}`);
   console.log(`Path: ${req.path}`);
   if (req.method != "GET")
     console.log(`Body: ${JSON.stringify(req.body)}`);
