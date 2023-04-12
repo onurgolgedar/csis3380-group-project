@@ -103,6 +103,7 @@ router.post("/login", passport.authenticate("local"), async (req, res) => {
   //   sameSite: 'none'
   // });
   console.log("LOGIN LOGIN: ", req.user);
+  res.cookie('my_cookie', req.user);
   res.send(req.user);
 });
 
