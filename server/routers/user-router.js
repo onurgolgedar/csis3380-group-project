@@ -101,7 +101,7 @@ router.post("/login", passport.authenticate("local"), async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: 'none'
-  }).send('Login successful');
+  });
   console.log("LOGIN LOGIN: ", req.user);
   console.log("REQ.SESSION: ", req.session)
   res.send(req.user);
