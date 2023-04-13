@@ -19,7 +19,7 @@ axios.defaults.withCredentials = true;
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-
+ 
   useEffect(() => {
     handleCheckLogIn();
   }, []);
