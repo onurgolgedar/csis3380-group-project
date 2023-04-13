@@ -7,29 +7,21 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
 
-const checkUserLoggedIn = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    console.log("User not logged");
-    return res.send({ error: "Unauthorized" });
-  }
-};
-
 // POST a comment
-router.post("/:gameId", checkUserLoggedIn, async (req, res) => {
+router.post("/:gameId", async (req, res) => {
   try {
     const { comment_text } = req.body;
-    const user = await User.findById(req.user);
-    if (user === null) {
-      console.log("Error -> User not logged in.");
-      return res.status(404).json({ error: "User not logged in" });
+
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      console.log("Error -> User is not logged in.");
+      return res.status(404).json({ error: "User is not logged in." });
     }
 
     const game = await Game.findById(req.params.gameId);
     if (!game) {
-      console.log("Error -> Game not Found");
-      return res.status(404).json({ error: "Game not Found" });
+      console.log("Error -> Game is not found.");
+      return res.status(404).json({ error: "Game is not found." });
     }
 
     const gameReview = new GameReview({
@@ -63,8 +55,8 @@ router.get("/:gameId", async (req, res) => {
       })
       .exec();
     if (!game) {
-      console.log("Error -> Game not Found");
-      return res.status(404).json({ error: "Game not Found" });
+      console.log("Error -> Game is not found.");
+      return res.status(404).json({ error: "Game is not found." });
     }
 
     game.game_reviews.sort((a, b) => {
@@ -77,8 +69,7 @@ router.get("/:gameId", async (req, res) => {
   }
 });
 
-// DELETE a comment....
-
+// DELETE a comment
 // router.get("/:gameId", async (req, res) => {
 //   const gamereviews = await GameReview.find({ gameID: req.params.gameID });
 //   return res.send(gamereviews);
