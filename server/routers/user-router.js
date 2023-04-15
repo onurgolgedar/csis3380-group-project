@@ -17,23 +17,23 @@ router.get("/", async (req, res) => {
 
 router.get("/checklogin", async (req, res) => {
   console.log("CHECK LOG IN", req.user);
-  if (!req.session.userId) {
+  if (!req.user) {
     console.log(
       "Error -> User is not logged in (Session userID: " +
-        req.session.userId +
+        req.user +
         ")"
     );
     return res.json({ isLoggedIn: false });
   }
 
-  console.log("CHECK CHECK CHECK, ", req.session.userId);
+  console.log("CHECK CHECK CHECK, ", req.user);
 
-  const user = await User.findById(req.session.userId);
+  const user = await User.findById(req.user);
   if (!user) {
     console.log("Error -> User could not be found.");
     return res.status(404).json({ error: "User could not be found." });
   } else {
-    console.log("Success -> Session UserID: " + req.session.userId);
+    console.log("Success -> Session UserID: " + req.user);
     return res
       .status(200)
       .json({ message: "Logged in", user, isLoggedIn: true });
@@ -102,9 +102,11 @@ router.post("/login", passport.authenticate("local"), async (req, res) => {
   //   secure: true,
   //   sameSite: 'none'
   // });
-  console.log("LOGIN LOGIN: ", req.user);
-  req.session.userId = req.user;
-  console.log("REQ SESSION: ", req.session);
+
+  // console.log("LOGIN LOGIN: ", req.user);
+  // req.session.userId = req.user;
+  // console.log("REQ SESSION: ", req.session);
+  
   res.send(req.user);
 });
 
