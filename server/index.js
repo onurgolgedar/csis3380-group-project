@@ -3,7 +3,7 @@ const databaseOperations = require("./db.js");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const flash = require("express-flash");
+// const flash = require("express-flash");
 const path = require("path");
 
 const userRouter = require("./routers/user-router.js");
@@ -27,7 +27,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(flash());
+// app.use(flash());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
