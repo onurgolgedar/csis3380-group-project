@@ -3,6 +3,7 @@ const databaseOperations = require("./db.js");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 // const cookieParser = require('cookie-parser');
 // const flash = require("express-flash");
 const path = require("path");
@@ -27,6 +28,9 @@ app.use(
     secret: process.env.COOKIE_SECRET_KEY,
     resave: false,
     saveUninitialized: true,
+    store: new MongoStore({
+      url: `mongodb+srv://group7:${process.env.DB_MONGODB_PASSWORD}@csis3380-group-project.vgzocak.mongodb.net/DB1`
+    }),
   })
 );
 // app.use(flash());
