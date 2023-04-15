@@ -19,7 +19,7 @@ router.get("/checklogin", async (req, res) => {
         req.user +
         ")"
     );
-    return res.json({ isLoggedIn: false });
+    return res.json({ isLoggedIn: false, session: req.session });
   }
 
   const user = await User.findById(req.session.userId);
