@@ -3,7 +3,8 @@ const databaseOperations = require("./db.js");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+// const MongoStore = require("connect-mongo");
+// const { MongoClient } = require('mongodb');
 // const cookieParser = require('cookie-parser');
 // const flash = require("express-flash");
 const path = require("path");
@@ -14,6 +15,13 @@ const gameReviewRouter = require("./routers/gameReview-router.js");
 
 const app = express();
 
+// const sessionStore = new MongoStore({
+//   url:`mongodb+srv://group7:${process.env.DB_MONGODB_PASSWORD}@csis3380-group-project.vgzocak.mongodb.net/DB1`,
+//   ttl: 14 * 24 * 60 * 60, // session TTL (in seconds)
+//   autoRemove: 'interval',
+//   autoRemoveInterval: 10, // remove expired sessions every 10 minutes
+// });
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -23,13 +31,52 @@ app.use(
 app.use(express.json());
 app.set("trust proxy", 1);
 // app.use(cookieParser());
+
+
+// const uri = `mongodb+srv://group7:${process.env.DB_MONGODB_PASSWORD}@csis3380-group-project.vgzocak.mongodb.net/DB1`;
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+// client.connect(err => {
+//   if (err) {
+//     console.error('Error connecting to MongoDB:', err);
+//   } else {
+
+//     const mongoStore = new MongoStore({
+//       client: client,
+//       ttl: 14 * 24 * 60 * 60, // session TTL (in seconds)
+//       autoRemove: 'interval',
+//       autoRemoveInterval: 10, // remove expired sessions every 10 minutes
+//     });
+
+//     app.use(
+//       session({
+//         secret: process.env.COOKIE_SECRET_KEY,
+//         resave: false,
+//         saveUninitialized: true,
+//         store: mongoStore,
+//       })
+//     );
+//   }
+// });
+
 app.use(
   session({
     secret: process.env.COOKIE_SECRET_KEY,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      domain: process.env.CLIENT_URL,
+      path: '/'
+    }
   })
 );
+
+
+
 // app.use(flash());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
