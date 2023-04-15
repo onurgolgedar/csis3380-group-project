@@ -27,14 +27,14 @@ router.get("/checklogin", async (req, res) => {
   });
 
 
-  if (!req.session.userId) {
-    console.log(
-      "Error -> User is not logged in (Session userID: " +
-        req.user +
-        ")"
-    );
-    return res.json({ isLoggedIn: false, session: req.session });
-  }
+  // if (!req.session.userId) {
+  //   console.log(
+  //     "Error -> User is not logged in (Session userID: " +
+  //       req.user +
+  //       ")"
+  //   );
+  //   return res.json({ isLoggedIn: false, session: req.session });
+  // }
 
   const user = await User.findById(req.session.userId);
   if (!user) {
