@@ -3,6 +3,7 @@ const databaseOperations = require("./db.js");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const cookieParser = require('cookie-parser');
 // const flash = require("express-flash");
 const path = require("path");
 
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(express.json());
 app.set("trust proxy", 1);
+app.use(cookieParser());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET_KEY,
