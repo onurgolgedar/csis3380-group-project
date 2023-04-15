@@ -13,28 +13,28 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-  const mongoStore = req.sessionStore;
-  const sessionId = req.sessionID;
+  // const mongoStore = req.sessionStore;
+  // const sessionId = req.sessionID;
 
-  mongoStore.get(sessionId, (err, session) => {
-    if (err) throw err;
+  // mongoStore.get(sessionId, (err, session) => {
+  //   if (err) throw err;
 
-    const user = session.userId;
-    // res.render('dashboard', { user });
-    return res
-    .status(200)
-    .json({ message: "Logged in", user, isLoggedIn: true });
-  });
+  //   const user = session.userId;
+  //   // res.render('dashboard', { user });
+  //   return res
+  //   .status(200)
+  //   .json({ message: "Logged in", user, isLoggedIn: true });
+  // });
 
 
-  // if (!req.session.userId) {
-  //   console.log(
-  //     "Error -> User is not logged in (Session userID: " +
-  //       req.user +
-  //       ")"
-  //   );
-  //   return res.json({ isLoggedIn: false, session: req.session });
-  // }
+  if (!req.session.userId) {
+    console.log(
+      "Error -> User is not logged in (Session userID: " +
+        req.user +
+        ")"
+    );
+    return res.json({ isLoggedIn: false, session: req.session });
+  }
 
   const user = await User.findById(req.session.userId);
   if (!user) {

@@ -27,10 +27,7 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET_KEY,
     resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({
-      url: `mongodb+srv://group7:${process.env.DB_MONGODB_PASSWORD}@csis3380-group-project.vgzocak.mongodb.net/DB1`
-    }),
+    saveUninitialized: true
   })
 );
 // app.use(flash());
