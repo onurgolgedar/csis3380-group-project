@@ -64,13 +64,12 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET_KEY,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      domain: process.env.CLIENT_URL,
-      path: '/'
+      domain: process.env.CLIENT_URL
     }
   })
 );
