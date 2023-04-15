@@ -1,12 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
 const router = express.Router();
 const User = require("../models/user.js");
 const bodyParser = require("body-parser");
 const { check, validationResult } = require("express-validator");
-
-const passport = require("passport");
 
 router.use(bodyParser.json());
 
@@ -16,8 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/checklogin", async (req, res) => {
-  console.log("CHECK LOG IN", req.user);
-  if (!req.user) {
+  if (!req.session.userId) {
     console.log(
       "Error -> User is not logged in (Session userID: " +
         req.user +
@@ -26,9 +22,7 @@ router.get("/checklogin", async (req, res) => {
     return res.json({ isLoggedIn: false });
   }
 
-  console.log("CHECK CHECK CHECK, ", req.user);
-
-  const user = await User.findById(req.user);
+  const user = await User.findById(req.session.userId);
   if (!user) {
     console.log("Error -> User could not be found.");
     return res.status(404).json({ error: "User could not be found." });
@@ -67,7 +61,8 @@ router.post(
       const { username, email, password } = req.body;
 
       const user = await User.findOne({ email });
-      if (user) return res.send({ error: [{ msg: "User already exists." }] });
+      if (user)
+        return res.send({ error: [{ msg: "User already exists." }] });
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -84,66 +79,44 @@ router.post(
       return res.send(createdUser);
     } catch (err) {
       console.log("Error -> " + err);
-      return res.status(500).json({ error: [{msg: "Internal Error"} ]});
+      return res.status(500).json({ error: [{ msg: "Internal Error" }] });
     }
   }
 );
 
-router.post("/login", passport.authenticate("local"), async (req, res) => {
-  // req.session.save(() => {
-  //   res.cookie('connect.sid', req.user, {
-  //     httpOnly: true,
-  //     secure: true,
-  //     sameSite: 'none'
-  //   }).send('Login successful');
-  // });
-  // res.cookie('connect.sid', req.user, {
-  //   httpOnly: true,
-  //   secure: true,
-  //   sameSite: 'none'
-  // });
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-  // console.log("LOGIN LOGIN: ", req.user);
-  // req.session.userId = req.user;
-  // console.log("REQ SESSION: ", req.session);
-  
-  res.send(req.user);
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log("Error -> Invalid Email Address");
+      return res.status(400).json({ error: "Invalid Email Address" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      console.log("Error -> Invalid Password");
+      return res.status(400).json({ error: "Invalid Password" });
+    }
+
+    req.session.userId = user._id;
+    console.log("Success -> Session UserID: " + req.session.userId);
+
+    return res.status(200).send(user);
+  } catch (err) {
+    console.log("Error -> " + err);
+    return res.status(500).json({ error: "Internal Error" });
+  }
 });
-
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       console.log("Error -> Invalid Email Address");
-//       return res.status(400).json({ error: "Invalid Email Address" });
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) {
-//       console.log("Error -> Invalid Password");
-//       return res.status(400).json({ error: "Invalid Password" });
-//     }
-
-//     req.session.userId = user._id;
-//     console.log("Success -> Session UserID: " + req.session.userId);
-
-//     return res.status(200).send(user);
-//   } catch (err) {
-//     console.log("Error -> " + err);
-//     return res.status(500).json({ error: "Internal Error" });
-//   }
-// });
 
 router.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
-      if (err) return res.status(500).json({ error: "Internal Error" });
-      else {
-        res.clearCookie("connect.sid");
+      if (err)
+        return res.status(500).json({ error: "Internal Error" });
+      else
         return res.status(200).json({ message: "Logged out succesfully." });
-      }
     });
   } else return res.end();
 });
@@ -163,7 +136,7 @@ router.delete("/deleteaccount", async (req, res) => {
           return res.status(500).json({ error: "Internal Error" });
         }
       });
-
+      
       res.clearCookie("connect.sid");
 
       console.log("Success -> Account has been deleted");

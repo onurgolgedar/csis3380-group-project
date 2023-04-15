@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 // Get all the arcade game favorite of a Single User
 router.get("/arcadefavorite", async (req, res) => {
   try {
-    const user = await User.findById(req.user)
+    const user = await User.findById(req.session.userId)
       .populate("favoriteArcadeGames")
       .exec();
     if (!user) {
@@ -67,20 +67,18 @@ router.get("/search-arcade/:name", async (req, res) => {
   }
 });
 
-// check if the user like the game
 router.get("/:id/checklike", async (req, res) => {
   try {
-    console.log("CHECKING LIKE CHECKING LIKE")
-    const user = await User.findById(req.user);
+    const user = await User.findById(req.session.userId);
     if (!user) {
-      console.log("Error -> User not logged in.");
-      return res.send({ error: "User not logged in" });
+      console.log("Error -> User is not logged in.");
+      return res.send({ error: "User is not logged in." });
     }
 
     const game = await Game.findById(req.params.id);
     if (!game) {
-      console.log("Error -> Game not Found");
-      return res.status(404).json({ error: "Game not Found" });
+      console.log("Error -> Game is not found.");
+      return res.status(404).json({ error: "Game is not found." });
     }
 
     const found_game = user.favoriteArcadeGames.find((g) => {
@@ -88,12 +86,8 @@ router.get("/:id/checklike", async (req, res) => {
       return g.toString() === game._id.toString();
     });
 
-    if (found_game) {
-      console.log("found_game: ", found_game);
-      return res.send({ isFavorite: true });
-    } else {
-      return res.send({ isFavorite: false });
-    }
+    if (found_game) return res.send({ isFavorite: true });
+    else return res.send({ isFavorite: false });
   } catch (err) {
     console.error(err.message);
   }
@@ -102,7 +96,7 @@ router.get("/:id/checklike", async (req, res) => {
 //Liking and disliking a Game
 router.put("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.user);
+    const user = await User.findById(req.session.userId);
     if (!user) {
       console.log("Error -> User not logged in.");
       return res.status(404).json({ error: "User not logged in" });
