@@ -36,7 +36,7 @@ router.get("/checklogin", async (req, res) => {
         req.user +
         ")"
     );
-    return res.json({ isLoggedIn: false, session: req.session });
+    return res.json({ isLoggedIn: false, session: req.session, req: req});
   }
 
   const user = await User.findById(req.session.userId);
@@ -47,7 +47,7 @@ router.get("/checklogin", async (req, res) => {
     console.log("Success -> Session UserID: " + req.user);
     return res
       .status(200)
-      .json({ message: "Logged in", user, isLoggedIn: true });
+      .json({ message: "Logged in", user, isLoggedIn: true, session: req.session });
   }
 });
 
