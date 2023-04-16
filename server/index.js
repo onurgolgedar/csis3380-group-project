@@ -23,7 +23,7 @@ app.use(
   })
 );
 app.use(express.json());
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 // app.use(cookieParser());
 
 var store = new MongoDBStore({
