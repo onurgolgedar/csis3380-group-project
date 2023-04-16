@@ -15,11 +15,9 @@ router.get("/", async (req, res) => {
 router.get("/checklogin", async (req, res) => {
   if (!req.session.userId) {
     console.log(
-      "Error -> User is not logged in (Session userID: " +
-        req.user +
-        ")"
+      "Error -> User is not logged in (Session userID: )"
     );
-    return res.json({ isLoggedIn: false, session: req.session, req: req});
+    return res.json({ isLoggedIn: false, session: req.session});
   }
 
   const user = await User.findById(req.session.userId);
