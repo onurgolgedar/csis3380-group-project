@@ -3,7 +3,7 @@ const databaseOperations = require("./db.js");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-var MongoDBStore = require('connect-mongodb-session')(session);
+const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require("path");
 
 const userRouter = require("./routers/user-router.js");
@@ -21,7 +21,7 @@ app.use(
 app.use(express.json());
 app.set("trust proxy", 1);
 
-var store = new MongoDBStore({
+const store = new MongoDBStore({
   uri: `mongodb+srv://group7:${process.env.DB_MONGODB_PASSWORD}@csis3380-group-project.vgzocak.mongodb.net/DB1`,
   collection: 'mySessions'
 });
