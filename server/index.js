@@ -38,10 +38,11 @@ store.on('error', function(error) {
 app.use(session({
   secret: process.env.COOKIE_SECRET_KEY,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    secure:true
   },
   store: store,
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }));
 
