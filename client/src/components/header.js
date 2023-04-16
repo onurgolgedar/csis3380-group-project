@@ -119,6 +119,7 @@ function Header({ isLoggedIn, handleCheckLogIn, user }) {
           console.log("LOG IN: ", response.data)
           handleCheckLogIn();
           hidePopLogInModal();
+          window.location.reload(false);
         })
         .catch((error) => {
           console.error(error.message);
