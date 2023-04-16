@@ -39,7 +39,6 @@ const SectionWiki = () => {
       .then((res) => res.json())
       .then((data) => {
         setGamesAnswer(data.results);
-        console.log("Genre Specific query", gamesAnswer)
       })
       .catch((error) => console.error(error));
   }, [genreSelected]);
