@@ -55,7 +55,7 @@ function UserProfile() {
       <div className="userP--container">
         <div className="userP--avatarContainer card">
           <div className="imgContainer">
-            <img src={Avatar} />
+            <img src={Avatar} alt="avatar" />
           </div>
         </div>
         <div className="userP--infoContainer card">

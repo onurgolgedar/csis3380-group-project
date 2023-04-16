@@ -32,18 +32,20 @@ const HomeLanding = () => {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <button
                     className="dropdown-item"
                     onClick={() => scrollDown("sectionHome_Arcade")}
+                    style={{backgroundColor:"white"}}
                   >
                     A r c a d e
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="dropdown-item"
                     onClick={() => scrollDown("sectionHome_Wiki")}
+                    style={{backgroundColor:"white"}}
                   >
                     W i k i
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

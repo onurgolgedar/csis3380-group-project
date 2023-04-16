@@ -16,16 +16,19 @@ router.get("/checklogin", async (req, res) => {
   // const mongoStore = req.sessionStore;
   // const sessionId = req.sessionID;
 
-  // mongoStore.get(sessionId, (err, session) => {
-  //   if (err) throw err;
+  // if (!mongoStore) {
+  //   return res.json({ isLoggedIn: false, session: req.session });
+  // } else {
+  //   mongoStore.get(sessionId, (err, session) => {
+  //     if (err) throw err;
 
-  //   const user = session.userId;
-  //   // res.render('dashboard', { user });
-  //   return res
-  //   .status(200)
-  //   .json({ message: "Logged in", user, isLoggedIn: true });
-  // });
-
+  //     const user = session.userId;
+  //     // res.render('dashboard', { user });
+  //     return res
+  //       .status(200)
+  //       .json({ message: "Logged in", user, isLoggedIn: true });
+  //   });
+  // }
 
   if (!req.session.userId) {
     console.log(
@@ -75,8 +78,7 @@ router.post(
       const { username, email, password } = req.body;
 
       const user = await User.findOne({ email });
-      if (user)
-        return res.send({ error: [{ msg: "User already exists." }] });
+      if (user) return res.send({ error: [{ msg: "User already exists." }] });
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -127,10 +129,8 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
-      if (err)
-        return res.status(500).json({ error: "Internal Error" });
-      else
-        return res.status(200).json({ message: "Logged out succesfully." });
+      if (err) return res.status(500).json({ error: "Internal Error" });
+      else return res.status(200).json({ message: "Logged out succesfully." });
     });
   } else return res.end();
 });
@@ -150,7 +150,7 @@ router.delete("/deleteaccount", async (req, res) => {
           return res.status(500).json({ error: "Internal Error" });
         }
       });
-      
+
       res.clearCookie("connect.sid");
 
       console.log("Success -> Account has been deleted");
