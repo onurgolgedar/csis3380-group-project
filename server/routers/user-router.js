@@ -118,8 +118,8 @@ router.post("/logout", (req, res) => {
 
 router.delete("/deleteaccount", async (req, res) => {
   try {
-    console.log("Delete Account", req.user);
-    const deletedUser = await User.findByIdAndDelete(req.user);
+    console.log("Delete Account", req.session.userId);
+    const deletedUser = await User.findByIdAndDelete(req.session.userId);
 
     if (!deletedUser) {
       console.log("Error -> User could not be found.");
