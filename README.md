@@ -35,6 +35,9 @@ The website will be developed using the following technologies:
 ## Database Schemas
 ![Screenshot (363)](https://user-images.githubusercontent.com/123438136/231600383-ee2c721e-8be1-4e0a-8a7f-d2fe1a10a21a.png)
 
+## Summary
+Our project, which was developed by Group 7 and uses various modern technologies, including React, Express, JavaScript, Node.js, Public API, and MongoDB, is a comprehensive single page applicationSPA. The application enables users to read information from a Wiki page about games across the world, for example scores and stories. Moreover, users can play HTML5 games, some of which we've developed ourselves, on an arcade page. A membership system that allows registered users to comment on games and save their favorite games for personal collections is also part of the platform. The project is a demonstration of the capacity to work together and resolve issues, use theory knowledge for real world applications while developing basic skills in technology.
+
 ## References
 - W3S: https://www.w3schools.com/react/default.asp 
 - User Profile Image: https://www.iamhja.com/2018/09/steam-profile-picture-steam-avatar.html
